@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
+import './pagAdm.scss';
 
-export default function Admin(props){
+
+export default function MenuAdmin(props){
     return(
         <main>
-            <div>
+            <div className="menu">
                 <img src={props.logo}></img>
                 <div>
-                    <Link>Administrador</Link>
+                    <Link className="opcao">Administrador</Link>
                 </div>
                 <div>
-                  <Link>Catálogos</Link>
+                  <Link className="opcao">Catálogos</Link>
                 </div>
                 <div>
-                    <Link>Pedidos</Link>
+                    <Link className="opcao">Pedidos</Link>
                 </div>
                 <div>
-                <Link>Produtos</Link>
+                <Link to='/Produtos' className="opcao">Produtos</Link>
                 </div>
                 <div>
-                <Link>Avaliações</Link>
+                <Link className="opcao">Avaliações</Link>
                 </div>
-
 
             </div>
         </main>

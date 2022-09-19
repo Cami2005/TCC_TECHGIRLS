@@ -1,17 +1,20 @@
-import Admin from "../../components/pagAdm.js"
-import './index.css'
+import MenuAdmin from "../../components/pagAdm.js";
+import './index.scss';
 export default function Index(){
     return(
-        <main>
-            <Admin logo='/images/logoAdmin.png'/>
+        <main className="pag1-adm">
+            <MenuAdmin logo='/images/logoAdmin.png'/>
+            
+            <div className="PedRecentes">
+            
             <div>
-                <h1>Bem vindo a área de administração</h1>
+                <img></img>
+                <h2 className="Bem-Vindo">Bem vindo a área de administração</h2>
             </div>
             <div>
-                <h2>Pedidos Recentes</h2>
+                <h3>Pedidos Recentes</h3>
             </div>
-
-            <h1 className="nome">Livia</h1>
+            </div>
         </main>
     )
 }

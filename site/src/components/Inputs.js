@@ -2,7 +2,7 @@ export default function Inputs(props){
     return(
         <main>
             <div>
-            <img src={props.icon}></img>
+            <img src={props.icon} alt="icon"></img>
             <input></input>
             </div>
     </main>
