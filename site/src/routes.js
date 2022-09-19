@@ -5,7 +5,6 @@ import Menu from './pages/Menu/index.js';
 import Produtos from './pages/Produtos/index.js';
 import AddProduto from './pages/AddProduto/index.js';
 
-
 export default function Index(){
     return(
         <BrowserRouter>

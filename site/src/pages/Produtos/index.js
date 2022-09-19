@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import MenuAdmin from "../../components/pagAdm.js";
+import "./index.scss"
 
 export default function Index(){
     return(
-        <main>
+        <main className="Novo-Produto">
              <MenuAdmin logo='/images/logoAdmin.png'/>
 
              <div>
-                 <Link to='/AddProduto'>Novo Produto</Link>
+                 <Link className="edit" to='/AddProduto'>Novo Produto</Link>
              </div>
 
         </main>

@@ -1,9 +1,9 @@
 export default function Inputs(props){
     return(
         <main>
-            <div>
-            <img src={props.icon} alt="icon"></img>
-            <input></input>
+            <div className={props.classe}>
+            <img className={props.img} src={props.icon} alt="icon"></img>
+            <input placeholder={props.placeholder}></input>
             </div>
     </main>
 

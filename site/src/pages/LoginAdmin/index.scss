@@ -1,0 +1,79 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+.login {
+
+    display: flex;
+    height: 99.7vh;
+    width: 139.5vh;
+    background-image: url("../../../public/images/planodefundo.png");
+    background-position: -55px -30px;
+    align-items: center;
+    justify-content: center;
+
+    .administracao{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 600px;
+        height: 500px;
+        align-items: center;
+        padding: 2.5em;
+        justify-content: space-between;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 5px;
+    }
+
+    h1{
+        color: #ffff;
+    }
+
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .componente-input {
+        display: flex;
+        width: max-content;
+        height: fit-content;
+        align-items: center;
+        padding: 1em;
+        justify-content: center;
+    }
+
+    .componente-input input {
+        width: 20em;
+        height: 2em;
+        border-radius: 5px;
+        border: 0px;
+        padding: 1em;
+    }
+
+    .img {
+        width: 3em;
+        height: 3em;
+        margin: 1em;
+    }
+
+    .acessar {
+        text-decoration: none;
+        color: #fff;
+        padding: 0.5em 3em;
+        background-color: #FF2C83;
+        border-radius: 20px;
+    }
+
+    .voltar {
+        text-transform: uppercase;
+        align-self: center;
+        color: #FF2C83;
+        margin-top: 1em;
+    }
+}
+
