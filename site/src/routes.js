@@ -1,9 +1,9 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import LoginAdmin from './pages/LoginAdmin/index.js';
-import PedidosRecentes from './pages/PedidosRecentes/index.js';
-import Menu from './pages/Menu/index.js';
-import Produtos from './pages/Produtos/index.js';
-import AddProduto from './pages/AddProduto/index.js';
+import LoginAdmin from './pages/Administrador/LoginAdmin/index.js';
+import PedidosRecentes from './pages/Administrador/PedidosRecentes/index.js';
+import Menu from './pages/Administrador/Menu/index.js';
+import Produtos from './pages/Administrador/Produtos';
+import AddProduto from './pages/Administrador/AddProduto';
 
 export default function Index(){
     return(

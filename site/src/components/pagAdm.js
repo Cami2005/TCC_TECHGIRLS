@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import './pagAdm.scss';
 
-
 export default function MenuAdmin(props){
     return(
         <main>
