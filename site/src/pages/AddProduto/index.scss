@@ -1,0 +1,81 @@
+
+
+.inserirProduto {
+
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+
+    .menu {
+      height: 100%;
+   }
+
+    * {
+    box-sizing: border-box;
+    margin: 0px;
+    } 
+
+    button {
+        text-transform: uppercase;
+    }
+
+    h1 {
+        text-transform: uppercase;
+    }
+
+    input {
+        width: 60%;
+    }
+
+
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+        width: 25em;
+        padding: 1em 0em;
+        margin: 0.5em;
+    }
+
+     .informacoes-produto {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 2em;
+        width: 90%;
+        background-color: #fff;
+     }
+
+     .inserir {
+        display: flex;
+        flex-direction: row;
+     }
+
+     .div1 {
+        padding: 2em;
+     }
+
+     .div2 {
+        padding: 2em;
+     }
+
+     .menu {
+        height: 100%;
+     }
+
+     .button {
+        background-color: #FF2C83;
+        border: none;
+        padding: 0.2em 2em;
+        width: fit-content;
+        border-radius: 5px;
+        color: #fff;
+     }
+
+     .centralizar {
+        align-self: center;
+     }
+
+
+
+}
