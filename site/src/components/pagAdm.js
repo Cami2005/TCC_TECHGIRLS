@@ -3,7 +3,6 @@ import './pagAdm.scss';
 
 export default function MenuAdmin(props){
     return(
-        <main>
             <div className="menu">
                 <img src={props.logo}></img>
                 <div>
@@ -23,6 +22,5 @@ export default function MenuAdmin(props){
                 </div>
 
             </div>
-        </main>
     )
 }

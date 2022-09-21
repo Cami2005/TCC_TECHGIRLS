@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
+import "../../../common/common.scss"
 
 export default function InserirProduto() {
     return (
@@ -28,7 +29,7 @@ export default function InserirProduto() {
 
                             <div className="flex-column">
                                 <label> Descrição do Produto </label>
-                                <textarea className="textarea"/>
+                                <textarea maxLength={100} className="textarea"/>
                             </div>
 
                             

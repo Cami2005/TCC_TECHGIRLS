@@ -42,6 +42,10 @@
     .textarea {
       border: none;
       background-color: #D9D9D9;
+      width: 18.7em;
+      height: 4.5em;
+      resize: none;
+      line-height: 1.5em;
     }
     
     .select-tamanho {
@@ -50,11 +54,11 @@
       margin: 0em 3em 0em 0em;
       width: 8em;
       padding: 0.7em 0em;
-  }
+      }
 
-  .space-between {
-   justify-content: space-between;
-  }
+      .space-between {
+         justify-content: space-between;
+      }
 
     .select {
       border: none;
@@ -96,9 +100,16 @@
      .input {
       border: none;
       background-color: #D9D9D9;
-      padding: 0.2em 2em;
-      margin: 0.5em 0em;
+      padding: 0.2em;
+      margin: 0.7em 0em;
      }
+
+
+     textarea:focus, input:focus {
+      box-shadow: 0 0 0 0;
+      outline: 0;
+      } 
+      // tirar a borda ao clicar
 
      .menu {
         height: 100%;
@@ -121,7 +132,7 @@
       padding: 0.2em 0.5em;
       width: fit-content;
       color: #fff;
-      margin: 0.5em 0em;
+      margin: 0.7em 0em;
       cursor: pointer;
    }
 

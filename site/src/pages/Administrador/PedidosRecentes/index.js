@@ -1,11 +1,13 @@
 import MenuAdmin from "../../../components/pagAdm";
 import './index.scss';
+import "../../../common/common.scss"
+
 export default function Index(){
     return(
         <main className="pag1-adm">
             <MenuAdmin logo='../../../images/logoAdmin.png'/>
             
-            <div className="PedRecentes">
+            <div className="PedRecentes fundo">
             
             <div>
                 <img></img>
