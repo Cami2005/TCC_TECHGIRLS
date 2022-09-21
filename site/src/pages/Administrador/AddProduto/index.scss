@@ -27,13 +27,41 @@
         width: 60%;
     }
 
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+    }
 
     .flex-column {
         display: flex;
         flex-direction: column;
         width: 25em;
-        padding: 1em 0em;
-        margin: 0.5em;
+        padding: 0.7em 0em;
+    }
+
+    .textarea {
+      border: none;
+      background-color: #D9D9D9;
+    }
+    
+    .select-tamanho {
+      display: flex;
+      flex-direction: column;
+      margin: 0em 3em 0em 0em;
+      width: 8em;
+      padding: 0.7em 0em;
+  }
+
+  .space-between {
+   justify-content: space-between;
+  }
+
+    .select {
+      border: none;
+      background-color: #D9D9D9;
+      padding: 0.2em;
+      margin: 0.5em 0em;
+      width: 100%;
     }
 
      .informacoes-produto {
@@ -59,8 +87,17 @@
         padding: 2em;
      }
 
-     .space-between {
-      justify-content: space-between;
+     .div-array {
+      display: flex;
+      flex-direction: column;
+      width: 15em;
+     }
+
+     .input {
+      border: none;
+      background-color: #D9D9D9;
+      padding: 0.2em 2em;
+      margin: 0.5em 0em;
      }
 
      .menu {
@@ -74,7 +111,19 @@
         width: fit-content;
         border-radius: 5px;
         color: #fff;
+        margin: 0px;
+        cursor: pointer;
      }
+
+     .button-ok {
+      background-color: #FF2C83;
+      border: none;
+      padding: 0.2em 0.5em;
+      width: fit-content;
+      color: #fff;
+      margin: 0.5em 0em;
+      cursor: pointer;
+   }
 
      .centralizar {
         align-self: center;

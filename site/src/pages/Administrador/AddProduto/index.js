@@ -18,46 +18,56 @@ export default function InserirProduto() {
                         <div className="div1">
                             <div className="flex-column">
                                 <label> Código do Produto </label>
-                                <input/>
+                                <input className="input"/>
                             </div>
 
                             <div className="flex-column">
                                 <label> Nome do Produto </label>
-                                <input/>
+                                <input className="input"/>
                             </div>
 
                             <div className="flex-column">
                                 <label> Descrição do Produto </label>
-                                <textarea/>
+                                <textarea className="textarea"/>
                             </div>
 
-                            <div className="flex-column">
-                                <label> Categoria:</label>
-                                <select>
-                                    <option> Vestimenta </option>
-                                </select>
+                            
+
+                            <div className="flex-row space-between">
+                                <div className="select-tamanho">
+                                    <label> Categoria:</label>
+                                    <select className="select">
+                                        <option> Vestimenta </option>
+                                    </select>
+                                </div>
+
+                                <div className="select-tamanho">
+                                    <label> Tema: </label>
+                                    <select className="select">
+                                        <option> Harry Potter </option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div className="flex-column">
-                                <label> Tema: </label>
-                                <select>
-                                    <option> Harry Potter </option>
-                                </select>
+                            
+
+                            <div className="div-array">
+                                <label> Cor </label>
+                                <div className="flex-row">
+                                    <input className="input"/> <button className="button-ok"> OK </button>
+                                </div>
                             </div>
 
-                            <div>
-                                <label className="space-between"> Cor </label>
-                                <input/> <button className="button"> OK </button>
-                            </div>
-
-                            <div>
-                                <label className="space-between"> Tamanhos </label>
-                                <input/> <button className="button"> OK </button>
+                            <div className="div-array">
+                                <label> Tamanhos </label>
+                                <div className="flex-row">
+                                    <input className="input"/> <button className="button-ok"> OK </button>
+                                </div>  
                             </div>
 
                             <div className="flex-column"> 
                                 <label > Valor </label>
-                                <input/>
+                                <input className="input"/>
                             </div>
 
                             <div>
