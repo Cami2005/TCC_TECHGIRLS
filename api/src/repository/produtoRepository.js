@@ -2,9 +2,8 @@ import { con } from 'connection.js'
 
 export async function inserirProduto(produto) {
     const comando = `
-    INSERT INTO TB_PRODUTO (ID_CATEGORIA, ID_TEMA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES (?, ?, ?, ?, ?, ?)
-    `;
+    INSERT INTO TB_PRODUTO (ID_CATEGORIA, ID_TEMA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL, NM_COR, DS_TAMANHO)
+    VALUES (?, ?, ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
                             produto.idDepartamento,
                             produto.nome,
@@ -17,22 +16,20 @@ export async function inserirProduto(produto) {
 export async function inserirProdutoCategoria(idProduto, idCategoria) {
     const comando = `
     INSERT INTO TB_CATEGORIA (NM_CATEGORIA)
-    VALUES (?)
-    `;
+    VALUES (?) `;
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
 
 export async function inserirCor(idProduto, cor) {
-    const comando= `
+    const comando = `
     INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
-    VALUES(?, ?)`;
+    VALUES(?, ?) `;
 
 }
 
 export async function inserirTamanho(idProduto, tamanho) {
-    const comando= `
+    const comando = `
     INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
-    VALUES(?, ?)
-    `;
+    VALUES(?, ?) `;
 }
