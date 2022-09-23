@@ -1,22 +1,24 @@
-import { con } from 'connection.js'
+import { con } from 'connection.js';
 
 export async function inserirProduto(produto) {
     const comando = `
-    INSERT INTO TB_PRODUTO (ID_CATEGORIA, ID_TEMA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL, NM_COR, DS_TAMANHO)
-    VALUES (?, ?, ?, ?, ?, ?) `;
+    INSERT INTO TB_PRODUTO (NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
+    VALUES ( ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
-                            produto.idDepartamento,
                             produto.nome,
                             produto.preco,
-                            produto.destaque
+                            produto.descricao,
+                            produto.disponivel
                         ])
-    return resp.insertId;
+    produto.id = resp.insertId;
+    return produto;
 }
 
-export async function inserirProdutoCategoria(idProduto, idCategoria) {
+export async function inserirProdutoCategoria(idCategoria, idProduto) {
     const comando = `
-    INSERT INTO TB_CATEGORIA (NM_CATEGORIA)
-    VALUES (?) `;
+    INSERT INTO TB_PRODUTO (ID_CATEGORIA)
+    VALUES (?) 
+    WHERE ID_PRODUTO = ?`;
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
@@ -24,8 +26,7 @@ export async function inserirProdutoCategoria(idProduto, idCategoria) {
 export async function inserirCor(idProduto, cor) {
     const comando = `
     INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
-    VALUES(?, ?) `;
-
+    VALUES(?, ?) ;`
 }
 
 export async function inserirTamanho(idProduto, tamanho) {

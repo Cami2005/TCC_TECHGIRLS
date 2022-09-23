@@ -14,22 +14,19 @@ server.post('/produto', async (req,resp) => {
         if(!novoProduto.nome)
             throw new Error('Nome do produto é obrigatório!');
 
-        if(!novoProduto.tema)
-            throw new Error('Tema do produto é obrigatório!');
-
-        if(!novoProduto.categoria)
-            throw new Error('Categoria do produto é obrigatória!');
-
-        if(!novoProduto.valor)
+        if(!novoProduto.preco)
             throw new Error('Valor do produto é obrigatório!');
 
         if(!novoProduto.descricao)
             throw new Error('Descrição do produto é obrigatória!');
 
+        if(!novoProduto.disponivel)
+            throw new Error('Descrição do produto é obrigatória!');
 
         const produtoInserido = await inserirProduto(novoProduto);
+        console.log(novoProduto);
 
-        resp.send(petInserido);
+        resp.send(produtoInserido);
     } catch (err) {
         resp.status(400).send({
             erro: err.message 
