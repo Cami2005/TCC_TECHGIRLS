@@ -4,12 +4,11 @@ export async function login (email, senha) {
     const comando = 
     `
     select ID_USUARIO 		id,
-           NM_USUARIO		nome,
+           ID_USUARIO_LOGIN		id,
            DS_EMAIL			email
-      from TB_USUARIO
+      from TB_USUARIO_LOGIN
      where DS_EMAIL 		= ?
        and DS_SENHA			= ?
-    
         `
     
         const [respostas] = await con.query (comando, [email, senha])
