@@ -17,14 +17,6 @@ export async function inserirProduto(produto) {
     return produto;
 }
 
-export async function inserirProdutoCategoria(idCategoria, nmCategoria) {
-    const comando = `
-    INSERT INTO TB_PRODUTO (ID_CATEGORIA, NM_CATEGORIA)
-    VALUES (?, ?) 
-    WHERE ID_PRODUTO = ?, ?`;
-
-    const [resp] = await con.query(comando, [idCategoria, idProduto])
-}
 
 export async function inserirCor(idProduto, cor) {
     const comando = `
@@ -40,4 +32,12 @@ export async function inserirTamanho(idProduto, tamanho) {
     VALUES(?, ?) `;
     const [resp] = await con.query(comando, [idProduto, tamanho])
 
+}
+export async function salvarProdutoCategoria(idProduto, idCategoria) {
+    const comando = `
+        insert into tb_produto_categoria (id_categoria, id_produto)
+                                  values (?, ?)
+    `
+
+    const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
