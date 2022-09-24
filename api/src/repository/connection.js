@@ -1,5 +1,4 @@
-
-import mysql from 'mysql2/promise.js';
+import mysql from 'mysql2/promise'
 
 const con = await mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -15,6 +14,6 @@ const con = await mysql.createConnection({
     }
 })
 
-console.log(`Banco de Dados Conectado!`)
+console.log(`Banco de Dados Conectado!`);
   
-export { con };
+export { con }

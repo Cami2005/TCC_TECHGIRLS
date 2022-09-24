@@ -1,14 +1,18 @@
-import 'dotenv/config';
+import 'dotenv/config'
+
 import loginController from './controller/loginController.js';
+import produtoController from './controller/produtoController.js'
 
 import cors from "cors"
 import express from "express"
 
-const server =express();
+const server = express();
 server.use(cors());
 server.use(express.json());
 
 server.use(loginController);
+server.use(produtoController);
+
 
 const PORT= process.env.PORT;
 server.listen(PORT, () => console.log('API Subiu!!!' + PORT));
