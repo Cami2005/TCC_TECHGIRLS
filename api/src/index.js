@@ -1,11 +1,17 @@
-import 'dotenv/config';
+import 'dotenv/config'
 
-import cors from "cors";
-import express from "express";
+import loginController from './controller/loginController.js';
+import produtoController from './controller/produtoController.js'
 
-const server =express();
+import cors from "cors"
+import express from "express"
+
+const server = express();
 server.use(cors());
 server.use(express.json());
+
+server.use(loginController);
+server.use(produtoController);
 
 
 const PORT= process.env.PORT;

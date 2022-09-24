@@ -1,43 +1,46 @@
-USE geek_db
+USE geek_db;
 
 -- LOGIN ADM
-    INSERT INTO tb_usuario (nm_usuario,ds_email,ds_senha) 
-        VALUES ('admin','admin@admin.com.br', '1234');
+    INSERT INTO TB_ADM_LOGIN (ID_ADM_LOGIN , NM_ADM , DS_EMAIL , DS_SENHA ) 
+        VALUES ( 1,'admin','admin@admin.com.br', '1234');
     
-select id_usuario id,
-     nm_usuario nome,
-     ds_email  email
-	FROM tb_usuario
-    WHERE ds_email = 'admin@admin.com.br'
-    AND ds_senha  = '1234';
+select ID_ADM_LOGIN id,
+     NM_ADM nome,
+     DS_EMAIL  email
+	FROM TB_ADM_LOGIN
+    WHERE DS_EMAIL = 'admin@admin.com.br'
+    AND DS_SENHA  = '1234';
 
 
  -- TEMA
-    INSERT INTO TB_TEMA (NM_TEMA, DS_COR) 
-        VALUES ('NARUTO', '#FFF30');
+    INSERT INTO TB_TEMA (ID_TEMA, NM_TEMA, DS_COR) 
+        VALUES (1,'NARUTO', '#FFF30');
 
     select ID_TEMA  id,
            NM_TEMA  nome,
            DS_COR   cor
-    FROM TB_COR 
+    FROM TB_TEMA
     WHERE NM_TEMA = 'NARUTO'
     AND DS_COR = '#FFF30';
+    
+
 
 -- CATEGORIA 
 
-    INSERT INTO TB_CATEGORIA (NM_CATEGORIA)
-        VALUES ('VESTIMENTA');
+    INSERT INTO TB_CATEGORIA (ID_CATEGORIA, NM_CATEGORIA)
+        VALUES (1,'Acessório');
     
     SELECT ID_CATEGORIA   ID,
+			NM_CATEGORIA  NOME
     FROM TB_CATEGORIA
-    WHERE NM_CATEGORIA = 'VESTIMENTA'
+    WHERE NM_CATEGORIA = 'Acessório';
 
 SELECT * FROM TB_CATEGORIA;
 
 -- CADASTAR NOVO PRODUTO 
 
-INSERT INTO TB_PRODUTO (ID_CATEGORIA, ID_TEMA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-VALUES (1, 1, 'Capa Harry Potter', 300.00, 'Capa de Hogwarts da casa GrifinÃ³ria', true);
+INSERT INTO TB_PRODUTO (ID_PRODUTO, ID_TEMA , ID_CATEGORIA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
+VALUES ('1', '1', '1','Faixa NARUTO',  30.00, 'Faixa super confortável', true);
 
 SELECT * FROM TB_PRODUTO;
 
@@ -45,3 +48,7 @@ SELECT * FROM TB_PRODUTO;
 -- ADICIONAR TAMANHO 
 INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
 VALUES(1, 'P');
+
+-- ADICIONAR COR
+INSERT INTO TB_COR (ID_COR, ID_PRODUTO, NM_COR)
+VALUES(1, 1, 'Laranja');
