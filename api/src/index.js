@@ -1,7 +1,9 @@
 import 'dotenv/config'
 
 import loginController from './controller/loginController.js';
-import produtoController from './controller/produtoController.js'
+import produtoController from './controller/produtoController.js';
+import categoria from './controller/categoriasController.js';
+import tema from './controller/temaController.js'
 
 import cors from "cors"
 import express from "express"
@@ -12,6 +14,9 @@ server.use(express.json());
 
 server.use(loginController);
 server.use(produtoController);
+server.use(categoria);
+server.use(tema);
+
 
 
 const PORT= process.env.PORT;

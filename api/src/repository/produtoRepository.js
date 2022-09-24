@@ -18,19 +18,27 @@ export async function inserirProduto(produto) {
 }
 
 
-export async function inserirCor(idProduto, cor) {
+export async function inserirCor(cor) {
     const comando = `
     INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
     VALUES(?, ?) `;
-    const [resp] = await con.query(comando, [idProduto, cor])
+    const [resp] = await con.query(comando, [cor.id, cor.nome])
+
+    cor.id = resp.insertId;
+    return cor;
+
 
 }
 
-export async function inserirTamanho(idProduto, tamanho) {
+export async function inserirTamanho(tamanho) {
     const comando = `
-    INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
-    VALUES(?, ?) `;
-    const [resp] = await con.query(comando, [idProduto, tamanho])
+    INSERT INTO TB_COR (ID_TAMANHO,ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?, ?) `;
+    const [resp] = await con.query(comando, [tamanho.id, tamanho.produto, tamanho.descricao])
+
+    tamanho.id = resp.insertId;
+    return tamanho;
+
 
 }
 export async function salvarProdutoCategoria(idProduto, idCategoria) {
@@ -40,4 +48,12 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
     `
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
+}
+export async function salvarTema(idProduto, idTema) {
+    const comando = `
+        insert into tb_produto_categoria (id_tema, id_produto)
+                                  values (?, ?)
+    `
+
+    const [resp] = await con.query(comando, [idTema, idProduto])
 }

@@ -1,4 +1,4 @@
-import { inserirProduto } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -51,5 +51,50 @@ server.put('/produto/:id/capa', upload.single('capa'), async (req,resp) => {
         })
     }
 })
+
+server.post('/cor', async (req,resp) => {
+    try {
+        const novaCor = req.body;
+
+        if(!novaCor.nome)
+            throw new Error('Nome do produto é obrigatório!');
+
+
+        const corInserida = await inserirCor(novaCor);
+        console.log(novaCor);
+
+        resp.send(corInserida);
+    
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message 
+        })
+    }
+})
+
+server.post('/tamanho', async (req,resp) => {
+    try {
+        const novoTamanho = req.body;
+
+        if(!novoTamanho.descricao)
+            throw new Error('Tamnaho do produto é obrigatório!');
+
+
+        const tamanhoInserido = await inserirTamanho(novoTamanho);
+        console.log(novoTamanho);
+
+        resp.send(tamanhoInserido);
+    
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message 
+        })
+    }
+})
+
+
+
+
+
 
 export default server;
