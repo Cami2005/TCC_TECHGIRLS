@@ -57,12 +57,12 @@ export async function salvarTema(idProduto, idTema) {
     const [resp] = await con.query(comando, [idTema, idProduto])
 }
 
-export async function salvarImagem(idProduto, imagem, destaque) {
+export async function salvarImagem(idProduto, imagem) {
     const comando = `
-        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO, IMG_DESTAQUE)
-        VALUES (?, ?, ?)
+        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO)
+        VALUES (?, ?)
         `;
-    const [resposta] = await con.query(comando, [idProduto, imagem, destaque]);
+    const [resposta] = await con.query(comando, [idProduto, imagem]);
 
     return resposta.affectedRows();
 }
