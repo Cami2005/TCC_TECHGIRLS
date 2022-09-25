@@ -4,7 +4,7 @@ import multer from 'multer';
 import { Router } from 'express';
 
 const server = Router();
-const upload = multer({dest:'storage/capaProduto'});
+const upload = multer({dest:'/storage/capaProduto'});
 
 //inserir Produto
 server.post('/produto', async (req,resp) => {
@@ -38,9 +38,10 @@ server.post('/produto', async (req,resp) => {
 server.put('/produto/:id/capa', upload.single('capa'), async (req,resp) => {
     try {
         const {id} = req.params;
+
         const imagem = req.file.path;
 
-        const resposta = await alterarImagem(imagem,id);
+        const resposta = await salvarImagem(imagem,id);
         if(resposta != 1)
         throw new Error('A imagem não pode ser salva.');
 
@@ -90,12 +91,13 @@ server.post('/produto/tamanho', async (req,resp) => {
     }
 })
 
-server.put('/produto/:id/imagem/', upload.single('imagem'), async (req, resp) => {
+server.put('/produto/:id/imagem/', upload.single('img'), async (req, resp) => {
     try {
         const { id } = req.params;
-        const imagem = req.file.path;
 
-        const resposta = await salvarImagem([id, imagem]);
+        const img = req.file.path;
+
+        const resposta = await salvarImagem([id, img]);
         console.log(resposta.affectedRows())
         resp.status(204).send();
     }
