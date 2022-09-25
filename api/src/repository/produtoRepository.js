@@ -63,9 +63,9 @@ export async function salvarImagem(id, imagem) {
         values (?, ?)
         `;
     if (isNaN(id)) {
-        throw new Error(id)
+        throw new Error(id) // vai retornar o que estamos enviando na rota em :id
     }
     const [resposta] = await con.query(comando, [id, imagem]);
 
     return resposta.affectedRows();
-}
+}  
