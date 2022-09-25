@@ -1,10 +1,10 @@
-import { inserirCor, inserirProduto, inserirTamanho } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
 
 const server = Router();
-const upload = multer({ dest: 'storage/capaProduto'})
+const upload = multer({dest:'storage/capaProduto'});
 
 //inserir Produto
 server.post('/produto', async (req,resp) => {
@@ -72,16 +72,14 @@ server.post('/cor', async (req,resp) => {
     }
 })
 
-server.post('/tamanho', async (req,resp) => {
+server.post('/produto/tamanho', async (req,resp) => {
     try {
         const novoTamanho = req.body;
 
         if(!novoTamanho.descricao)
             throw new Error('Tamnaho do produto é obrigatório!');
 
-
         const tamanhoInserido = await inserirTamanho(novoTamanho);
-        console.log(novoTamanho);
 
         resp.send(tamanhoInserido);
     
@@ -92,7 +90,21 @@ server.post('/tamanho', async (req,resp) => {
     }
 })
 
-
+server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const imagem = req.file.path;
+        const {destaque} = req.query ;
+        const resposta = await salvarImagem([id, imagem, destaque]);
+    
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.send({
+            erro:err.message
+        })
+    }
+})
 
 
 

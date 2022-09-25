@@ -32,9 +32,9 @@ export async function inserirCor(cor) {
 
 export async function inserirTamanho(tamanho) {
     const comando = `
-    INSERT INTO TB_COR (ID_TAMANHO,ID_PRODUTO, DS_TAMANHO)
+    INSERT INTO TB_TAMANHO (ID_TAMANHO, ID_PRODUTO, DS_TAMANHO)
     VALUES(?, ?, ?) `;
-    const [resp] = await con.query(comando, [tamanho.id, tamanho.produto, tamanho.descricao])
+    const [resp] = await con.query(comando, [tamanho.id, tamanho.idProduto, tamanho.descricao])
 
     tamanho.id = resp.insertId;
     return tamanho;
@@ -49,6 +49,7 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
+
 export async function salvarTema(idProduto, idTema) {
     const comando = `
         insert into tb_produto_categoria (id_tema, id_produto)
@@ -56,4 +57,14 @@ export async function salvarTema(idProduto, idTema) {
     `
 
     const [resp] = await con.query(comando, [idTema, idProduto])
+}
+
+export async function salvarImagem(idProduto, imagem, destaque) {
+    const comando = `
+        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO, IMG_DESTAQUE)
+        VALUES (?, ?, ?)
+        `;
+    const [resposta] = await con.query(comando, [idProduto, imagem, destaque]);
+
+    return resposta.affectedRows();
 }
