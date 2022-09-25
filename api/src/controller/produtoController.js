@@ -4,7 +4,7 @@ import multer from 'multer';
 import { Router } from 'express';
 
 const server = Router();
-const upload = multer({dest:'/storage/capaProduto'});
+const upload = multer({dest:'./storage/capaProduto'});
 
 //inserir Produto
 server.post('/produto', async (req,resp) => {
@@ -34,21 +34,22 @@ server.post('/produto', async (req,resp) => {
     }
 })
 
-//ALTERAR IMAGEM
-server.put('/produto/:id/capa', upload.single('capa'), async (req,resp) => {
+
+server.put('/produto/:id/imagem', upload.single("img"), async (req, resp) => {
     try {
         const {id} = req.params;
 
-        const imagem = req.file.path;
+        const img = req.file.path;
 
-        const resposta = await salvarImagem(imagem,id);
-        if(resposta != 1)
-        throw new Error('A imagem não pode ser salva.');
+        const resposta = await salvarImagem(id, img);
+
+        console.log(resposta.affectedRows);
 
         resp.status(204).send();
-    } catch (err) {
-        resp.status(400).send({
-            erro : err.message
+    }
+    catch (err) {
+        resp.send({
+            erro:err.message
         })
     }
 })
@@ -91,22 +92,7 @@ server.post('/produto/tamanho', async (req,resp) => {
     }
 })
 
-server.put('/produto/:id/imagem/', upload.single('img'), async (req, resp) => {
-    try {
-        const { id } = req.params;
 
-        const img = req.file.path;
-
-        const resposta = await salvarImagem([id, img]);
-        console.log(resposta.affectedRows())
-        resp.status(204).send();
-    }
-    catch (err) {
-        resp.send({
-            erro:err.message
-        })
-    }
-})
 
 
 export default server;

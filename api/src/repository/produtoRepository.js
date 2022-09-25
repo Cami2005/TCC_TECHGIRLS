@@ -3,7 +3,7 @@ import { con } from './connection.js'
 export async function inserirProduto(produto) {
     const comando = `
     INSERT INTO TB_PRODUTO (ID_PRODUTO, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?, ?, ?,?) `;
+    VALUES ( ?, ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
                             produto.id, 
                             produto.nome,
@@ -60,13 +60,15 @@ export async function salvarTema(idProduto, idTema) {
 
 export async function salvarImagem(id, imagem) {
     const comando = `
-        insert into tb_imagem (id_produto, img_produto)
-        values (?, ?)
+        insert into tb_imagem (id_produto, img_produto, img_destaque)
+        values (?, ?, false)
         `;
+        
     if (isNaN(id)) {
         throw new Error("id tem o valor =" + "'" + id + "'" + " e imagem tem o valor=" + imagem) // vai retornar o que estamos enviando na rota em :id
     }
+    
     const [resposta] = await con.query(comando, [id, imagem]);
 
-    return resposta.affectedRows();
+    return resposta;
 }  
