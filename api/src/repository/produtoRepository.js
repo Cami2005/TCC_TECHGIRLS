@@ -49,6 +49,7 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
+
 export async function salvarTema(idProduto, idTema) {
     const comando = `
         insert into tb_produto_categoria (id_tema, id_produto)
@@ -56,4 +57,14 @@ export async function salvarTema(idProduto, idTema) {
     `
 
     const [resp] = await con.query(comando, [idTema, idProduto])
+}
+
+export async function salvarImagem(idProduto, imagem, destaque) {
+    const comando = `
+        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO, IMG_DESTAQUE)
+        VALUES (?, ?, ?)
+        `;
+    const [resposta] = await con.query(comando, [idProduto, imagem, destaque]);
+
+    return resposta.affectedRows();
 }
