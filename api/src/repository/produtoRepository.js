@@ -44,6 +44,7 @@ export async function salvarProdutoCategoria(idProduto, idCategoria) {
         insert into tb_produto_categoria (id_categoria, id_produto)
                                   values (?, ?)
     `
+    
 
     const [resp] = await con.query(comando, [idCategoria, idProduto])
 }
