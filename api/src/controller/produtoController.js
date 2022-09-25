@@ -90,13 +90,14 @@ server.post('/produto/tamanho', async (req,resp) => {
     }
 })
 
-server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => {
+server.put('/produto/:id/imagem/', upload.single('imagem'), async (req, resp) => {
     try {
         const { id } = req.params;
         const imagem = req.file.path;
+
         const resposta = await salvarImagem([id, imagem]);
-    
-        resposta.status(204).send();
+        console.log(resposta.affectedRows())
+        resp.status(204).send();
     }
     catch (err) {
         resp.send({
@@ -104,5 +105,6 @@ server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => 
         })
     }
 })
+
 
 export default server;

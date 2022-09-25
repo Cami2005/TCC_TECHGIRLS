@@ -30,9 +30,9 @@ export async function inserirCor(cor) {
 
 export async function inserirTamanho(tamanho) {
     const comando = `
-    INSERT INTO TB_TAMANHO (ID_tamanho,ID_PRODUTO, DS_TAMANHO)
-    VALUES(?, ?, ? ) `;
-    const [resp] = await con.query(comando, [tamanho.id, tamanho.produto, tamanho.descricao])
+    INSERT INTO TB_TAMANHO (ID_TAMANHO, ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?, ?) `;
+    const [resp] = await con.query(comando, [tamanho.id, tamanho.idProduto, tamanho.descricao])
 
     tamanho.id = resp.insertId;
     return tamanho;
@@ -58,12 +58,15 @@ export async function salvarTema(idProduto, idTema) {
     const [resp] = await con.query(comando, [idTema, idProduto])
 }
 
-export async function salvarImagem(idProduto, imagem, destaque) {
+export async function salvarImagem(id, imagem) {
     const comando = `
-        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO, IMG_DESTAQUE)
-        VALUES (?, ?, ?)
+        insert into tb_imagem (id_produto, img_produto)
+        values (?, ?)
         `;
-    const [resposta] = await con.query(comando, [idProduto, imagem, destaque]);
+    if (isNaN(id)) {
+        throw new Error(id) // vai retornar o que estamos enviando na rota em :id
+    }
+    const [resposta] = await con.query(comando, [id, imagem]);
 
     return resposta.affectedRows();
-}
+}  
