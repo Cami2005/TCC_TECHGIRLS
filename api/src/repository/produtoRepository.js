@@ -57,12 +57,15 @@ export async function salvarTema(idProduto, idTema) {
     const [resp] = await con.query(comando, [idTema, idProduto])
 }
 
-export async function salvarImagem(idProduto, imagem) {
+export async function salvarImagem(id, imagem) {
     const comando = `
-        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO)
-        VALUES (?, ?)
+        insert into tb_imagem (id_produto, img_produto)
+        values (?, ?)
         `;
-    const [resposta] = await con.query(comando, [idProduto, imagem]);
+    if (isNaN(id)) {
+        throw new Error(id)
+    }
+    const [resposta] = await con.query(comando, [id, imagem]);
 
     return resposta.affectedRows();
 }
