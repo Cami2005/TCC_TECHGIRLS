@@ -2,12 +2,10 @@ import { con } from './connection.js'
 
 export async function inserirProduto(produto) {
     const comando = `
-    INSERT INTO TB_PRODUTO (ID_PRODUTO, ID_TEMA , ID_CATEGORIA, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?, ?, ?,?) `;
+    INSERT INTO TB_PRODUTO (ID_PRODUTO, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
+    VALUES ( ?, ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
                             produto.id, 
-                            produto.tema, 
-                            produto.categoria,
                             produto.nome,
                             produto.preco,
                             produto.descricao,

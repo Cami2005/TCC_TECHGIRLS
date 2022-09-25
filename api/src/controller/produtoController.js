@@ -104,7 +104,4 @@ server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => 
     }
 })
 
-
-
-
 export default server;
