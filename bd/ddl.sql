@@ -157,3 +157,11 @@ CREATE TABLE TB_CARRINHO (
     FOREIGN KEY (ID_COR) REFERENCES TB_COR (ID_COR),
     FOREIGN KEY (ID_TAMANHO) REFERENCES TB_TAMANHO (ID_TAMANHO)
     );
+    
+    create table tb_produto_categoria (
+	id_produto_categoria	int primary key auto_increment,
+    id_categoria			int,
+    id_produto				int,
+    foreign key (id_categoria) references tb_categoria (id_categoria),
+    foreign key (id_produto) references tb_produto (id_produto)
+);
