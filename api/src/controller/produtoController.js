@@ -97,7 +97,7 @@ server.put('/produto/:id/imagem', upload.single('imagem'), async (req, resp) => 
         const {destaque} = req.query ;
         const resposta = await salvarImagem([id, imagem, destaque]);
     
-        resp.status(204).send();
+        resposta.status(204).send();
     }
     catch (err) {
         resp.send({
