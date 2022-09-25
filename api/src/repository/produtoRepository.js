@@ -3,7 +3,7 @@ import { con } from './connection.js'
 export async function inserirProduto(produto) {
     const comando = `
     INSERT INTO TB_PRODUTO (ID_PRODUTO, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?, ?) `;
+    VALUES ( ?, ?, ?, ?, ?, ?,?) `;
     const [resp] = await con.query(comando, [
                             produto.id, 
                             produto.nome,
