@@ -52,3 +52,7 @@ VALUES(1, 'P');
 -- ADICIONAR COR
 INSERT INTO TB_COR (ID_COR, ID_PRODUTO, NM_COR)
 VALUES(1, 1, 'Laranja');
+
+
+insert into tb_produto_categoria (id_categoria, id_produto)
+values (1, 1);       

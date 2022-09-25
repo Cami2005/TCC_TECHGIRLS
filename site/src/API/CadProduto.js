@@ -5,16 +5,32 @@ const api = axios.create({
     baseURL: API_URL
 })
 
-export async function CadastrarPoduto(id, nome, descricao, preco, disponivel, usuario) {
-    const resposta= await api.post('/produto',{
-        id,
-        nome, 
-        preco, 
-        descricao,
-        disponivel,
-        usuario
-    } )
+export async function CadastrarCor(id,cor) {
+    const resposta= await api.post ('/cor', {
+        id: id,
+        cor: cor
+    })
     return resposta.data
 }
 
-//export async function InserirImagem(id, imagem){}
+
+export async function CadastrarTamanho(id, tamanho) {
+    const resposta= await api.post ('/tamanho', {
+        id: id,
+        tamanho: tamanho
+
+    })
+    return resposta.data;
+}
+
+export async function listarCategorias() {
+        const resp = await api.get('/api/categoria')
+        return resp.data;
+}
+
+    export async function listarTemas() {
+        const resp = await api.get('/api/tema')
+        return resp.data;
+    }
+    
+    

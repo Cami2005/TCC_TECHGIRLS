@@ -1,10 +1,8 @@
-
-import { Link } from "react-router-dom";
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
-import "../../../common/common.scss"
+import "../../../common/common.scss";
 
-export default function InserirProduto() {
+export default function Index() {
     return (
         <main className="inserirProduto">
 
@@ -19,17 +17,17 @@ export default function InserirProduto() {
                         <div className="div1">
                             <div className="flex-column">
                                 <label> Código do Produto </label>
-                                <input className="input"/>
+                                <input  className="input"/>
                             </div>
 
                             <div className="flex-column">
                                 <label> Nome do Produto </label>
-                                <input className="input"/>
+                                <input  className="input"/>
                             </div>
 
                             <div className="flex-column">
                                 <label> Descrição do Produto </label>
-                                <textarea maxLength={100} className="textarea"/>
+                                <textarea  maxLength={100} className="textarea"/>
                             </div>
 
                             
@@ -72,9 +70,7 @@ export default function InserirProduto() {
                             </div>
 
                             <div>
-                                <label> Disponível ? </label>
-                                    <div> <label> Sim </label> <input type='checkbox'/> </div>
-                                    <div> <label> Não </label> <input type='checkbox'/> </div>
+                                    <div> <label >Disponível ?</label> <input type='checkbox'/> </div>
                             </div> 
                         </div>
 
@@ -93,7 +89,7 @@ export default function InserirProduto() {
 
                     </div>
 
-                    <button className="button centralizar"> Adicionar </button>
+                    <button  className="button centralizar"> Adicionar </button>
 
                 </div>
 

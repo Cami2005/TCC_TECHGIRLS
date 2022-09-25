@@ -32,9 +32,9 @@ export async function inserirCor(cor) {
 
 export async function inserirTamanho(tamanho) {
     const comando = `
-    INSERT INTO TB_TAMANHO (ID_TAMANHO, ID_PRODUTO, DS_TAMANHO)
-    VALUES(?, ?, ?) `;
-    const [resp] = await con.query(comando, [tamanho.id, tamanho.idProduto, tamanho.descricao])
+    INSERT INTO TB_TAMANHO (ID_tamanho,ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?, ? ) `;
+    const [resp] = await con.query(comando, [tamanho.id, tamanho.produto, tamanho.descricao])
 
     tamanho.id = resp.insertId;
     return tamanho;
