@@ -3,7 +3,7 @@ import { con } from './connection.js'
 export async function inserirProduto(produto) {
     const comando = `
     INSERT INTO TB_PRODUTO (ID_PRODUTO, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?, ?) `;
+    VALUES ( ?, ?, ?, ?, ?, ?,?) `;
     const [resp] = await con.query(comando, [
                             produto.id, 
                             produto.nome,
@@ -57,12 +57,12 @@ export async function salvarTema(idProduto, idTema) {
     const [resp] = await con.query(comando, [idTema, idProduto])
 }
 
-export async function salvarImagem(idProduto, imagem) {
+export async function salvarImagem(idProduto, imagem, destaque) {
     const comando = `
-        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO)
-        VALUES (?, ?)
+        INSERT INTO TB_IMAGEM (ID_PRODUTO, IMG_PRODUTO, IMG_DESTAQUE)
+        VALUES (?, ?, ?)
         `;
-    const [resposta] = await con.query(comando, [idProduto, imagem]);
+    const [resposta] = await con.query(comando, [idProduto, imagem, destaque]);
 
     return resposta.affectedRows();
 }
