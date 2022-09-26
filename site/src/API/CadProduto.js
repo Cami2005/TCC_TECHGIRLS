@@ -13,20 +13,13 @@ export async function CadastrarPoduto(id, nome, descricao, preco, disponivel) {
 
 
 export async function CadastrarCor(cor) {
-    const resposta= await api.post ('/cor', {
-        
-        cor
-    })
+    const resposta= await api.post ('/cor', {cor})
     return resposta.data
 }
 
 
 export async function CadastrarTamanho(id, tamanho) {
-    const resposta= await api.post ('/tamanho', {
-        id,
-        tamanho
-
-    })
+    const resposta= await api.post ('/tamanho', {tamanho})
     return resposta.data;
 }
 

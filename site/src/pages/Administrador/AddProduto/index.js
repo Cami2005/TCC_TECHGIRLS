@@ -13,16 +13,27 @@ export default function Index() {
 
     ///////////////////////////
     const[cor, setCor] = useState('');
+    const [respo, setRespo] = useState([])
 
     async function SalvarCor(){
-        try {
-            const resp= await CadastrarCor(cor);
-            alert('cor cadastrada')
-        } catch (error) {
-alert('ERR')
-        }
+            const nova= await CadastrarCor([...respo, cor]);
+            setRespo(nova);
     }
-    
+
+    function RemoverCor(t){
+        let l = lista.filter(item => item !== t);
+        setLista(l)
+    }
+
+    function LimparCor(){
+        setLista([]);
+    }
+
+    useEffect(() => {
+        LimparCor();
+    }, [])
+
+    ////////////////////////////////////////////////////
     async function Adicionar(){
         try {
             const precoProduto = Number(preco.replace(',', '.'));
@@ -86,6 +97,7 @@ alert('ERR')
                                 <label> Cor </label>
                                 <div className="flex-row">
                                     <input type="text" value={cor} onChange={e=> setCor(e.target.value)}className="input"/> <button onClick={SalvarCor} className="button-ok"> OK </button>
+                                    
                                 </div>
                             </div>
 
