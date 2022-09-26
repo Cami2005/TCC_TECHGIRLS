@@ -1,14 +1,22 @@
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
 import "../../../common/common.scss"
-import {  useState } from "react";
-import {  CadastrarPoduto } from '../../../API/CadProduto.js';
+import {  useEffect, useState } from "react";
+import {  CadastrarPoduto, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
 
 export default function Index() {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
-    const [disponivel, setDisponivel] = useState(false);
+    const [disponivel, setDisponivel] = useState(true);
+
+    const [idCategoria, setIdCategoria] = useState();
+    const [categorias, setCategorias] = useState([]);
+
+    const [idTemas, setIdTemas] = useState();
+    const [Temas, setTemas] = useState([]);
+
+    const [catSelecionadas, setCatSelecionadas] = useState([]);
 
     async function Adicionar(){
         try {
@@ -21,6 +29,36 @@ export default function Index() {
         }
     }
  
+    function buscarNomeCategoria(id) {
+        const cat = categorias.find(item => item.id == id);
+        return cat.categoria;
+    }
+
+    
+    function adicionarCategoria() {
+        if (!catSelecionadas.find(item => item == idCategoria)) {
+            const categorias = [...catSelecionadas, idCategoria];
+            setCatSelecionadas(categorias);
+        }
+    }
+
+
+    async function carregarTemas() {
+        const r = await listarTemas();
+        setTemas(r);
+    }
+
+
+    async function carregarCategorias() {
+        const r = await listarCategorias();
+        setCategorias(r);
+    }
+
+
+    useEffect(() => {
+        carregarCategorias();
+        carregarTemas();
+    }, [])
 
 
 
@@ -54,15 +92,25 @@ export default function Index() {
                             <div className="flex-row space-between">
                                 <div className="select-tamanho">
                                     <label> Categoria:</label>
-                                    <select className="select">
+                                    <select className="select" value={idCategoria} onChange={e => setIdCategoria(e.target.value)}>
                                         <option> Vestimenta </option>
+
+                                        {categorias.map(item =>
+                                <option value={item.id}> {item.categoria} </option>
+                            )}
                                     </select>
                                 </div>
 
+                                
+
                                 <div className="select-tamanho">
                                     <label> Tema: </label>
-                                    <select className="select">
+                                    <select className="select" value={idTemas} onChange={e => setIdTemas(e.target.value)}>
                                         <option> Harry Potter </option>
+
+                                        {Temas.map(item =>
+                            <option value={item.id}> {item.temas} </option>
+                        )}
                                     </select>
                                 </div>
                             </div>
@@ -92,14 +140,14 @@ export default function Index() {
                             </div>
 
                             <div>
-                                    <div> <label type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}>Disponível ?</label> <input type='checkbox'/> </div>
+                                    <div> <label type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}>Disponível ?</label> <input type='checkbox'/>&nbsp; </div>
                             </div> 
                         </div>
 
                         <div className="div2">
                             <div>
                                 <label> Foto de destaque</label>
-                                <input/>
+                                <input type="file" accept="image"/>
                             </div>
 
                             <div> 
