@@ -14,12 +14,15 @@ export default function Index() {
     
     async function Adicionar(){
         try {
-            const r = await CadastrarPoduto (nome, descricao, preco, disponivel)
+            const precoProduto = Number(preco.replace(',', '.'));
+
+            const r = await CadastrarPoduto (nome, descricao, precoProduto, disponivel)
             alert('Produto cadastrado com sucesso')
         } catch (err) {
-           alert('deu erro')
+           alert(err.response.data.erro);
         }
     }
+
     
     return (
         <main className="inserirProduto">

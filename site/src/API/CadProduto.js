@@ -6,12 +6,7 @@ const api = axios.create({
 })
 
 export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
-    const resposta= await api.post('/produto',{
-    nome: nome,
-    preco: preco,
-    descricao: descricao,
-    disponivel: disponivel
-    } )
+    const resposta= await api.post('/produto', {nome, descricao, preco, disponivel});
     return resposta.data
 }
 
