@@ -10,6 +10,17 @@ export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
     return resposta.data
 }
 
+export async function CadastrarImagem(id, imagem){
+    const formData = new FormData();
+    formData.append ('capa', imagem);
+
+    const resposta = await api.put('produto/${id}/imagem', formData, {
+        headers:{
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    return resposta.status;
+}
 
 
 export async function CadastrarCor(cor) {

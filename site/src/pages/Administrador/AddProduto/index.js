@@ -99,16 +99,8 @@ useEffect(() => {
                             </div>
 
                             <div>
-                {respo.map ( item =>
-                    <ul><Lista
-                    key={item}
-                    it={item}
-                    deletarit={Remover}
-                        />                    
-                        
-                    </ul>
-                )}
-            </div>
+                        {respo.map ( item =>
+                            <Lista key={item} it={item} deletarit={Remover}/>)}</div>
 
 
                             <div className="div-array">
