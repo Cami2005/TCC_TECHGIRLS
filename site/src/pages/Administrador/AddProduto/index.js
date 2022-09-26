@@ -11,29 +11,6 @@ export default function Index() {
     const [preco, setPreco] = useState('');
     const [disponivel, setDisponivel] = useState(false);
 
-    ///////////////////////////
-    const[cor, setCor] = useState('');
-    const [respo, setRespo] = useState([])
-
-    async function SalvarCor(){
-            const nova= await CadastrarCor([...respo, cor]);
-            setRespo(nova);
-    }
-
-    function RemoverCor(t){
-        let l = lista.filter(item => item !== t);
-        setLista(l)
-    }
-
-    function LimparCor(){
-        setLista([]);
-    }
-
-    useEffect(() => {
-        LimparCor();
-    }, [])
-
-    ////////////////////////////////////////////////////
     async function Adicionar(){
         try {
             const precoProduto = Number(preco.replace(',', '.'));
@@ -44,7 +21,14 @@ export default function Index() {
            alert(err.response.data.erro);
         }
     }
+ ///////////////////////////
+ const[cor, setCor] = useState('');
+ const [respo, setRespo] = useState([])
 
+ async function SalvarCor(){
+         const nova= await CadastrarCor([...respo, cor]);
+         setRespo(nova);
+ }
     
     return (
         <main className="inserirProduto">
