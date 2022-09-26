@@ -1,16 +1,27 @@
 
-import { Link } from "react-router-dom";
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
 import "../../../common/common.scss"
 import { useState } from "react";
-import { CadastrarPoduto } from '../../../API/CadProduto.js';
+import { CadastrarCor, CadastrarPoduto } from '../../../API/CadProduto.js';
 
 export default function Index() {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
     const [disponivel, setDisponivel] = useState(false);
+
+    ///////////////////////////
+    const[cor, setCor] = useState('');
+
+    async function SalvarCor(){
+        try {
+            const resp= await CadastrarCor(cor);
+            alert('cor cadastrada')
+        } catch (error) {
+alert('ERR')
+        }
+    }
     
     async function Adicionar(){
         try {
@@ -74,14 +85,14 @@ export default function Index() {
                             <div className="div-array">
                                 <label> Cor </label>
                                 <div className="flex-row">
-                                    <input className="input"/> <button className="button-ok"> OK </button>
+                                    <input type="text" value={cor} onChange={e=> setCor(e.target.value)}className="input"/> <button onClick={SalvarCor} className="button-ok"> OK </button>
                                 </div>
                             </div>
 
                             <div className="div-array">
                                 <label> Tamanhos </label>
                                 <div className="flex-row">
-                                    <input className="input"/> <button className="button-ok"> OK </button>
+                                    <input  className="input"/> <button className="button-ok"> OK </button>
                                 </div>  
                             </div>
 
