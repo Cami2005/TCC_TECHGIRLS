@@ -1,6 +1,3 @@
-SHOW DATABASES;
-
-
 CREATE DATABASE geek_db; 
 
 use geek_db;
@@ -68,11 +65,10 @@ CREATE TABLE TB_COR (
 CREATE TABLE TB_IMAGEM (
 	ID_IMAGEM        INT PRIMARY KEY AUTO_INCREMENT,
     ID_PRODUTO       INT,
-    IMG_PRODUTO      VARCHAR(800),
+    IMG_PRODUTO      varchar(800),
+    IMG_DESTAQUE	 BOOLEAN,
 FOREIGN KEY (ID_PRODUTO) REFERENCES TB_PRODUTO (ID_PRODUTO)
 );
-
-
  
  CREATE TABLE TB_USUARIO_LOGIN (
 	ID_USUARIO_LOGIN   INT PRIMARY KEY AUTO_INCREMENT,
@@ -165,3 +161,4 @@ CREATE TABLE TB_CARRINHO (
     foreign key (id_categoria) references tb_categoria (id_categoria),
     foreign key (id_produto) references tb_produto (id_produto)
 );
+
