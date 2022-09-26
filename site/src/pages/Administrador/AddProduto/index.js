@@ -1,8 +1,8 @@
-
+import Lista from "../../../components/lista.js";
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
 import "../../../common/common.scss"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CadastrarCor, CadastrarPoduto } from '../../../API/CadProduto.js';
 
 export default function Index() {
@@ -29,6 +29,20 @@ export default function Index() {
          const nova= await CadastrarCor([...respo, cor]);
          setRespo(nova);
  }
+
+ function Remover(t){
+    let l = respo.filter(item => item !== t);
+    setRespo(l)
+}
+
+function Limpar(){
+    setRespo([]);
+}
+
+useEffect(() => {
+    Limpar();
+}, [])
+
     
     return (
         <main className="inserirProduto">
@@ -81,9 +95,21 @@ export default function Index() {
                                 <label> Cor </label>
                                 <div className="flex-row">
                                     <input type="text" value={cor} onChange={e=> setCor(e.target.value)}className="input"/> <button onClick={SalvarCor} className="button-ok"> OK </button>
-                                    
                                 </div>
                             </div>
+
+                            <div>
+                {respo.map ( item =>
+                    <ul><Lista
+                    key={item}
+                    it={item}
+                    deletarit={Remover}
+                        />                    
+                        
+                    </ul>
+                )}
+            </div>
+
 
                             <div className="div-array">
                                 <label> Tamanhos </label>
