@@ -11,20 +11,7 @@ server.post('/produto', async (req,resp) => {
     try {
         const novoProduto = req.body;
 
-        if(!novoProduto.nome)
-            throw new Error('Nome do produto é obrigatório!');
-
-            if(!novoProduto.descricao)
-            throw new Error('Descrição do produto é obrigatória!');
-
-
-        if(!novoProduto.preco)
-            throw new Error('Valor do produto é obrigatório!');
-
-
-        if(!novoProduto.disponivel)
-            throw new Error('Descrição do produto é obrigatória!');
-
+        
         const produtoInserido = await inserirProduto(novoProduto);
         console.log(novoProduto);
 

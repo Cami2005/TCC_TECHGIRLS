@@ -1,9 +1,8 @@
-import Lista from "../../../components/lista.js";
 import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
 import "../../../common/common.scss"
-import { useEffect, useState } from "react";
-import { CadastrarCor, CadastrarPoduto } from '../../../API/CadProduto.js';
+import {  useState } from "react";
+import {  CadastrarPoduto } from '../../../API/CadProduto.js';
 
 export default function Index() {
     const [nome, setNome] = useState('');
@@ -18,30 +17,12 @@ export default function Index() {
             const r = await CadastrarPoduto (nome, descricao, precoProduto, disponivel)
             alert('Produto cadastrado com sucesso')
         } catch (err) {
-           alert(err.response.data.erro);
+        console.log();
         }
     }
- ///////////////////////////
- const[cor, setCor] = useState('');
- const [respo, setRespo] = useState([])
+ 
 
- async function SalvarCor(){
-         const nova= await CadastrarCor([...respo, cor]);
-         setRespo(nova);
- }
 
- function Remover(t){
-    let l = respo.filter(item => item !== t);
-    setRespo(l)
-}
-
-function Limpar(){
-    setRespo([]);
-}
-
-useEffect(() => {
-    Limpar();
-}, [])
 
     
     return (
@@ -56,10 +37,7 @@ useEffect(() => {
                     <div className="inserir">
 
                         <div className="div1">
-                            <div className="flex-column">
-                                <label> Código do Produto </label>
-                                <input className="input"/>
-                            </div>
+                            
 
                             <div className="flex-column">
                                 <label> Nome do Produto </label>
@@ -94,13 +72,11 @@ useEffect(() => {
                             <div className="div-array">
                                 <label> Cor </label>
                                 <div className="flex-row">
-                                    <input type="text" value={cor} onChange={e=> setCor(e.target.value)}className="input"/> <button onClick={SalvarCor} className="button-ok"> OK </button>
+                                    <input className="input"/> <button  className="button-ok"> OK </button>
                                 </div>
                             </div>
 
-                            <div>
-                        {respo.map ( item =>
-                            <Lista key={item} it={item} deletarit={Remover}/>)}</div>
+                           
 
 
                             <div className="div-array">
@@ -116,7 +92,7 @@ useEffect(() => {
                             </div>
 
                             <div>
-                                    <div> <label type="checked" value={disponivel} onChange={e=> setDisponivel(e.target.checked)}>Disponível ?</label> <input type='checkbox'/> </div>
+                                    <div> <label type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}>Disponível ?</label> <input type='checkbox'/> </div>
                             </div> 
                         </div>
 

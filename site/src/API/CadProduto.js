@@ -7,12 +7,12 @@ const api = axios.create({
 
 export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
     const resposta= await api.post('/produto', {nome, descricao, preco, disponivel});
-    return resposta.data
+    return resposta.data;
 }
 
 export async function CadastrarImagem(id, imagem){
     const formData = new FormData();
-    formData.append ('capa', imagem);
+    formData.append ('imagem', imagem);
 
     const resposta = await api.put('produto/${id}/imagem', formData, {
         headers:{
@@ -43,5 +43,4 @@ export async function listarCategorias() {
         const resp = await api.get('/api/tema')
         return resp.data;
     }
-    
     

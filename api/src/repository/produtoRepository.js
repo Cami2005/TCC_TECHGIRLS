@@ -11,6 +11,7 @@ export async function inserirProduto(produto) {
                             produto.descricao,
                             produto.disponivel
                         ])
+                        
     produto.id = resp.insertId;
     return produto;
 }
