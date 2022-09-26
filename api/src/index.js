@@ -5,7 +5,7 @@ import produtoController from './controller/produtoController.js';
 import categoria from './controller/categoriasController.js';
 import tema from './controller/temaController.js'
 
-import multer from 'multer';
+import multer from "multer";
 import cors from "cors"
 import express from "express"
 
@@ -17,7 +17,7 @@ server.use(loginController);
 server.use(produtoController);
 server.use(categoria);
 server.use(tema);
-
+server.use(multer)
 
 
 const PORT= process.env.PORT;
