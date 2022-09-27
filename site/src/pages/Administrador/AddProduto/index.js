@@ -18,6 +18,15 @@ export default function Index() {
 
     const [catSelecionadas, setCatSelecionadas] = useState([]);
 
+    // função adicionar novo produto completa
+    // async function inserir(){
+    //    Adicionar();
+    //    adicionarCategoria()
+    //    adicionarCategoria()
+    //    adicionarImagem()
+    //    alterarDestaque()
+    // }
+
     //cor
     const [cor, setCor] = useState([]);
     const [novaCor, setNovaCor] = useState('');
@@ -25,6 +34,9 @@ export default function Index() {
     //tamanho
     const [tamanho, setTamanho] = useState([]);
     const [novoTamanho, setNovoTamanho] = useState('');
+
+    //funções cor e tamanho (renderização)
+
 
     function delay(milliseconds) {
         return new Promise (resolve => setTimeout(resolve, milliseconds)) // acabar com o delay
@@ -44,6 +56,12 @@ export default function Index() {
         setTamanho([...tamanho, novoTamanho]);
         delay(500).then(_=> console.log(tamanho))
     }
+
+    //
+
+    // função adicinar cores
+
+    async
 
     async function Adicionar(){
         try {
@@ -148,6 +166,12 @@ export default function Index() {
                                 <div className="flex-row">
                                     <input type="text" value={novaCor} onChange={e => setNovaCor(e.target.value)} className="input"/> 
                                     <button onClick={arrayCor} className="button-ok"> OK </button>
+                                    
+                                    {cor.map( item => 
+                                        <div className="itemzinho" key={item} >
+                                            {item}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -158,10 +182,10 @@ export default function Index() {
                                     <button onClick={arrayTamanho} className="button-ok"> OK </button>
 
                                     {tamanho.map( item => 
-                                        <div>
-                                            key={item} 
-                                            item={item}
-                                        </div>)}
+                                        <div className="itemzinho" key={item} >
+                                            {item}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

@@ -94,7 +94,7 @@
      .div-array {
       display: flex;
       flex-direction: column;
-      width: 15em;
+      width: max-content;
      }
 
      .input {
@@ -132,7 +132,7 @@
       padding: 0.2em 0.5em;
       width: fit-content;
       color: #fff;
-      margin: 0.7em 0em;
+      margin: 0.7em 0.5em;
       cursor: pointer;
    }
 
@@ -140,6 +140,13 @@
         align-self: center;
      }
 
-
+     .itemzinho {
+      margin: 0.7em 0.5em;
+      padding: 0.2em 0.5em;;
+      background-color: #FF2C83;
+      color: #fff;
+      font-family: 'Lexend-Light';
+      border-radius: 0.8em;
+     }
 
 }

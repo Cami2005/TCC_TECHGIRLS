@@ -25,8 +25,6 @@ export async function inserirCor(cor) {
 
     cor.id = resp.insertId;
     return cor;
-
-
 }
 
 export async function inserirTamanho(tamanho) {
