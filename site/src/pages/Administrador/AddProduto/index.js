@@ -18,6 +18,33 @@ export default function Index() {
 
     const [catSelecionadas, setCatSelecionadas] = useState([]);
 
+    //cor
+    const [cor, setCor] = useState([]);
+    const [novaCor, setNovaCor] = useState('');
+
+    //tamanho
+    const [tamanho, setTamanho] = useState([]);
+    const [novoTamanho, setNovoTamanho] = useState('');
+
+    function delay(milliseconds) {
+        return new Promise (resolve => setTimeout(resolve, milliseconds)) // acabar com o delay
+    }
+
+    async function arrayCor(){
+        console.log(cor)
+        console.log(novaCor);
+        setCor([...cor, novaCor]);
+        delay(500).then(_ => console.log(cor))
+    }
+
+
+    async function arrayTamanho(){
+        console.log(tamanho)
+        console.log(novoTamanho);
+        setTamanho([...tamanho, novoTamanho]);
+        delay(500).then(_=> console.log(tamanho))
+    }
+
     async function Adicionar(){
         try {
             const precoProduto = Number(preco.replace(',', '.'));
@@ -116,22 +143,26 @@ export default function Index() {
                             </div>
 
                             
-
                             <div className="div-array">
                                 <label> Cor </label>
                                 <div className="flex-row">
-                                    <input className="input"/> <button  className="button-ok"> OK </button>
+                                    <input type="text" value={novaCor} onChange={e => setNovaCor(e.target.value)} className="input"/> 
+                                    <button onClick={arrayCor} className="button-ok"> OK </button>
                                 </div>
                             </div>
-
-                           
-
 
                             <div className="div-array">
                                 <label> Tamanhos </label>
                                 <div className="flex-row">
-                                    <input  className="input"/> <button className="button-ok"> OK </button>
-                                </div>  
+                                    <input value={novoTamanho}  className="input" onChange={e => setNovoTamanho(e.target.value)}/> 
+                                    <button onClick={arrayTamanho} className="button-ok"> OK </button>
+
+                                    {tamanho.map( item => 
+                                        <div>
+                                            key={item} 
+                                            item={item}
+                                        </div>)}
+                                </div>
                             </div>
 
                             <div className="flex-column"> 
