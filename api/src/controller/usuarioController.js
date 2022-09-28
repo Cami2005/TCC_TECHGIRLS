@@ -21,4 +21,5 @@ server.post('/usuario', async (req, resp) => {
    
 })
 
+
 export default server;
