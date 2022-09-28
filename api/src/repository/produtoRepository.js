@@ -19,9 +19,9 @@ export async function inserirProduto(produto) {
 
 export async function inserirCor(cor) {
     const comando = `
-    INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
-    VALUES(?, ?) `;
-    const [resp] = await con.query(comando, [cor.id, cor.nome])
+    INSERT INTO TB_COR (ID_COR, ID_PRODUTO, NM_COR)
+    VALUES( ?,?, ?) `;
+    const [resp] = await con.query(comando, [cor.id, cor.produto, cor.nome])
 
     cor.id = resp.insertId;
     return cor;

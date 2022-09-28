@@ -23,7 +23,7 @@ export async function CadastrarImagem(id, imagem){
 
 
 export async function CadastrarCor(cor) {
-    const resposta= await api.post ('/cor', {cor})
+    const resposta= await api.post ('/cor', {id, cor})
     return resposta.data
 }
 
