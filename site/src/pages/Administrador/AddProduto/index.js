@@ -2,7 +2,7 @@ import MenuAdmin from "../../../components/pagAdm.js";
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarPoduto, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
 
 export default function Index() {
     const [nome, setNome] = useState('');
@@ -43,10 +43,16 @@ export default function Index() {
     }
 
     async function arrayCor(){
-        console.log(cor)
-        console.log(novaCor);
-        setCor([...cor, novaCor]);
-        delay(500).then(_ => console.log(cor))
+        try {
+            setCor([...cor, novaCor]);
+            delay(500).then(_ => console.log(cor))
+            const addCor= await CadastrarCor (cor);
+            alert('Produto cadastrado com sucesso')
+            
+        } catch (error) {
+            console.log();
+
+        }
     }
 
 
