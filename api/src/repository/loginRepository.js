@@ -14,3 +14,16 @@ export async function login (email, senha) {
         const [respostas] = await con.query (comando, [email, senha]);
         return respostas [0];
     }
+
+  export async function inserirUsuarioLogin(usuariologin){
+    
+    const comando= `
+    insert into tb_usuario_login(id_usuario_login, id_usuario, ds_email, ds_senha)
+    values(?, ?, ?, ?)
+    `;
+  
+    const [r] = await con.query(comando, [usuariologin.id_usuario_login, usuariologin.id, usuariologin.email, usuariologin.senha]);
+    usuariologin.id_usuario_login = r.insertId;
+
+    return r.affectedRows;
+  }

@@ -1,4 +1,5 @@
 import { login } from '../repository/loginRepository.js';  
+import { inserirUsuarioLogin } from '../repository/loginRepository.js';
 import { Router } from "express"; 
 
 const server = Router(); 
@@ -19,5 +20,24 @@ server.post('/admin/login', async (req,resp) => {
                 })    
              } 
             })  
+
+server.post('/login/usuario', async (req, resp) => {
+     try{
+          const usuariologin = req.body;
+           
+          const novoUsuarioLogin = await inserirUsuarioLogin(usuariologin);
+
+          if( novoUsuarioLogin != 1)
+          throw new Error('Não foi possível inserir as informações de login do usuário')
+           
+          resp.status(204).send();
+        }
+     catch (err) {
+           resp.status(400).send({
+               erro: err.message
+            })
+               
+     }
+           })
             
 export default server;

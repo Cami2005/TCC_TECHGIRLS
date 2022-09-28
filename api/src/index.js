@@ -18,7 +18,7 @@ server.use(loginController);
 server.use(produtoController);
 server.use(categoria);
 server.use(tema);
-server.use(usuarioController)
+server.use(usuarioController);
 server.use(multer)
 
 

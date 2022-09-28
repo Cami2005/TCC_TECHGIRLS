@@ -10,3 +10,4 @@ export async function inserirUsuario(usuario){
     usuario.id = resposta.insertId;
     return resposta.affectedRows;
 }
+

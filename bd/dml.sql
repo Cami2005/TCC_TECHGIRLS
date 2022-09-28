@@ -56,3 +56,7 @@ VALUES(1, 1, 'Laranja');
 
 insert into tb_produto_categoria (id_categoria, id_produto)
 values (1, 1);       
+
+-- inserir login usuario
+  insert into tb_usuario_login(id_usuario_login, id_usuario, ds_email, ds_senha)
+    values(?, ?, ?, ?);
