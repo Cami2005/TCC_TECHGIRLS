@@ -10,7 +10,6 @@ const upload = multer({dest:'./storage/capaProduto'});
 server.post('/produto', async (req,resp) => {
     try {
         const novoProduto = req.body;
-
         
         const produtoInserido = await inserirProduto(novoProduto);
         console.log(novoProduto);

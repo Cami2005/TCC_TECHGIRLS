@@ -1,0 +1,24 @@
+// PRODUTO
+
+// TEMA
+
+// CATEGORIA
+
+//  USUARIO
+
+1. Inserir Usuário (post) '/usuario'
+    req {
+        "nome"
+        "email"
+        "telefone"
+        "cpf"
+        "rg"
+    }
+    resp {
+        "id"
+        "nome"
+        "email"
+        "telefone"
+        "cpf"
+        "rg"
+    }

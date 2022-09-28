@@ -61,8 +61,6 @@ export default function Index() {
 
     // função adicinar cores
 
-    async
-
     async function Adicionar(){
         try {
             const precoProduto = Number(preco.replace(',', '.'));
