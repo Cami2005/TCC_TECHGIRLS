@@ -45,8 +45,8 @@ export default function Index() {
 
     function arrayCor(){
         
-            let l= [... cor, novaCor];
-            setCor(l);
+            let c= [... cor, novaCor];
+            setCor(c);
     
        // try {
             //setCor([...cor, novaCor]);
@@ -60,13 +60,26 @@ export default function Index() {
         //}
     }
 
+    async function arrayTamanho(){
+        let T= [... tamanho, novoTamanho];
+            setTamanho(T);
+        //setTamanho([...tamanho, novoTamanho]);
+        //delay(500).then(_=> console.log(tamanho))
+    }
+
+    //
+
     function Remover(t){
-        let l = cor.filter(item => item !== t);
-        setCor(l)
+        let c = cor.filter(item => item !== t);
+        let T = tamanho.filter(item => item !== t);
+        setCor(c)
+        setTamanho(T)
     }
 
     function Limpar(){
         setCor([]);
+        setTamanho([]);
+
     }
 
     useEffect(() => {
@@ -75,14 +88,7 @@ export default function Index() {
 
 
 
-    async function arrayTamanho(){
-        console.log(tamanho)
-        console.log(novoTamanho);
-        setTamanho([...tamanho, novoTamanho]);
-        delay(500).then(_=> console.log(tamanho))
-    }
-
-    //
+  
 
     // função adicinar cores
 
@@ -210,8 +216,11 @@ export default function Index() {
                                     <button onClick={arrayTamanho} className="button-ok"> OK </button>
 
                                     {tamanho.map( item => 
-                                        <div className="itemzinho" key={item} >
-                                            {item}
+                                        <div className="itemzinho" >
+                                            <DeletarItem  
+                                            key={item}
+                                            it={item}
+                                            deletarit={Remover}  />
                                         </div>
                                     )}
                                 </div>
