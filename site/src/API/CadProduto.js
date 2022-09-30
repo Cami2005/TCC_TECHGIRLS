@@ -6,7 +6,13 @@ const api = axios.create({
 })
 
 export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
-    const resposta= await api.post('/produto', {nome, descricao, preco, disponivel});
+    const resposta= await api.post('/produto', {
+        nome: nome,
+        descricao: descricao,
+        preco: preco,
+        disponivel: disponivel
+    });
+    console.log(resposta.data);
     return resposta.data;
 }
 
@@ -22,8 +28,11 @@ export async function CadastrarImagem(id, imagem){
 }
 
 
-export async function CadastrarCor(n) {
-    const resposta= await api.post ('/cor', {n})
+export async function CadastrarCor(produto, nome) {
+    const resposta= await api.post ('/cor', {
+        produto: produto,
+        nome: nome
+    })
     return resposta.data
 }
 

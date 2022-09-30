@@ -1,4 +1,5 @@
 import MenuAdmin from "../../../components/pagAdm.js";
+import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
@@ -6,9 +7,10 @@ import {  CadastrarCor, CadastrarPoduto, listarCategorias, listarTemas } from '.
 import DeletarItem from "../../../components/delete.js";
 
 export default function Index() {
+
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [preco, setPreco] = useState('');
+    const [preco, setPreco] = useState(0.0);
     const [disponivel, setDisponivel] = useState(true);
 
     const [idCategoria, setIdCategoria] = useState();
@@ -18,6 +20,7 @@ export default function Index() {
     const [Temas, setTemas] = useState([]);
 
     const [catSelecionadas, setCatSelecionadas] = useState([]);
+
 
     // função adicionar novo produto completa
     // async function inserir(){
@@ -44,7 +47,6 @@ export default function Index() {
     }
 
     function arrayCor(){
-        
             let c= [... cor, novaCor];
             setCor(c);
     
@@ -91,23 +93,11 @@ export default function Index() {
   
 
     // função adicinar cores
-
-    async function Adicionar(){
-        try {
-            const precoProduto = Number(preco.replace(',', '.'));
-
-            const r = await CadastrarPoduto (nome, descricao, precoProduto, disponivel)
-            alert('Produto cadastrado com sucesso')
-        } catch (err) {
-        console.log();
-        }
-    }
  
     function buscarNomeCategoria(id) {
         const cat = categorias.find(item => item.id == id);
         return cat.categoria;
     }
-
     
     function adicionarCategoria() {
         if (!catSelecionadas.find(item => item == idCategoria)) {
@@ -134,9 +124,21 @@ export default function Index() {
         carregarTemas();
     }, [])
 
+    // inserindo cores
+    async function inserirCor(id) {
+        for(let i=0; i<=cor.length; i++) {
+        let x = await CadastrarCor(id, cor[i])
+        }
+    }
 
+    // inserindo produto + cores
+    async function inserirProduto(){ 
+        // const precoProduto = Number(preco.replace(',', '.'));
+       const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
+       const r = await inserirCor(novoProduto.id);
+       alert('produto e cor ok');
+    }        
 
-    
     return (
         <main className="inserirProduto">
 
@@ -232,7 +234,10 @@ export default function Index() {
                             </div>
 
                             <div>
-                                    <div> <label type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}>Disponível ?</label> <input type='checkbox'/>&nbsp; </div>
+                                <div> 
+                                    <label > Disponível ?</label> 
+                                     <input type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}/>
+                                </div>
                             </div> 
                         </div>
 
@@ -251,7 +256,7 @@ export default function Index() {
 
                     </div>
 
-                    <button onClick={Adicionar} className="button centralizar"> Adicionar </button>
+                    <button onClick={inserirProduto} className="button centralizar"> Adicionar </button>
 
                 </div>
 

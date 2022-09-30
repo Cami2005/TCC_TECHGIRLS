@@ -2,10 +2,9 @@ import { con } from './connection.js'
 
 export async function inserirProduto(produto) {
     const comando = `
-    INSERT INTO TB_PRODUTO (ID_PRODUTO, NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?, ?) `;
+    INSERT INTO TB_PRODUTO (NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
+    VALUES ( ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
-                            produto.id, 
                             produto.nome,
                             produto.preco,
                             produto.descricao,
@@ -19,33 +18,33 @@ export async function inserirProduto(produto) {
 
 export async function inserirCor(cor) {
     const comando = `
-    INSERT INTO TB_COR (ID_COR, ID_PRODUTO, NM_COR)
-    VALUES( ?,?, ?) `;
-    const [resp] = await con.query(comando, [cor.id, cor.produto, cor.nome])
-
+    INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
+    VALUES(?, ?) `;
+    const [resp] = await con.query(comando, [cor.produto, cor.nome])
     cor.id = resp.insertId;
     return cor;
 }
 
 export async function inserirTamanho(tamanho) {
     const comando = `
-    INSERT INTO TB_TAMANHO (ID_TAMANHO, ID_PRODUTO, DS_TAMANHO)
-    VALUES(?, ?, ?) `;
-    const [resp] = await con.query(comando, [tamanho.id, tamanho.idProduto, tamanho.descricao])
+    INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?) `;
+    const [resp] = await con.query(comando, [tamanho.produto, tamanho.descricao])
 
     tamanho.id = resp.insertId;
     return tamanho;
 
 
 }
-export async function salvarProdutoCategoria(idProduto, idCategoria) {
+export async function salvarProdutoCategoria(categoria) {
     const comando = `
-        insert into tb_produto_categoria (id_categoria, id_produto)
-                                  values (?, ?)
+        insert into tb_produto_categoria (nm_categoria)
+                                  values (?)
     `
-    
 
-    const [resp] = await con.query(comando, [idCategoria, idProduto])
+    const [resp] = await con.query(comando, [categoria.nome]);
+    categoria.id = resp.insertId;
+
 }
 
 export async function salvarTema(idProduto, idTema) {

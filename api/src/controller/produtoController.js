@@ -13,9 +13,9 @@ server.post('/produto', async (req,resp) => {
         
         const produtoInserido = await inserirProduto(novoProduto);
         console.log(novoProduto);
-
         resp.send(produtoInserido);
-    } catch (err) {
+    } 
+    catch (err) {
         resp.status(400).send({
             erro: err.message 
         })
@@ -48,7 +48,6 @@ server.post('/cor', async (req,resp) => {
 
         if(!novaCor.nome)
             throw new Error('Nome do produto é obrigatório!');
-
 
         const corInserida = await inserirCor(novaCor);
         console.log(novaCor);
