@@ -1,8 +1,13 @@
+import "./delete.scss";
+
 export default function DeletarItem(props){
     return(
-        <div>
-            <span>{props.item}</span>
-            <span onClick={e=> props.RemoverItem(props.item)}>(X)</span>
+        <main>
+                    <div>
+            <span>{props.it}</span>
+            <button className="deletebutton" onClick={e=> props.deletarit(props.it)}>(X)</button>
         </div>
-    )
+
+        </main>
+            )
 }

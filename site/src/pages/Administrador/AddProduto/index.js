@@ -3,6 +3,7 @@ import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
 import {  CadastrarCor, CadastrarPoduto, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
+import DeletarItem from "../../../components/delete.js";
 
 export default function Index() {
     const [nome, setNome] = useState('');
@@ -42,18 +43,36 @@ export default function Index() {
         return new Promise (resolve => setTimeout(resolve, milliseconds)) // acabar com o delay
     }
 
-    async function arrayCor(){
-        try {
-            setCor([...cor, novaCor]);
-            delay(500).then(_ => console.log(cor))
-            const addCor= await CadastrarCor (cor);
-            alert('Produto cadastrado com sucesso')
+    function arrayCor(){
+        
+            let l= [... cor, novaCor];
+            setCor(l);
+    
+       // try {
+            //setCor([...cor, novaCor]);
+            //delay(500).then(_ => console.log(cor))
+            //const addCor= await CadastrarCor (cor);
+            //alert('Produto cadastrado com sucesso')
             
-        } catch (error) {
-            console.log();
+        //} catch (error) {
+          //  console.log();
 
-        }
+        //}
     }
+
+    function Remover(t){
+        let l = cor.filter(item => item !== t);
+        setCor(l)
+    }
+
+    function Limpar(){
+        setCor([]);
+    }
+
+    useEffect(() => {
+        Limpar();
+    }, [])
+
 
 
     async function arrayTamanho(){
@@ -171,11 +190,16 @@ export default function Index() {
                                     <input type="text" value={novaCor} onChange={e => setNovaCor(e.target.value)} className="input"/> 
                                     <button onClick={arrayCor} className="button-ok"> OK </button>
                                     
-                                    {cor.map( item => 
-                                        <div className="itemzinho" key={item} >
-                                            {item}
+                                   
+                                   {cor.map( item => 
+                                        <div className="itemzinho" >
+                                            <DeletarItem  
+                                            key={item}
+                                            it={item}
+                                            deletarit={Remover}  />
                                         </div>
                                     )}
+                                  
                                 </div>
                             </div>
 
