@@ -29,13 +29,11 @@ export async function inserirTamanho(tamanho) {
     const comando = `
     INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
     VALUES(?, ?) `;
-    const [resp] = await con.query(comando, [tamanho.produto, tamanho.descricao])
-
+    const [resp] = await con.query(comando, [tamanho.produto, tamanho.descricao]);
     tamanho.id = resp.insertId;
     return tamanho;
-
-
 }
+
 export async function salvarProdutoCategoria(categoria) {
     const comando = `
         insert into tb_produto_categoria (nm_categoria)

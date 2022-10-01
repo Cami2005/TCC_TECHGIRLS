@@ -29,16 +29,19 @@ export async function CadastrarImagem(id, imagem){
 
 
 export async function CadastrarCor(produto, nome) {
-    const resposta= await api.post ('/cor', {
+    const resposta= await api.post ('/produto/cor', {
         produto: produto,
         nome: nome
     })
-    return resposta.data
+    return resposta.data;
 }
 
 
-export async function CadastrarTamanho(tamanho) {
-    const resposta= await api.post ('/tamanho', {tamanho})
+export async function CadastrarTamanho(produto, tamanho) {
+    const resposta= await api.post ('/produto/tamanho', {
+        produto: produto,
+        descricao: tamanho
+    })
     return resposta.data;
 }
 

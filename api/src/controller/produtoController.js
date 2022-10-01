@@ -42,7 +42,7 @@ server.put('/produto/:id/imagem', upload.single("img"), async (req, resp) => {
     }
 })
 
-server.post('/cor', async (req,resp) => {
+server.post('/produto/cor', async (req,resp) => {
     try {
         const novaCor = req.body;
 
@@ -69,9 +69,9 @@ server.post('/produto/tamanho', async (req,resp) => {
             throw new Error('Tamnaho do produto é obrigatório!');
 
         const tamanhoInserido = await inserirTamanho(novoTamanho);
+        console.log(novoTamanho);
 
         resp.send(tamanhoInserido);
-    
     } catch (err) {
         resp.status(400).send({
             erro: err.message 

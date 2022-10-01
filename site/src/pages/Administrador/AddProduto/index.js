@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
 
 export default function Index() {
@@ -63,8 +63,8 @@ export default function Index() {
     }
 
     async function arrayTamanho(){
-        let T= [... tamanho, novoTamanho];
-            setTamanho(T);
+        let T= [...tamanho, novoTamanho];
+        setTamanho(T);
         //setTamanho([...tamanho, novoTamanho]);
         //delay(500).then(_=> console.log(tamanho))
     }
@@ -124,6 +124,13 @@ export default function Index() {
         carregarTemas();
     }, [])
 
+        // inserindo tamanho
+        async function inserirTamanho(id) {
+            for(let i=0; i<=tamanho.length; i++) {
+            let x = await CadastrarTamanho(id, tamanho[i])
+            }
+        }
+
     // inserindo cores
     async function inserirCor(id) {
         for(let i=0; i<=cor.length; i++) {
@@ -131,12 +138,13 @@ export default function Index() {
         }
     }
 
-    // inserindo produto + cores
+    // inserindo produto + cores + tamanho
     async function inserirProduto(){ 
         // const precoProduto = Number(preco.replace(',', '.'));
        const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
-       const r = await inserirCor(novoProduto.id);
-       alert('produto e cor ok');
+       inserirCor(novoProduto.id);
+       inserirTamanho(novoProduto.id);
+       toast('produto e cor ok');
     }        
 
     return (
