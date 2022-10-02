@@ -144,7 +144,7 @@ export default function Index() {
        const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
        inserirCor(novoProduto.id);
        inserirTamanho(novoProduto.id);
-       toast('produto e cor ok');
+       toast.dark('produto e cor ok');
     }        
 
     return (
