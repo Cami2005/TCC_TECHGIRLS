@@ -18,12 +18,12 @@ export async function login (email, senha) {
   export async function inserirUsuarioLogin(usuariologin){
     
     const comando= `
-    insert into tb_usuario_login(id_usuario_login, id_usuario, ds_email, ds_senha)
-    values(?, ?, ?, ?)
+    insert into tb_usuario_login(id_usuario, ds_email, ds_senha)
+    values( ?, ?, ?)
     `;
   
-    const [r] = await con.query(comando, [usuariologin.id_usuario_login, usuariologin.id, usuariologin.email, usuariologin.senha]);
-    usuariologin.id_usuario_login = r.insertId;
+    const [r] = await con.query(comando, [ usuariologin.id_usuario, usuariologin.email, usuariologin.senha]);
+    usuariologin.id= r.insertId;
 
-    return r.affectedRows;
+    return usuariologin;
   }

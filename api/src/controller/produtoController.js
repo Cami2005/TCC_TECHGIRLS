@@ -1,4 +1,4 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor, buscarPorNome, filtrarPorTema, filtrarPorCategoria } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -94,7 +94,7 @@ server.get('/produto', async (req,resp) => {
 server.put ('/produto/:id', async (req,resp) => {
 
 	try {
-		const { id } = req.params.id;
+		const { id } = req.params;
 		const produto = req.body;
 
 		if(!produto.nome) 
@@ -121,7 +121,6 @@ if (resposta != 1)
             resp.status(204).send();
 
 
-resp.send();
 } catch (err) { 
 resp.status(400).send({
 	erro: err.message
@@ -146,4 +145,49 @@ server.delete('/produto/:id', async (req,resp) => {
 			})
 		   }
 		})
+
+        server.get('/produto/busca', async (req, resp) => {
+            try {
+                const { nome } = req.query;
+                
+                const resposta = await buscarPorNome(nome);
+        
+                if (resposta.length == 0)
+                    resp.status(404).send([])
+                else
+                    resp.send(resposta);
+            } catch (err) {
+                resp.status(400).send({
+                    erro: err.message
+                })
+            }
+        })
+        server.get('/produto/tema', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const x = await filtrarPorTema(nome);
+                resp.send(x)
+        
+            } catch(err) {
+                console.log()
+               
+            }
+        })
+
+        server.get('/produto/categoria', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const y = await filtrarPorCategoria(nome);
+                resp.send(y)
+        
+            } catch(err) {
+                console.log()
+               
+            }
+        })
+
+
+        
 export default server;

@@ -27,10 +27,10 @@ server.post('/login/usuario', async (req, resp) => {
            
           const novoUsuarioLogin = await inserirUsuarioLogin(usuariologin);
 
-          if( novoUsuarioLogin != 1)
+          if( !novoUsuarioLogin.id )
           throw new Error('Não foi possível inserir as informações de login do usuário')
            
-          resp.status(204).send();
+          resp.send(novoUsuarioLogin);
         }
      catch (err) {
            resp.status(400).send({

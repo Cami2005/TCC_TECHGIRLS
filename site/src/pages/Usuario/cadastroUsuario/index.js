@@ -1,19 +1,33 @@
 import './index.scss';
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { LoginUsuario } from '../../../API/Usuario';
+import { toast } from 'react-toastify';
+import { InserirUsuarioLogin } from '../../../API/logAdm';
 
 export default function Index() {
 
-    const {nome, setNome} = useState('');
-    const {sobrenome, setSobrenome} = useState('');
-    const {telefone, setTelefone} = useState('');
-    const {datadenasc, setDatadenasc} = useState('');
-    const {rg, setRg} = useState('');
-    const {cpf, setCpf} = useState('');
-    const {cep, setCep} = useState('');
-    const {email, setEmail} = useState('');
-    const {senha, setSenha} = useState('');
-    const {confSenha, setConfSenha} = useState('');
+    const [nome, setNome] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [datadenasc, setDatadenasc] = useState('');
+    const [rg, setRg] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confSenha, setConfSenha] = useState('');
+
+    async function cadastrarUsuario() {
+        const a = await LoginUsuario(nome, telefone, cpf, rg, datadenasc);
+        alert('User cadastrado' + ' ' + a.id);
+        if (senha == confSenha) {
+        const b = await InserirUsuarioLogin(a.id, email, senha);
+        alert('login ok')
+        }
+    }
+
+    useEffect(() => {
+        console.log(datadenasc)
+    }, [datadenasc])
 
     return(
         <main className='cadastro'>
@@ -30,35 +44,25 @@ export default function Index() {
                         </div>
 
                         <div>
-                            <label> Sobrenome </label>
-                            <input type="text" value={sobrenome} onChange={e => setSobrenome(e.target.value)}/>
-                        </div>
-
-                        <div>
                             <label> Telefone </label>
-                            <input type="text" value={telefone} onChange={e => setTelefone(e.target.value)}/>
+                            <input maxLength={20} type="text" value={telefone} onChange={e => setTelefone(e.target.value)}/>
                         </div>
 
                         <div>
                             <label> Data de nascimento </label>
-                            <input type="text" value={datadenasc} onChange={e => setDatadenasc(e.target.value)}/>
+                            <input type="date" value={datadenasc} onChange={e => setDatadenasc(e.target.value)}/>
                         </div>
 
                         <div>
                             <label> RG </label>
-                            <input type="text" value={rg} onChange={e => setRg(e.target.value)}/>
+                            <input maxLength={20} type="text" value={rg} onChange={e => setRg(e.target.value)}/>
                         </div>
                     </div>
 
                     <div className='flex-column espacamento'>
                         <div>
                             <label> CPF </label>
-                            <input type="text" value={cpf} onChange={e => setCpf(e.target.value)}/>
-                        </div>
-
-                        <div>
-                            <label> CEP </label>
-                            <input type="text" value={cep} onChange={e => setCep(e => setCep(e.target.value))}/>
+                            <input maxLength={20} type="text" value={cpf} onChange={e => setCpf(e.target.value)}/>
                         </div>
 
                         <div>
@@ -79,7 +83,7 @@ export default function Index() {
                     </div>
                 </div>
 
-                <button className='prossiga'> Prossiga </button>
+                <button className='prossiga' onClick={cadastrarUsuario}> Prossiga </button>
 
                 <Link className='voltar' to='/'> Voltar </Link>
              </div>
