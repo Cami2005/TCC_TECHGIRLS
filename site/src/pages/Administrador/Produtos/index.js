@@ -35,7 +35,6 @@ export default function Index(){
                      )}
                 </div>
                 <img src="../../../images/lixeira.png"/>
-                //já salvei a imagem do lixinho e de editar
             </div>
             
         </main>
