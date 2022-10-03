@@ -35,6 +35,7 @@ export default function Index(){
                      )}
                 </div>
                 <img src="../../../images/lixeira.png"/>
+                <img src="../../../images/lixeira.png"/>
             </div>
             
         </main>
