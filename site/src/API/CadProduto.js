@@ -45,13 +45,30 @@ export async function CadastrarTamanho(produto, tamanho) {
     return resposta.data;
 }
 
+export async function ProdutosListados() {
+    const resp = await api.get('/produto')
+    return resp.data;
+}
+
 export async function listarCategorias() {
         const resp = await api.get('/api/categoria')
         return resp.data;
 }
 
-    export async function listarTemas() {
-        const resp = await api.get('/api/tema')
-        return resp.data;
-    }
-    
+export async function listarTemas() {
+    const resp = await api.get('/api/tema')
+    return resp.data;
+}
+export async function buscarProdutosPorNome(nome) {
+    const resp = await api.get(`/produto/busca?nome=${nome}`)
+    return resp.data;
+}
+
+export async function buscarCategoria(nome) {
+    const resposta = await api.get(`/filtro/categoria?nome=${nome}`)
+    return resposta.data;
+}
+export async function buscarPorTema(nome) {
+    const resposta = await api.get(`/filtro/tema?nome=${nome}`)
+    return resposta.data;
+}

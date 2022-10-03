@@ -1,4 +1,4 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor, buscarPorNome, buscarPorCategoria, buscarPorTema } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -121,7 +121,6 @@ if (resposta != 1)
             resp.status(204).send();
 
 
-resp.send();
 } catch (err) { 
 resp.status(400).send({
 	erro: err.message
@@ -146,4 +145,50 @@ server.delete('/produto/:id', async (req,resp) => {
 			})
 		   }
 		})
+
+        server.get('/produto/busca', async (req, resp) => {
+            try {
+                const { nome } = req.query;
+                
+                const resposta = await buscarPorNome(nome);
+        
+                if (resposta.length == 0)
+                    resp.status(404).send([])
+                else
+                    resp.send(resposta);
+            } catch (err) {
+                resp.status(400).send({
+                    erro: err.message
+                })
+            }
+        })
+        server.get('/filtro/tema', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const x = await buscarPorTema(nome);
+                resp.send(x)
+        
+            } catch(err) {
+                resp.status(400).send({
+                    erro: err.message
+                })
+            }
+        })
+
+        server.get('/filtro/categoria', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const x = await buscarPorCategoria(nome);
+                resp.send(x)
+        
+            } catch(err) {
+                resp.status(400).send({
+                    erro: err.message
+                })
+            }
+        })
+
+        
 export default server;

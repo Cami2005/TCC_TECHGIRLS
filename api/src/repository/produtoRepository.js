@@ -94,7 +94,7 @@ export async function alterarProduto (id, produto) {
 			VL_PRECO       = ?,
 			DS_DESCRICAO   = ?,
 			DS_DISPONIVEL  = ?
-			WHERE ID_PRODUTO = ?`;
+			WHERE ID_PRODUTO = ?`
 
 const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
 return resposta.affectedRows;
@@ -108,3 +108,40 @@ export async function removerProdutor (id) {
 	return resposta.affectedRows;
 }
 
+export async function buscarPorNome(nome) {
+    const comando =
+    `SELECT ID_PRODUTO   id,
+    ID_TEMA    tema,
+ID_CATEGORIA categoria,
+NM_PRODUTO   nome,
+VL_PRECO     preco,
+DS_DESCRICAO descricao,
+DS_DISPONIVEL disponivel
+FROM TB_PRODUTO
+          WHERE NM_PRODUTO like ? `;
+    
+    const [linhas] = await con.query(comando, [ `%${nome}%` ]);
+    return linhas;
+}
+
+export async function buscarPorCategoria(nome) {
+    const comando =
+    `SELECT ID_CATEGORIA   ID,
+    NM_CATEGORIA  NOME
+FROM TB_CATEGORIA
+WHERE NM_CATEGORIA like ? `;
+    
+    const [linhas] = await con.query(comando, [ `%${nome}%` ]);
+    return linhas;
+}
+export async function buscarPorTema(nome) {
+    const comando =`
+    select ID_TEMA  id,
+           NM_TEMA  nome,
+           DS_COR   cor
+    FROM TB_TEMA
+    WHERE NM_TEMA like ? `;
+    
+    const [linhas] = await con.query(comando, [ `%${nome}%` ]);
+    return linhas;
+}
