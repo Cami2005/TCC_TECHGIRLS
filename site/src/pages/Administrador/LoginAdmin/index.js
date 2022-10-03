@@ -24,7 +24,6 @@ export default function Index(){
            try{
             const r= await LoginAdm(email, senha);
 
-
            setTimeout(() => {
             navigate('/PedidosRecentes');
 
