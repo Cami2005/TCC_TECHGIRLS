@@ -2,6 +2,7 @@ CREATE DATABASE geek_db;
 
 use geek_db;
 
+
 CREATE TABLE TB_ADM_LOGIN 
 ( 	ID_ADM_LOGIN 		INT PRIMARY KEY auto_increment,
 	NM_ADM 				VARCHAR(100),
@@ -59,7 +60,7 @@ CREATE TABLE TB_COR (
 	ID_COR 			INT PRIMARY KEY AUTO_INCREMENT,
     ID_PRODUTO 		INT,
     NM_COR			VARCHAR(20),
-    foreign key (id_produto) references tb_produto(id_produto);
+    foreign key (id_produto) references tb_produto(id_produto)
 );
 
 CREATE TABLE TB_IMAGEM (

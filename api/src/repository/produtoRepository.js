@@ -68,3 +68,43 @@ export async function salvarImagem(id, imagem) {
 
     return resposta;
 }  
+
+
+export async function listarProduto () {
+    const comando = `SELECT ID_PRODUTO   id,
+                   ID_TEMA    tema,
+               ID_CATEGORIA categoria,
+               NM_PRODUTO   nome,
+               VL_PRECO     preco,
+               DS_DESCRICAO descricao,
+               DS_DISPONIVEL disponivel
+               FROM TB_PRODUTO`;
+
+const [linhas] = await con.query (comando);
+return linhas;
+
+}
+
+export async function alterarProduto (id, produto) {
+	const comando = 
+            `UPDATE TB_PRODUTO
+			SET NM_PRODUTO = ?,
+			ID_TEMA        = ?,
+			ID_CATEGORIA   = ?,
+			VL_PRECO       = ?,
+			DS_DESCRICAO   = ?,
+			DS_DISPONIVEL  = ?
+			WHERE ID_PRODUTO = ?`;
+
+const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
+return resposta.affectedRows;
+}
+
+export async function removerProdutor (id) {
+	const comando = `DELETE FROM TB_PRODUTO 
+			 WHERE ID_PRODUTO = ?`;
+
+	const [resposta] = await con.query (comando,[id]);
+	return resposta.affectedRows;
+}
+

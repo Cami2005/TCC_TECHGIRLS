@@ -1,4 +1,4 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -80,6 +80,70 @@ server.post('/produto/tamanho', async (req,resp) => {
 })
 
 
+server.get('/produto', async (req,resp) => {
+    try {
+        const resposta = await listarProduto();
+        resp.send(resposta);
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+server.put ('/produto/:id', async (req,resp) => {
+
+	try {
+		const { id } = req.params.id;
+		const produto = req.body;
+
+		if(!produto.nome) 
+			throw new Error ('Nome do produto é obrigatório!');
+
+	     if (!produto.tema) 
+			throw new Error ('Tema do produto é obrigatório!');
+		
+        if(!produto.categoria) 
+			throw new Error ('Categoria do produto é obrigatória!');
+		
+        if(!produto.preco) 
+			throw new Error ('Preço do produto é obrigatório!');
+		
+        if(!produto.descricao) 
+			throw new Error ('Descrição do produto é obrigatória!');
+		if(produto.disponivel === undefined) 
+			throw new Error ('Disponibilidade do produto é obrigatório!');
+
+const resposta = await alterarProduto(id, produto);
+if (resposta != 1)
+            throw new Error('Produto não pode ser alterado');
+        else
+            resp.status(204).send();
 
 
+resp.send();
+} catch (err) { 
+resp.status(400).send({
+	erro: err.message
+  
+     })
+   }
+})
+
+server.delete('/produto/:id', async (req,resp) => {
+	try {
+		const {id} = req.params;
+
+		const resposta = await removerProdutor(id);
+		if(resposta != 1)
+			throw new Error('Produto não pode ser removido');
+			resp.status(204).send();
+		}
+
+		catch (err) {
+		resp.status(400).send ({
+		  erro: err.message
+			})
+		   }
+		})
 export default server;
