@@ -18,7 +18,7 @@ export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
 
 export async function CadastrarImagem(id, imagem){
     const formData = new FormData();
-    formData.append ('imagem', imagem);
+    formData.append ('img', imagem);
     const resposta = await api.put(`/produto/:${id}/imagem`, formData, {
         headers:{
             "Content-Type": "multipart/form-data"

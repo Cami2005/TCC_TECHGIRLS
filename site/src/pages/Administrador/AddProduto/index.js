@@ -238,7 +238,7 @@ export default function Index() {
 
                             <div className="flex-column"> 
                                 <label > Valor </label>
-                                <input type="text" value={preco} onChange={e=> setPreco(e.target.value)} className="input"/>
+                                <input type="text" value={preco} onChange={e=> setPreco(e.target.value)} className="imagem-input"/>
                             </div>
 
                             <div>

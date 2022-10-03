@@ -94,7 +94,7 @@ server.get('/produto', async (req,resp) => {
 server.put ('/produto/:id', async (req,resp) => {
 
 	try {
-		const { id } = req.params.id;
+		const { id } = req.params;
 		const produto = req.body;
 
 		if(!produto.nome) 
@@ -189,6 +189,33 @@ server.delete('/produto/:id', async (req,resp) => {
                 })
             }
         })
+
+        server.get('/produto/tema', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const x = await filtrarPorTema(nome);
+                resp.send(x)
+        
+            } catch(err) {
+                console.log()
+               
+            }
+        })
+
+        server.get('/produto/categoria', async (req,resp) => {
+
+            try{
+                const { nome } = req.query;
+                const y = await filtrarPorCategoria(nome);
+                resp.send(y)
+        
+            } catch(err) {
+                console.log()
+               
+            }
+        })
+
 
         
 export default server;

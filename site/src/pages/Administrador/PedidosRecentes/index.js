@@ -10,7 +10,7 @@ export default function Index(){
             <div className="PedRecentes fundo">
             
             <div>
-                <img></img>
+                <img src='' alt='' />
                 <h2 className="Bem-Vindo">Bem vindo a área de administração</h2>
             </div>
             <div>
