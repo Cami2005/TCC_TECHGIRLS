@@ -5,6 +5,7 @@ import Menu from './pages/Administrador/Menu/index.js';
 import Produtos from './pages/Administrador/Produtos';
 import AddProduto from './pages/Administrador/AddProduto';
 import CadastroUsuario from './pages/Usuario/cadastroUsuario/index.js'
+import LoginUsuario from './pages/Usuario/loginUsuario/index.js'
 
 export default function Index(){
     return(
@@ -15,6 +16,7 @@ export default function Index(){
                 <Route path='/pedidosRecentes' element={<PedidosRecentes />} />
                 <Route path='/produtos' element={<Produtos />} />
                 <Route path='/addProduto' element={<AddProduto />} />
+                <Route path='/usuario/login' element={<LoginUsuario/>} />
                 <Route path='/usuario/cadastro' element={<CadastroUsuario />} />
             </Routes>
         </BrowserRouter>

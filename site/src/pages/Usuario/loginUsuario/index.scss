@@ -1,0 +1,24 @@
+
+.login {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    background-image: url('../../../../public/images/Awesome-8-Bit-Background.jpg');
+    width: 195vh;
+    height: 99vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .fundo {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
+        padding: 2em;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+}
