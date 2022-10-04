@@ -54,4 +54,18 @@ export async function listarCategorias() {
         const resp = await api.get('/api/tema')
         return resp.data;
     }
+
+    export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
+        let form = new FormData();
+        form.append('imagens', imagem1);
+        form.append('imagens', imagem2);
+        form.append('imagens', imagem3);
+        form.append('imagens', imagem4);
+
+        const r= await api.put('/produto/imagem/' + id, form, {
+            headers : {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+    }
     

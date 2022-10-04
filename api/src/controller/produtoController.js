@@ -4,7 +4,7 @@ import multer from 'multer';
 import { Router } from 'express';
 
 const server = Router();
-const upload = multer({dest:'./storage/capaProduto'});
+const upload = multer({dest:'./storage/produto'});
 
 //inserir Produto
 server.post('/produto', async (req,resp) => {
@@ -12,8 +12,9 @@ server.post('/produto', async (req,resp) => {
         const novoProduto = req.body;
         
         const produtoInserido = await inserirProduto(novoProduto);
-        console.log(novoProduto);
-        resp.send(produtoInserido);
+        
+        resp.send({
+            id : produtoInserido});
     } 
     catch (err) {
         resp.status(400).send({
@@ -38,6 +39,24 @@ server.put('/produto/:id/imagem', upload.single("img"), async (req, resp) => {
     catch (err) {
         resp.send({
             erro:err.message
+        })
+    }
+})
+
+server.put('/produto/imagem/:id', upload.array('imagens'), async (req, resp) => {
+    try{
+        const id = req.params.id;
+        const imagens = req.files;
+
+        for( const imagem of imagens) {
+            await salvarImagem(id, imagem.path);
+        }
+
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
         })
     }
 })

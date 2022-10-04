@@ -12,11 +12,11 @@ export default function Index(){
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Menu/>}/>
-                <Route path='/loginAdmin' element={<LoginAdmin />} />
+                <Route path='/login/admin' element={<LoginAdmin />} />
                 <Route path='/pedidosRecentes' element={<PedidosRecentes />} />
                 <Route path='/produtos' element={<Produtos />} />
                 <Route path='/addProduto' element={<AddProduto />} />
-                <Route path='/usuario/login' element={<LoginUsuario/>} />
+                <Route path='/login/usuario' element={<LoginUsuario/>} />
                 <Route path='/usuario/cadastro' element={<CadastroUsuario />} />
             </Routes>
         </BrowserRouter>

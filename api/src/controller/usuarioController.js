@@ -20,7 +20,7 @@ server.post('/usuario', async (req, resp) => {
             throw new Error('Não foi possível inserir as informações do usuário - rg');
         if( !novoUsuario.nascimento )
         throw new Error('Não foi possível inserir as informações do usuário - nascimento');
-
+        
         resp.send(novoUsuario);
     }
     catch (err) {

@@ -12,7 +12,7 @@ export async function inserirProduto(produto) {
                         ])
                         
     produto.id = resp.insertId;
-    return produto;
+    return produto.id;
 }
 
 

@@ -4,7 +4,7 @@ import "../../../common/common.scss"
 export default function Index(){
     return(
         <main>
-            <Link to='/LoginAdmin'>oi</Link>
+            <Link to='/login/admin'>oi</Link>
         </main>
     )
 }

@@ -1,4 +1,4 @@
-import { login } from '../repository/loginRepository.js';  
+import { login, loginUsuario } from '../repository/loginRepository.js';  
 import { inserirUsuarioLogin } from '../repository/loginRepository.js';
 import { Router } from "express"; 
 
@@ -22,6 +22,19 @@ server.post('/admin/login', async (req,resp) => {
             })  
 
 server.post('/login/usuario', async (req, resp) => {
+     try{
+          const {email, senha} = req.body;
+          const realizarLogin = await loginUsuario(email, senha);
+          resp.status(200).send();
+          }
+     catch (err) {
+          resp.status(401).send({         
+               erro: err.message         
+              })    
+     }
+})
+
+server.post('/usuario/login', async (req, resp) => {
      try{
           const usuariologin = req.body;
            
