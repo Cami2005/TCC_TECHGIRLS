@@ -10,8 +10,16 @@ export async function LoginAdm(email, senha){
         return r.data;
 }
 
+export async function loginUsuario(email, senha) {
+    const r = await api.post('/login/usuario', {
+        email: email,
+        senha: senha
+    });
+    return r.status;
+}
+
 export async function InserirUsuarioLogin(id_usuario, email, senha){
-    const r= await api.post('/login/usuario', {
+    const r= await api.post('/usuario/login', {
         id_usuario: id_usuario, 
         email: email, 
         senha: senha

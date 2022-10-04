@@ -1,7 +1,7 @@
 import './index.scss';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { LoginUsuario } from '../../../API/Usuario';
+import { UsuarioCadastro } from '../../../API/Usuario';
 import { toast } from 'react-toastify';
 import { InserirUsuarioLogin } from '../../../API/logAdm';
 
@@ -17,11 +17,13 @@ export default function Index() {
     const [confSenha, setConfSenha] = useState('');
 
     async function cadastrarUsuario() {
-        const a = await LoginUsuario(nome, telefone, cpf, rg, datadenasc);
+        const a = await UsuarioCadastro(nome, telefone, cpf, rg, datadenasc);
+        console.log(a);
         alert('User cadastrado' + ' ' + a.id);
         if (senha == confSenha) {
         const b = await InserirUsuarioLogin(a.id, email, senha);
-        alert('login ok')
+        alert('login ok');
+        toast.dark('up')
         }
     }
 

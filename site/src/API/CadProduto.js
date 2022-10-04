@@ -55,6 +55,7 @@ export async function listarCategorias() {
         return resp.data;
 }
 
+<<<<<<< HEAD
 export async function listarTemas() {
     const resp = await api.get('/api/tema')
     return resp.data;
@@ -72,3 +73,24 @@ export async function buscarPorTema(nome) {
     const resposta = await api.get(`/filtro/tema?nome=${nome}`)
     return resposta.data;
 }
+=======
+    export async function listarTemas() {
+        const resp = await api.get('/api/tema')
+        return resp.data;
+    }
+
+    export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
+        let form = new FormData();
+        form.append('imagens', imagem1);
+        form.append('imagens', imagem2);
+        form.append('imagens', imagem3);
+        form.append('imagens', imagem4);
+
+        const r= await api.put('/produto/imagem/' + id, form, {
+            headers : {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+    }
+    
+>>>>>>> b54321d71d586c6680382cc916ece7065e7d8268

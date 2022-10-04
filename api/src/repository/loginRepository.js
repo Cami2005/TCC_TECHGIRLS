@@ -15,6 +15,21 @@ export async function login (email, senha) {
         return respostas [0];
     }
 
+    export async function loginUsuario(email, senha) {
+      const comando = `
+        select id_usuario_login as id,
+        ds_email as email,
+        ds_senha as senha
+        from tb_usuario_login
+        where ds_email = ?
+        and ds_senha = ?
+      `;
+
+      const [resposta] = await con.query(comando, [email, senha]);
+
+      return resposta[0];
+    }
+
   export async function inserirUsuarioLogin(usuariologin){
     
     const comando= `

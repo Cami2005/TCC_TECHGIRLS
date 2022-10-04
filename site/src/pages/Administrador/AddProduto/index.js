@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens } from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
 
 export default function Index() {
@@ -20,6 +20,27 @@ export default function Index() {
     const [Temas, setTemas] = useState([]);
 
     const [catSelecionadas, setCatSelecionadas] = useState([]);
+
+    //imagens
+
+    const [imagem1, setImagem1] = useState();
+    const [imagem2, setImagem2] = useState();
+    const [imagem3, setImagem3] = useState();
+    const [imagem4, setImagem4] = useState();
+
+    //função imagem
+    function escolherImagem(inputId) {
+        document.getElementById(inputId).click();
+    }
+
+    function exibirImagem(imagem) {
+        if (imagem == undefined){
+            return '../images/add.png'
+        }
+        else {
+            return URL.createObjectURL(imagem)
+        }
+    }
 
 
     // função adicionar novo produto completa
@@ -138,12 +159,13 @@ export default function Index() {
         }
     }
 
-    // inserindo produto + cores + tamanho
+    // inserindo produto + cores + tamanho + imagem
     async function inserirProduto(){ 
         // const precoProduto = Number(preco.replace(',', '.'));
        const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
        inserirCor(novoProduto.id);
        inserirTamanho(novoProduto.id);
+       await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
        toast.dark('produto e cor ok');
     }        
 
@@ -251,13 +273,25 @@ export default function Index() {
 
                         <div className="div2">
                             <div>
-                                <label> Foto de destaque</label>
-                                <input type="file" accept="image"/>
+                                <h1> Foto Destaque</h1>
+                                <img className="img" src='../images/add.png' alt='' />
                             </div>
 
-                            <div> 
-                                <label> Fotos extras </label>
-                                <input/>
+                            <div className="flex-column"> 
+                                <h1> Fotos Extras</h1>
+
+                                <div>
+                                    <img className="img" src={exibirImagem(imagem1)} alt='' onClick={() => escolherImagem('imagem1')}/>
+                                    <img className="img" src={exibirImagem(imagem2)}  alt='' onClick={() => escolherImagem('imagem2')}/>
+                                    <img className="img" src={exibirImagem(imagem3)}  alt='' onClick={() => escolherImagem('imagem3')}/>
+                                    <img className="img" src={exibirImagem(imagem4)}  alt='' onClick={() => escolherImagem('imagem4')}/>
+
+                                    <input type='file' id='imagem1' onChange={e => setImagem1(e.target.files[0])} />
+                                    <input type='file' id='imagem2' onChange={e => setImagem2(e.target.files[0])} />
+                                    <input type='file' id='imagem3' onChange={e => setImagem3(e.target.files[0])} />
+                                    <input type='file' id='imagem4' onChange={e => setImagem4(e.target.files[0])} />
+                                </div>
+                                
                             </div>
                         </div>
 

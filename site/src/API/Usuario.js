@@ -5,7 +5,7 @@ const api = axios.create({
     baseURL: API_URL
 })
 
-export async function LoginUsuario(nome, telefone, cpf, rg, nascimento) {
+export async function UsuarioCadastro(nome, telefone, cpf, rg, nascimento) {
     const r = await api.post('/usuario', {
         nome: nome,
         telefone: telefone,
