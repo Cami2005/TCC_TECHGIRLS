@@ -72,10 +72,7 @@ export async function buscarPorTema(nome) {
     const resposta = await api.get(`/filtro/tema?nome=${nome}`)
     return resposta.data;
 }
-<<<<<<< HEAD
     
-=======
->>>>>>> 2b1743a96c94e3a8c4bf38299cbe611c7e6187a2
 
 
 export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
@@ -93,16 +90,13 @@ export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
 }
     
 
-<<<<<<< HEAD
     export async function Temas() {
         const resp = await api.get('/api/tema');
         return resp.data;
     }
-=======
 //deletar
 
 export async function deletarProduto(id) {
     const resposta = await api.delete('/produto/' + id)
     return resposta.data;
 }
->>>>>>> 2b1743a96c94e3a8c4bf38299cbe611c7e6187a2

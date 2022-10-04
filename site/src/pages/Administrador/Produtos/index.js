@@ -3,11 +3,25 @@ import MenuAdmin from "../../../components/pagAdm";
 import "./index.scss"
 import "../../../common/common.scss"
 import { useEffect, useState } from "react";
-import { deletarProduto, ProdutosListados } from "../../../API/CadProduto";
+import { buscarCategoria, buscarPorTema, deletarProduto, ProdutosListados } from "../../../API/CadProduto";
 import { toast } from "react-toastify";
 
 export default function Index(){
     const[produto, setProduto] = useState([]);
+
+    const[filtroTema, setFiltroTema]= useState('');
+    const[filtroCategoria, setFiltroCategoria] = useState('');
+
+    async function buscarTemaClick() {
+        const resp = await buscarPorTema(filtroTema);
+        console.log(resp)
+        setProduto(resp);
+    }
+    async function buscarCategoriaClick() {
+        const resp = await buscarCategoria(filtroCategoria);
+        console.log(resp)
+        setProduto(resp);
+    }
 
     async function ListarProdutos(){
         const resposta= await ProdutosListados();
@@ -37,6 +51,12 @@ export default function Index(){
             <div className="fundo">
                 <div>
                     <Link className="edit" to='/AddProduto'>Novo Produto</Link>
+                </div>
+                <div>
+                    <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
+                    <button onClick={buscarTemaClick}>Buscar</button>
+                    <input type='text' value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
+                    <button onClick={buscarCategoriaClick}>Buscar</button>
                 </div>
                 <div>
                     {produto.map(item =>
