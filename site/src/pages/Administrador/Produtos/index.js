@@ -30,12 +30,13 @@ export default function Index(){
                     {produto.map(item =>
                     <div>
                         <p>{item.nome}</p>
-                        <p>{item.preco}</p>
+                        <button><img src="../../../images/lixeira.png"/></button>  
+                        <button><img src="../../../images/editar.png"/></button>  
+                        
                     </div>
+                        
                      )}
                 </div>
-                <img src="../../../images/lixeira.png"/>
-                <img src="../../../images/lixeira.png"/>
             </div>
             
         </main>

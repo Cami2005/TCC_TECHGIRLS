@@ -120,15 +120,7 @@ DS_DISPONIVEL disponivel
 FROM TB_PRODUTO
           WHERE NM_PRODUTO like ? `;
     
-                `SELECT ID_PRODUTO   id,
-                ID_TEMA    tema,
-                ID_CATEGORIA categoria,
-                NM_PRODUTO   nome,
-                VL_PRECO     preco,
-                DS_DESCRICAO descricao,
-                DS_DISPONIVEL disponivel
-                FROM TB_PRODUTO
-                WHERE NM_PRODUTO like ? `;
+
         
     const [linhas] = await con.query(comando, [ `%${nome}%` ]);
     return linhas;
