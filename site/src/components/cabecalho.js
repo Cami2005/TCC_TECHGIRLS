@@ -24,22 +24,17 @@ export default function Cabecalho(props){
      }
 
     return(
-<<<<<<< HEAD
             <main>
-                <header className='cab'>
                 <img className="logo" src={props.logo}/>
                 <img  className='menuCab' src={props.menu}/>
-=======
             <header className="cab">
                 <img className="logo" alt="" src={props.logo}/>
                 <img  className='menuCab' alt="" src={props.menu}/>
->>>>>>> e9d5f0d1274898819644e7c6cfce681af8587959
                 <div>
                 <input className='busca' placeholder='encontre seu produto aqui' type='text' value={busca} onChange={e=> setBusca(e.target.value)} />
                 <button onClick={buscarNomeClick}>pesquisar</button>
 
                 </div>
-<<<<<<< HEAD
                 <img className='icons' src={props.fav}></img>
                 <img className='icons' src={props.user}></img>
                 <img className='icons' src={props.sacola}></img>
@@ -58,11 +53,6 @@ export default function Cabecalho(props){
                      )}
                 </div>
             </main>
-=======
-                <img className='icons' alt="" src={props.fav}></img>
-                <img className='icons' alt="" src={props.user}></img>
-                <img className='icons' alt="" src={props.sacola}></img>
-            </header>
->>>>>>> e9d5f0d1274898819644e7c6cfce681af8587959
+               
         )
 }
