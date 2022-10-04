@@ -161,12 +161,19 @@ export default function Index() {
 
     // inserindo produto + cores + tamanho + imagem
     async function inserirProduto(){ 
-        // const precoProduto = Number(preco.replace(',', '.'));
-       const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
-       inserirCor(novoProduto.id);
-       inserirTamanho(novoProduto.id);
-       await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
-       toast.dark('produto e cor ok');
+        try {
+            // const precoProduto = Number(preco.replace(',', '.'));
+            const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
+            inserirCor(novoProduto.id);
+            inserirTamanho(novoProduto.id);
+            await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
+            alert('produto inserido')
+        }
+        catch (err) {
+            alert({erro : err.message})
+        }
+    
+       
     }        
 
     return (
