@@ -6,6 +6,7 @@ import Produtos from './pages/Administrador/Produtos';
 import AddProduto from './pages/Administrador/AddProduto';
 import CadastroUsuario from './pages/Usuario/cadastroUsuario/index.js'
 import LoginUsuario from './pages/Usuario/loginUsuario/index.js'
+import NossosProdutos from './pages/Usuario/nossosProdutos/index.js'
 
 export default function Index(){
     return(
@@ -18,6 +19,7 @@ export default function Index(){
                 <Route path='/addProduto' element={<AddProduto />} />
                 <Route path='/login/usuario' element={<LoginUsuario/>} />
                 <Route path='/usuario/cadastro' element={<CadastroUsuario />} />
+                <Route path='/usuario/produtos' element={<NossosProdutos/>} />
             </Routes>
         </BrowserRouter>
     )

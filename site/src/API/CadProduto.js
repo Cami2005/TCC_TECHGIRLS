@@ -55,7 +55,6 @@ export async function listarCategorias() {
         return resp.data;
 }
 
-<<<<<<< HEAD
 export async function listarTemas() {
     const resp = await api.get('/api/tema')
     return resp.data;
@@ -73,11 +72,7 @@ export async function buscarPorTema(nome) {
     const resposta = await api.get(`/filtro/tema?nome=${nome}`)
     return resposta.data;
 }
-=======
-    export async function listarTemas() {
-        const resp = await api.get('/api/tema')
-        return resp.data;
-    }
+    
 
     export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
         let form = new FormData();
@@ -93,4 +88,8 @@ export async function buscarPorTema(nome) {
         })
     }
     
->>>>>>> b54321d71d586c6680382cc916ece7065e7d8268
+
+    export async function Temas() {
+        const resp = await api.get('/api/tema');
+        return resp.data;
+    }
