@@ -3,7 +3,8 @@ import MenuAdmin from "../../../components/pagAdm";
 import "./index.scss"
 import "../../../common/common.scss"
 import { useEffect, useState } from "react";
-import { ProdutosListados } from "../../../API/CadProduto";
+import { deletarProduto, ProdutosListados } from "../../../API/CadProduto";
+import { toast } from "react-toastify";
 
 export default function Index(){
     const[produto, setProduto] = useState([]);
@@ -11,6 +12,17 @@ export default function Index(){
     async function ListarProdutos(){
         const resposta= await ProdutosListados();
         setProduto(resposta)
+    }
+
+    async function DeletarProdutos(id) {
+        try { 
+            await deletarProduto(id);
+            toast.dark('Deletado com sucesso');
+            await ListarProdutos();
+        }
+        catch(err) {
+            toast.error(err.message)
+        }
     }
 
     useEffect(() => {
@@ -30,7 +42,7 @@ export default function Index(){
                     {produto.map(item =>
                     <div>
                         <p>{item.nome}</p>
-                        <button><img src="../../../images/lixeira.png"/></button>  
+                        <button onClick={() => DeletarProdutos(item.id)} ><img src="../../../images/lixeira.png"/></button>  
                         <button><img src="../../../images/editar.png"/></button>  
                         
                     </div>

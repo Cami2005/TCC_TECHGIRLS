@@ -1,5 +1,7 @@
 import { con } from './connection.js'
 
+//inserir
+
 export async function inserirProduto(produto) {
     const comando = `
     INSERT INTO TB_PRODUTO (NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
@@ -69,6 +71,7 @@ export async function salvarImagem(id, imagem) {
     return resposta;
 }  
 
+// buscar
 
 export async function listarProduto () {
     const comando = `SELECT ID_PRODUTO   id,
@@ -100,7 +103,7 @@ const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto
 return resposta.affectedRows;
 }
 
-export async function removerProdutor (id) {
+export async function removerProduto (id) {
 	const comando = `DELETE FROM TB_PRODUTO 
 			 WHERE ID_PRODUTO = ?`;
 
@@ -170,3 +173,44 @@ export async function filtrarPorTema(nome){
             return linhas;
         }
         
+// deletar
+
+export async function deletarCor(idProduto) {
+    const comando =`
+        delete from tb_cor 
+        where id_produto = ?
+    `;
+
+    const [resp] = await con.query(comando, [idProduto]);
+    return resp.affectedRows;
+}
+
+export async function deletarTamanho(idProduto) {
+    const comando =`
+    delete from tb_tamanho 
+    where id_produto= ?
+    `;
+
+    const [resp] = await con.query(comando, [idProduto]);
+    return resp.affectedRows;
+}
+
+export async function deletarProduto(idProduto) {
+    const comando =`
+        delete from tb_produto 
+        where id_produto = ?
+    `;
+
+    const [resp] = await con.query(comando, [idProduto]);
+    return resp.affectedRows;
+}
+
+    export async function deletarImagem(idProduto) {
+        const comando =`
+            delete from tb_imagem 
+            where id_produto = ?
+        `;
+    
+        const [resp] = await con.query(comando, [idProduto]);
+        return resp.affectedRows;
+}

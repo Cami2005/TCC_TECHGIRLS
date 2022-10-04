@@ -1,4 +1,7 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, listarProduto, alterarProduto, removerProdutor, buscarPorNome, buscarPorCategoria, buscarPorTema } from '../repository/produtoRepository.js';
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
+        listarProduto, alterarProduto, removerProduto, 
+        buscarPorNome, buscarPorCategoria, buscarPorTema, 
+        deletarCor, deletarTamanho, deletarProduto, deletarImagem } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -7,6 +10,7 @@ const server = Router();
 const upload = multer({dest:'./storage/produto'});
 
 //inserir Produto
+
 server.post('/produto', async (req,resp) => {
     try {
         const novoProduto = req.body;
@@ -98,6 +102,8 @@ server.post('/produto/tamanho', async (req,resp) => {
     }
 })
 
+// buscar e listar
+
 
 server.get('/produto', async (req,resp) => {
     try {
@@ -148,22 +154,6 @@ resp.status(400).send({
    }
 })
 
-server.delete('/produto/:id', async (req,resp) => {
-	try {
-		const {id} = req.params;
-
-		const resposta = await removerProdutor(id);
-		if(resposta != 1)
-			throw new Error('Produto não pode ser removido');
-			resp.status(204).send();
-		}
-
-		catch (err) {
-		resp.status(400).send ({
-		  erro: err.message
-			})
-		   }
-		})
 
         server.get('/produto/busca', async (req, resp) => {
             try {
@@ -236,5 +226,43 @@ server.delete('/produto/:id', async (req,resp) => {
         })
 
 
+// DELETAR
+
+
+//server.delete('/produto/:id', async (req,resp) => {
+//	try {
+//		const {id} = req.params;
+//
+//		const resposta = await removerProdutor(id);
+//		if(resposta != 1)
+//			throw new Error('Produto não pode ser removido');
+//			resp.status(204).send();
+//		}
+//
+//		catch (err) {
+//		resp.status(400).send ({
+//		  erro: err.message
+//			})
+//		   }
+//		})
+
+
+server.delete('/produto/:id', async (req, resp) => {
+    try {
+
+        const  id  = req.params.id;
+        await deletarCor(id);
+        await deletarTamanho(id);
+        await deletarImagem(id);
+        await deletarProduto(id);
+        resp.status(204).send();
+
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
         
 export default server;
