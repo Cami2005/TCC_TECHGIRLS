@@ -167,7 +167,7 @@ export default function Index() {
             inserirCor(novoProduto.id);
             inserirTamanho(novoProduto.id);
             await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
-            alert('produto inserido')
+            toast.dark('tudo ok')
         }
         catch (err) {
             alert({erro : err.message})

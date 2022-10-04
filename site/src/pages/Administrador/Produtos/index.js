@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import MenuAdmin from "../../../components/pagAdm";
+import  MenuAdmin from "../../../components/pagAdm";
+import BoxProduto from "../../../components/boxProduto";
 import "./index.scss"
 import "../../../common/common.scss"
 import { useEffect, useState } from "react";
@@ -46,29 +47,38 @@ export default function Index(){
     return(
         <main className="Novo-Produto">
 
-             <MenuAdmin logo='../../../images/logoAdmin.png'/>
+            <MenuAdmin logo='../../../images/logoAdmin.png'/>
 
             <div className="fundo">
-                <div>
+
+                <div className="espacamento">
                     <Link className="edit" to='/AddProduto'>Novo Produto</Link>
-                </div>
-                <div>
-                    <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
-                    <button onClick={buscarTemaClick}>Buscar</button>
-                    <input type='text' value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
-                    <button onClick={buscarCategoriaClick}>Buscar</button>
-                </div>
-                <div>
-                    {produto.map(item =>
+
                     <div>
-                        <p>{item.nome}</p>
-                        <button onClick={() => DeletarProdutos(item.id)} ><img src="../../../images/lixeira.png"/></button>  
-                        <button><img src="../../../images/editar.png"/></button>  
-                        
+                        <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
+                        <button onClick={buscarTemaClick}>Buscar</button>
+                        <input type='text' value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
+                        <button onClick={buscarCategoriaClick}>Buscar</button>
                     </div>
-                        
+               </div>
+
+                
+
+                <div className="produtosmapeamento">
+                    {produto.map(item =>
+
+                        <BoxProduto
+                            img=""
+                            preco={item.preco}
+                            nome={item.nome}
+                            clickdelete={() => DeletarProdutos(item.id)}
+                            clickedit=""
+                        />
+                   
                      )}
                 </div>
+
+
             </div>
             
         </main>
