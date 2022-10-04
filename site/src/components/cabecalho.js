@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { buscarProdutosPorNome } from '../API/CadProduto.js';
+import { useEffect, useState } from 'react';
+import { buscarProdutosPorNome, ProdutosListados } from '../API/CadProduto.js';
 import './cabecalho.scss';
 
 export default function Cabecalho(props){
@@ -8,6 +8,16 @@ export default function Cabecalho(props){
 
     const [busca, setBusca] = useState('');
 
+    async function ListarProdutos(){
+        const resposta= await ProdutosListados();
+        setProdutos(resposta)
+    }
+
+    
+        useEffect(() => {
+            ListarProdutos();
+        } , [])
+
     async function buscarNomeClick() {
         const resp = await buscarProdutosPorNome(busca);
         console.log(resp)
@@ -15,7 +25,8 @@ export default function Cabecalho(props){
      }
 
     return(
-            <header className="cab">
+            <main>
+                <header className='cab'>
                 <img className="logo" src={props.logo}/>
                 <img  className='menuCab' src={props.menu}/>
                 <div>
@@ -26,6 +37,20 @@ export default function Cabecalho(props){
                 <img className='icons' src={props.fav}></img>
                 <img className='icons' src={props.user}></img>
                 <img className='icons' src={props.sacola}></img>
-            </header>
+        </header>
+        <hr className='linha'></hr>
+
+                <img className='banner' src={props.banner}></img>
+
+        <div>
+                    {produtos.map(item =>
+                    <div>
+                        <p>{item.nome}</p>
+                        <p>{item.preco}</p>
+                    </div>
+                        
+                     )}
+                </div>
+            </main>
         )
 }

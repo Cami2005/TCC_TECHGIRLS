@@ -53,9 +53,9 @@ export default function Index(){
                     <Link className="edit" to='/AddProduto'>Novo Produto</Link>
                 </div>
                 <div>
-                    <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
+                    <input type='text' placeholder="digite o tema" value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
                     <button onClick={buscarTemaClick}>Buscar</button>
-                    <input type='text' value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
+                    <input type='text'placeholder="digite a" value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
                     <button onClick={buscarCategoriaClick}>Buscar</button>
                 </div>
                 <div>
