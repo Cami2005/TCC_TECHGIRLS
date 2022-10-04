@@ -14,4 +14,40 @@
         background-color:#ffffff;
 
     }
+
+    .produtosmapeamento {
+        display: flex;
+        align-self: center;
+        flex-direction: row;
+        justify-content: left;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        padding: 2em 1em;
+    }
+
+    .centralizar {
+        display: flex;
+        align-items: left;
+    }
+
+    .espacamento {
+        display: flex;
+        width: 100%;
+        padding: 2em;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .edit {
+        background-color: #521FAF;
+        font-family: "Lexend-Regular";
+        color: #ffffff;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: left;
+        padding: 0.5em 1em;
+    }
 }

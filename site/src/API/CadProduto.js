@@ -12,7 +12,7 @@ export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
         preco: preco,
         disponivel: disponivel
     });
-    console.log(resposta.data);
+    
     return resposta.data;
 }
 
