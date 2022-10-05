@@ -23,13 +23,19 @@ server.post('/produto', async (req,resp) => {
         if(!produtoInserido.nome) {
             throw new Error('Nome não registrado');
         };
+        if(!produtoInserido.tema) {
+            throw new Error('Tema não registrado');
+        };
+        if(!produtoInserido.categoria) {
+            throw new Error('Categoria não registrada');
+        };
         if(!produtoInserido.preco) {
             throw new Error('Preço não registrado')
         }
         if(!produtoInserido.descricao) {
                 throw new Error('Descrição não registrada')
         }
-        if(!produtoInserido.disponivel) {
+        if(produtoInserido.disponivel == undefined) {
             throw new Error('Disponibilidade não registrada')
         }
         

@@ -73,3 +73,23 @@ values (1, 1);
   insert into tb_usuario_login(id_usuario_login, id_usuario, ds_email, ds_senha)
     values(?, ?, ?, ?);
 
+-- inner join produtos
+
+select 
+	tb_produto.id_produto 	    as id,
+	nm_produto 				    as nome, 
+	ds_descricao 			    as descricao, 
+	vl_preco 				    as preco, 
+	ds_disponivel 			    as disponivel, 
+	nm_categoria		 	    as categoria, 
+	nm_tema 				    as tema, 
+	nm_cor 					    as cores,
+	img_produto 			    as destaque
+from tb_produto
+	inner join tb_categoria     on tb_produto.id_categoria = tb_categoria.id_categoria
+	inner join tb_tema          on tb_produto.id_tema = tb_tema.id_tema
+	inner join tb_cor           on tb_cor.id_produto = tb_produto.id_produto
+	inner join tb_tamanho       on tb_tamanho.id_produto = tb_produto.id_produto
+	inner join tb_imagem        on tb_imagem.id_produto = tb_produto.id_produto
+where img_destaque = true
+and tb_produto.id_produto = 5;

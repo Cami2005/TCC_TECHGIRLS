@@ -16,10 +16,10 @@ export default function Index() {
     const [preco, setPreco] = useState(0.0);
     const [disponivel, setDisponivel] = useState(true);
 
-    const [idCategoria, setIdCategoria] = useState();
+    const [idCategoria, setIdCategoria] = useState(0);
     const [categorias, setCategorias] = useState([]);
 
-    const [idTemas, setIdTemas] = useState();
+    const [idTemas, setIdTemas] = useState(0);
     const [Temas, setTemas] = useState([]);
 
     const [catSelecionadas, setCatSelecionadas] = useState([]);
@@ -147,12 +147,14 @@ export default function Index() {
     async function carregarTemas() {
         const r = await listarTemas();
         setTemas(r);
+        console.log(Temas);
     }
 
 
     async function carregarCategorias() {
         const r = await listarCategorias();
         setCategorias(r);
+        console.log(categorias);
     }
 
 
@@ -160,6 +162,11 @@ export default function Index() {
         carregarCategorias();
         carregarTemas();
     }, [])
+
+    useEffect(() => {
+        console.log('tema: ' + idTemas);
+        console.log('categoria: ' + idCategoria)
+    }, [idCategoria, idTemas])
 
         // inserindo tamanho
         async function inserirTamanho(id) {
@@ -179,7 +186,7 @@ export default function Index() {
     async function inserirProduto(){ 
         try {
             // const precoProduto = Number(preco.replace(',', '.'));
-            const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
+            const novoProduto = await CadastrarPoduto(nome, idTemas, idCategoria, descricao, preco, disponivel);
             inserirCor(novoProduto.id);
             inserirTamanho(novoProduto.id);
             const dest = await CadastrarImgDestaque(novoProduto.id, destaque);
@@ -228,7 +235,7 @@ export default function Index() {
                                         <option> Vestimenta </option>
 
                                         {categorias.map(item =>
-                                            <option value={item.id}> {item.categoria} </option>
+                                            <option value={item.id}> {item.nome} </option>
                                         )}
 
                                     </select>
@@ -243,7 +250,7 @@ export default function Index() {
                                         <option> Harry Potter </option>
 
                                         {Temas.map(item =>
-                                            <option value={item.id}> {item.temas} </option>
+                                            <option value={item.id}> {item.nome} </option>
                                         )}
                                     </select>
                                 </div>
