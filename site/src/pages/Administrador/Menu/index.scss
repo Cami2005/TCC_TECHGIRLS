@@ -1,0 +1,59 @@
+.cabeçalho{
+    background-color: #521FAF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo{
+    height: 13vh;
+    width: 14vh;
+}
+.icons{
+    height: 24px;
+    width: 28px;
+}
+.faixa{
+    margin-top: 15em;
+    display: flex;
+    justify-content: space-around;
+}
+.linha-vertical{
+    width: 40px;
+    height: 0px;
+    margin-top: 30px;
+    background-color: #000;
+
+    transform: rotate(88.6deg);
+}
+.icons-1{
+    width: 92px;
+    height: 60px;
+}
+.degrade{
+    width: 94.9em;
+    padding: 2em;
+}
+h1{
+    position: absolute;
+    top: 29em;
+    margin-left: 17em;
+}
+.setas{
+    position: absolute;
+    top: 78em;
+    margin: 2em;
+}
+.seta2{
+    margin-left: 82em;
+}
+h3{
+    position: absolute;
+    top: 135em;
+}
+.texto{
+    position: absolute;
+    top: 165em;
+}
+.rodapé{
+    background-color: #521FAF;
+}
