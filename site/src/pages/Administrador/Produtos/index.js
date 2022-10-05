@@ -4,7 +4,7 @@ import BoxProduto from "../../../components/boxProduto";
 import "./index.scss"
 import "../../../common/common.scss"
 import { useEffect, useState } from "react";
-import { buscarCategoria, buscarPorTema, deletarProduto, ProdutosListados } from "../../../API/CadProduto";
+import { buscarCategoria, buscarDestaque, buscarPorTema, deletarProduto, ProdutosListados } from "../../../API/CadProduto";
 import { toast } from "react-toastify";
 
 export default function Index(){
@@ -26,6 +26,7 @@ export default function Index(){
 
     async function ListarProdutos(){
         const resposta= await ProdutosListados();
+        await buscarDestaque()
         setProduto(resposta)
     }
 
@@ -52,6 +53,7 @@ export default function Index(){
             <div className="fundo">
 
                 <div className="espacamento">
+<<<<<<< HEAD
                     <Link className="edit" to='/AddProduto'>Novo Produto</Link>
                 </div>
                 <div>
@@ -63,6 +65,9 @@ export default function Index(){
                 <div>
                     {produto.map(item =>
 
+=======
+                    <Link className="edit" to='/AddProduto'>Novo Produto </Link>
+>>>>>>> ea12a9d5cb945280c46c3052ac38e543a097f4d8
                     <div>
                         <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}/>
                         <button onClick={buscarTemaClick}>Buscar</button>

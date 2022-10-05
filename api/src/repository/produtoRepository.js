@@ -14,7 +14,7 @@ export async function inserirProduto(produto) {
                         ])
                         
     produto.id = resp.insertId;
-    return produto.id;
+    return produto;
 }
 
 
@@ -71,7 +71,23 @@ export async function salvarImagem(id, imagem) {
     return resposta;
 }  
 
-// buscar
+export async function salvarDestaque(id, imagem) {
+    const comando = `
+        insert into tb_imagem (id_produto, img_produto, img_destaque)
+        values (?, ?, true)
+        `;
+        
+    if (isNaN(id)) {
+        throw new Error("id tem o valor =" + "'" + id + "'" + " e imagem tem o valor=" + imagem) // vai retornar o que estamos enviando na rota em :id
+    }
+    
+    const [resposta] = await con.query(comando, [id, imagem]);
+
+    return resposta;
+}  
+
+
+// buscar e listar
 
 export async function listarProduto () {
     const comando = `SELECT ID_PRODUTO   id,
@@ -171,6 +187,20 @@ export async function filtrarPorTema(nome){
             const [linhas] = await con.query(comando, [ `%${nome}%` ]);
             return linhas;
         }
+
+    export async function buscarDestaque(id) {
+        const comando= `
+        select img_produto as destaque 
+        from tb_imagem 
+        where 
+            img_destaque = true 
+        and 
+            id_produto = ?;
+        `;
+
+        const [linhas] = await con.query(comando, [id]);
+        return linhas[0];
+    }
         
 // deletar
 

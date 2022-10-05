@@ -1,7 +1,7 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, salvarDestaque,
         listarProduto, alterarProduto, removerProduto, 
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
-        deletarCor, deletarTamanho, deletarProduto, deletarImagem } from '../repository/produtoRepository.js';
+        deletarCor, deletarTamanho, deletarProduto, deletarImagem, buscarDestaque } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -33,8 +33,7 @@ server.post('/produto', async (req,resp) => {
             throw new Error('Disponibilidade não registrada')
         }
         
-        resp.send({
-            id : produtoInserido});
+        resp.send( produtoInserido);
     } 
     catch (err) {
         resp.status(400).send({
@@ -46,11 +45,11 @@ server.post('/produto', async (req,resp) => {
 
 server.put('/produto/destaque/:id', upload.single("img"), async (req, resp) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         const img = req.file.path;
 
-        const resposta = await salvarImagem(id, img);
+        const resposta = await salvarDestaque(id, img);
 
         console.log(resposta.affectedRows);
 
@@ -208,7 +207,9 @@ server.get('/produto/tema', async (req,resp) => {
         resp.send(x)
         
     } catch(err) {
-        console.log()
+        resp.status(400).send({
+        erro: err.message
+    })
                
     }
 })
@@ -222,8 +223,23 @@ server.get('/produto/categoria', async (req,resp) => {
         resp.send(y)
         
     } catch(err) {
-        console.log()
-               
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
+
+server.get('/produto/destaque/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const r = await buscarDestaque(id);
+        console.log(r.destaque)
+        resp.send(r.destaque);
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
     }
 })
 
