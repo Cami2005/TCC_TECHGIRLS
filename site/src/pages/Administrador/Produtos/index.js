@@ -4,7 +4,7 @@ import BoxProduto from "../../../components/boxProduto";
 import "./index.scss"
 import "../../../common/common.scss"
 import { useEffect, useState } from "react";
-import { buscarCategoria, buscarPorTema, deletarProduto, ProdutosListados } from "../../../API/CadProduto";
+import { buscarCategoria, buscarDestaque, buscarPorTema, deletarProduto, ProdutosListados } from "../../../API/CadProduto";
 import { toast } from "react-toastify";
 
 export default function Index(){
@@ -26,6 +26,7 @@ export default function Index(){
 
     async function ListarProdutos(){
         const resposta= await ProdutosListados();
+        await buscarDestaque()
         setProduto(resposta)
     }
 
@@ -52,20 +53,7 @@ export default function Index(){
             <div className="fundo">
 
                 <div className="espacamento">
-                    <Link className="edit" to='/AddProduto'>Novo Produto</Link>
-<<<<<<< HEAD
-                </div>
-                <div>
-                    <input type='text' placeholder="digite o tema" value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
-                    <button onClick={buscarTemaClick}>Buscar</button>
-                    <input type='text'placeholder="digite a" value={filtroCategoria} onChange={e=> setFiltroCategoria(e.target.value)}></input>
-                    <button onClick={buscarCategoriaClick}>Buscar</button>
-                </div>
-                <div>
-                    {produto.map(item =>
-=======
-
->>>>>>> e9d5f0d1274898819644e7c6cfce681af8587959
+                    <Link className="edit" to='/AddProduto'>Novo Produto </Link>
                     <div>
                         <input type='text' value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
                         <button onClick={buscarTemaClick}>Buscar</button>

@@ -20,7 +20,9 @@
     }
 
     h1 {
-        text-transform: uppercase;
+         font-family: 'Lexend-Bold';
+         font-weight: 100;
+         font-size: 16px;
     }
 
     input {
@@ -97,6 +99,10 @@
       width: max-content;
      }
 
+     .input-item {
+      width: 8em !important;
+     }
+
      .input {
       border: none;
       background-color: #D9D9D9;
@@ -105,8 +111,9 @@
      }
 
      .img {
-      width: 10em;
-      height: 10em;
+      width: 8em;
+      height: 8em;
+      margin: 1em 4em 1em 0em;
      }
 
      textarea:focus, input:focus {
@@ -144,6 +151,13 @@
         align-self: center;
      }
 
+     .wrapwrap {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 30em;
+     }
+
      .itemzinho {
       margin: 0.7em 0.5em;
       padding: 0.2em 0.5em;;
@@ -151,6 +165,31 @@
       color: #fff;
       font-family: 'Lexend-Light';
       border-radius: 0.8em;
+     }
+
+     #imagemDestaque {
+      visibility: hidden;
+      position: absolute;
+     }
+
+     #imagem1 {
+      visibility: hidden;
+      position: absolute;
+     }
+
+     #imagem2 {
+      visibility: hidden;
+      position: absolute;
+     }
+
+     #imagem3 {
+      visibility: hidden;
+      position: absolute;
+     }
+
+     #imagem4 {
+      visibility: hidden;
+      position: absolute;
      }
 
 }
