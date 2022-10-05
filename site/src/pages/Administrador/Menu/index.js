@@ -5,6 +5,8 @@ export default function Index(){
     return(
         <main>
             <Link to='/login/admin'>oi</Link>
+
+            <img src='../../../images/cardBts.png'></img>
         </main>
     )
 }

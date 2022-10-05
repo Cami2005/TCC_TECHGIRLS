@@ -25,24 +25,16 @@ export default function Cabecalho(props){
 
     return(
             <main>
-                <img className="logo" src={props.logo}/>
-                <img  className='menuCab' src={props.menu}/>
-<<<<<<< HEAD
             <header className="cab">
                 <img className="logo" alt="" src={props.logo}/>
                 <img  className='menuCab' alt="" src={props.menu}/>
-=======
 
->>>>>>> ea12a9d5cb945280c46c3052ac38e543a097f4d8
                 <div>
                 <input className='busca' placeholder='encontre seu produto aqui' type='text' value={busca} onChange={e=> setBusca(e.target.value)} />
                 <button onClick={buscarNomeClick}>pesquisar</button>
 
                 </div>
-<<<<<<< HEAD
-=======
                 
->>>>>>> ea12a9d5cb945280c46c3052ac38e543a097f4d8
                 <img className='icons' src={props.fav}></img>
                 <img className='icons' src={props.user}></img>
                 <img className='icons' src={props.sacola}></img>
@@ -50,6 +42,18 @@ export default function Cabecalho(props){
         <hr className='linha'></hr>
 
                 <img className='banner' src={props.banner}></img>
+
+                <div className='menuzinho'>
+                    <p>Vestimenta</p>
+                    <p>Acessório</p>
+                    <p>Colecionável</p>
+                    <p>Funko</p>
+                    <p>Caneca</p>
+                    <p>Pelúcia</p>
+                    <p>Moda e Casa</p>
+                </div>
+                <hr className='linha-menuzinho'></hr>
+
 
         <div>
                     {produtos.map(item =>
@@ -61,9 +65,6 @@ export default function Cabecalho(props){
                      )}
                 </div>
             </main>
-<<<<<<< HEAD
                
-=======
->>>>>>> ea12a9d5cb945280c46c3052ac38e543a097f4d8
         )
 }
