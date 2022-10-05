@@ -3,10 +3,13 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque } from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
 
 export default function Index() {
+
+
+//VARIÁVEIS DE ESTADO
 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -28,6 +31,13 @@ export default function Index() {
     const [imagem3, setImagem3] = useState();
     const [imagem4, setImagem4] = useState();
 
+    // imagem destaque
+
+    const [destaque, setDestaque] = useState();
+
+
+// FUNÇÕES
+
     //função imagem
     function escolherImagem(inputId) {
         document.getElementById(inputId).click();
@@ -40,6 +50,12 @@ export default function Index() {
         else {
             return URL.createObjectURL(imagem)
         }
+    }
+
+    // função imagem destaque
+
+    async function escolherDestaque(){
+        document.getElementById('imagemDestaque').click();
     }
 
 
@@ -159,15 +175,17 @@ export default function Index() {
         }
     }
 
-    // inserindo produto + cores + tamanho + imagem
+    // inserindo produto + cores + tamanho + imagens
     async function inserirProduto(){ 
         try {
             // const precoProduto = Number(preco.replace(',', '.'));
             const novoProduto = await CadastrarPoduto(nome, descricao, preco, disponivel);
             inserirCor(novoProduto.id);
             inserirTamanho(novoProduto.id);
-            await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
-            alert('produto inserido')
+            const dest = await CadastrarImgDestaque(novoProduto.id, destaque);
+            console.log(dest)
+            const imgs = await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
+            toast.dark('tudo ok')
         }
         catch (err) {
             alert({erro : err.message})
@@ -203,41 +221,46 @@ export default function Index() {
                             
 
                             <div className="flex-row space-between">
+
                                 <div className="select-tamanho">
                                     <label> Categoria:</label>
                                     <select className="select" value={idCategoria} onChange={e => setIdCategoria(e.target.value)}>
                                         <option> Vestimenta </option>
 
                                         {categorias.map(item =>
-                                <option value={item.id}> {item.categoria} </option>
-                            )}
+                                            <option value={item.id}> {item.categoria} </option>
+                                        )}
+
                                     </select>
                                 </div>
 
                                 
 
                                 <div className="select-tamanho">
+
                                     <label> Tema: </label>
                                     <select className="select" value={idTemas} onChange={e => setIdTemas(e.target.value)}>
                                         <option> Harry Potter </option>
 
                                         {Temas.map(item =>
-                            <option value={item.id}> {item.temas} </option>
-                        )}
+                                            <option value={item.id}> {item.temas} </option>
+                                        )}
                                     </select>
                                 </div>
+
                             </div>
 
                             
                             <div className="div-array">
                                 <label> Cor </label>
-                                <div className="flex-row">
-                                    <input type="text" value={novaCor} onChange={e => setNovaCor(e.target.value)} className="input"/> 
+
+                                <div className="flex-row wrapwrap">
+
+                                    <input type="text" value={novaCor} onChange={e => setNovaCor(e.target.value)} className="input input-item"/> 
                                     <button onClick={arrayCor} className="button-ok"> OK </button>
                                     
-                                   
                                    {cor.map( item => 
-                                        <div className="itemzinho" >
+                                        <div className="itemzinho">
                                             <DeletarItem  
                                             key={item}
                                             it={item}
@@ -249,9 +272,12 @@ export default function Index() {
                             </div>
 
                             <div className="div-array">
+
                                 <label> Tamanhos </label>
-                                <div className="flex-row">
-                                    <input value={novoTamanho}  className="input" onChange={e => setNovoTamanho(e.target.value)}/> 
+
+                                <div className="flex-row wrapwrap">
+                                    <input value={novoTamanho}  className="input input-item" onChange={e => setNovoTamanho(e.target.value)}/> 
+
                                     <button onClick={arrayTamanho} className="button-ok"> OK </button>
 
                                     {tamanho.map( item => 
@@ -262,29 +288,51 @@ export default function Index() {
                                             deletarit={Remover}  />
                                         </div>
                                     )}
+
                                 </div>
+
                             </div>
 
                             <div className="flex-column"> 
+
                                 <label > Valor </label>
                                 <input type="text" value={preco} onChange={e=> setPreco(e.target.value)} className="imagem-input"/>
+                           
                             </div>
+                
 
                             <div>
                                 <div> 
-                                    <label > Disponível ?</label> 
+                                     <label > Disponível ?</label> 
                                      <input type="checkbox" checked={disponivel} onChange={e=> setDisponivel(e.target.checked)}/>
                                 </div>
                             </div> 
+
                         </div>
 
                         <div className="div2">
                             <div>
-                                <h1> Foto Destaque</h1>
-                                <img className="img" src='../images/add.png' alt='' />
+
+                                <h1> Foto Destaque </h1>
+
+                                <img 
+                                    className="img" 
+                                    src={exibirImagem(destaque)}
+                                    alt='' 
+                                    onClick={escolherDestaque}  
+                                />
+
+
+                                <input 
+                                type="file" 
+                                id="imagemDestaque"
+                                onChange={e => setDestaque(e.target.files[0])} 
+                                />
+                                
                             </div>
 
                             <div className="flex-column"> 
+
                                 <h1> Fotos Extras</h1>
 
                                 <div>
@@ -300,6 +348,7 @@ export default function Index() {
                                 </div>
                                 
                             </div>
+
                         </div>
 
 

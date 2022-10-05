@@ -12,17 +12,17 @@ export async function CadastrarPoduto(nome, descricao, preco, disponivel) {
         preco: preco,
         disponivel: disponivel
     });
-    console.log(resposta.data);
+    
     return resposta.data;
 }
 
-export async function CadastrarImagem(id, imagem){
+export async function CadastrarImgDestaque(id, imagem){
     const formData = new FormData();
-    formData.append ('img', imagem);
-    const resposta = await api.put(`/produto/:${id}/imagem`, formData, {
-        headers:{
+    formData.append('img', imagem);
+    const resposta = await api.put(`/produto/destaque/` + id , formData, {
+        headers: {
             "Content-Type": "multipart/form-data"
-        }
+        },
     });
     return resposta.status;
 }
@@ -47,6 +47,7 @@ export async function CadastrarTamanho(produto, tamanho) {
 
 export async function ProdutosListados() {
     const resp = await api.get('/produto')
+    
     return resp.data;
 }
 
@@ -72,8 +73,6 @@ export async function buscarPorTema(nome) {
     const resposta = await api.get(`/filtro/tema?nome=${nome}`)
     return resposta.data;
 }
-    
-
 
 export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
     let form = new FormData();
@@ -87,6 +86,11 @@ export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
             'Content-Type' : 'multipart/form-data'
         }
     })
+}
+
+export async function buscarDestaque(id){
+    const resp = await api.get('/produto/destaque/' + id);
+    return resp.data;
 }
     
 

@@ -1,7 +1,7 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, salvarDestaque,
         listarProduto, alterarProduto, removerProduto, 
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
-        deletarCor, deletarTamanho, deletarProduto, deletarImagem } from '../repository/produtoRepository.js';
+        deletarCor, deletarTamanho, deletarProduto, deletarImagem, buscarDestaque } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -16,9 +16,24 @@ server.post('/produto', async (req,resp) => {
         const novoProduto = req.body;
         
         const produtoInserido = await inserirProduto(novoProduto);
+
+        if(!produtoInserido.id) {
+        throw new Error('Id não registrado');
+        };
+        if(!produtoInserido.nome) {
+            throw new Error('Nome não registrado');
+        };
+        if(!produtoInserido.preco) {
+            throw new Error('Preço não registrado')
+        }
+        if(!produtoInserido.descricao) {
+                throw new Error('Descrição não registrada')
+        }
+        if(!produtoInserido.disponivel) {
+            throw new Error('Disponibilidade não registrada')
+        }
         
-        resp.send({
-            id : produtoInserido});
+        resp.send( produtoInserido);
     } 
     catch (err) {
         resp.status(400).send({
@@ -28,13 +43,13 @@ server.post('/produto', async (req,resp) => {
 })
 
 
-server.put('/produto/:id/imagem', upload.single("img"), async (req, resp) => {
+server.put('/produto/destaque/:id', upload.single("img"), async (req, resp) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         const img = req.file.path;
 
-        const resposta = await salvarImagem(id, img);
+        const resposta = await salvarDestaque(id, img);
 
         console.log(resposta.affectedRows);
 
@@ -69,8 +84,10 @@ server.post('/produto/cor', async (req,resp) => {
     try {
         const novaCor = req.body;
 
+        if(!novaCor.produto)
+            throw new Error('Produto (cor) não especificado!');
         if(!novaCor.nome)
-            throw new Error('Nome do produto é obrigatório!');
+            throw new Error('Nome da cor é obrigatório!');
 
         const corInserida = await inserirCor(novaCor);
         console.log(novaCor);
@@ -88,6 +105,8 @@ server.post('/produto/tamanho', async (req,resp) => {
     try {
         const novoTamanho = req.body;
 
+        if (!novoTamanho.produto)
+            throw new Error('Produto (tamanho) não especificado!')
         if(!novoTamanho.descricao)
             throw new Error('Tamnaho do produto é obrigatório!');
 
@@ -122,108 +141,107 @@ server.put ('/produto/:id', async (req,resp) => {
 		const { id } = req.params;
 		const produto = req.body;
 
-		if(!produto.nome) 
-			throw new Error ('Nome do produto é obrigatório!');
+        const resposta = await alterarProduto(id, produto);
+        
+            resp.send(resposta);
 
-	     if (!produto.tema) 
-			throw new Error ('Tema do produto é obrigatório!');
-		
-        if(!produto.categoria) 
-			throw new Error ('Categoria do produto é obrigatória!');
-		
-        if(!produto.preco) 
-			throw new Error ('Preço do produto é obrigatório!');
-		
-        if(!produto.descricao) 
-			throw new Error ('Descrição do produto é obrigatória!');
-		if(produto.disponivel === undefined) 
-			throw new Error ('Disponibilidade do produto é obrigatório!');
-
-const resposta = await alterarProduto(id, produto);
-if (resposta != 1)
-            throw new Error('Produto não pode ser alterado');
-        else
-            resp.status(204).send();
-
-
-} catch (err) { 
-resp.status(400).send({
-	erro: err.message
-  
-     })
-   }
+    } catch (err) { 
+        resp.status(400).send({
+	        erro: err.message 
+        })
+    }
 })
 
 
-        server.get('/produto/busca', async (req, resp) => {
-            try {
-                const { nome } = req.query;
+server.get('/produto/busca', async (req, resp) => {
+        try {
+            const { nome } = req.query;
                 
-                const resposta = await buscarPorNome(nome);
+            const resposta = await buscarPorNome(nome);
         
-                if (resposta.length == 0)
-                    resp.status(404).send([])
-                else
-                    resp.send(resposta);
-            } catch (err) {
-                resp.status(400).send({
-                    erro: err.message
-                })
-            }
+            if (resposta.length == 0)
+                resp.status(404).send([])
+            else
+                resp.send(resposta);
+        } catch (err) {
+            resp.status(400).send({
+                erro: err.message
+            })
+        }
+    })
+
+
+server.get('/filtro/tema', async (req,resp) => {
+
+    try{
+        const { nome } = req.query;
+        const x = await buscarPorTema(nome);
+        resp.send(x)
+        
+    } catch(err) {
+        resp.status(400).send({
+            erro: err.message
         })
-        server.get('/filtro/tema', async (req,resp) => {
+    }
+})
 
-            try{
-                const { nome } = req.query;
-                const x = await buscarPorTema(nome);
-                resp.send(x)
+server.get('/filtro/categoria', async (req,resp) => {
+
+    try{
+        const { nome } = req.query;
+        const x = await buscarPorCategoria(nome);
+        resp.send(x)
         
-            } catch(err) {
-                resp.status(400).send({
-                    erro: err.message
-                })
-            }
+    } catch(err) {
+        resp.status(400).send({
+            erro: err.message
         })
+    }
+})
 
-        server.get('/filtro/categoria', async (req,resp) => {
+server.get('/produto/tema', async (req,resp) => {
 
-            try{
-                const { nome } = req.query;
-                const x = await buscarPorCategoria(nome);
-                resp.send(x)
+    try{
+        const { nome } = req.query;
+        const x = await filtrarPorTema(nome);
+        resp.send(x)
         
-            } catch(err) {
-                resp.status(400).send({
-                    erro: err.message
-                })
-            }
-        })
-
-        server.get('/produto/tema', async (req,resp) => {
-
-            try{
-                const { nome } = req.query;
-                const x = await filtrarPorTema(nome);
-                resp.send(x)
-        
-            } catch(err) {
-                console.log()
+    } catch(err) {
+        resp.status(400).send({
+        erro: err.message
+    })
                
-            }
-        })
+    }
+})
 
-        server.get('/produto/categoria', async (req,resp) => {
 
-            try{
-                const { nome } = req.query;
-                const y = await filtrarPorCategoria(nome);
-                resp.send(y)
+server.get('/produto/categoria', async (req,resp) => {
+
+    try{
+        const { nome } = req.query;
+        const y = await filtrarPorCategoria(nome);
+        resp.send(y)
         
-            } catch(err) {
-                console.log()
-               
-            }
+    } catch(err) {
+        resp.status(400).send({
+            erro: err.message
         })
+    }
+})
+
+server.get('/produto/destaque/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const r = await buscarDestaque(id);
+        console.log(r.destaque)
+        resp.send(r.destaque);
+    }
+    catch(err){
+        resp.status(400).send({
+            erro: err.message
+        })
+    }
+})
 
 
 // DELETAR

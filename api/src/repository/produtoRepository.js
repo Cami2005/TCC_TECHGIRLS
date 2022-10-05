@@ -14,7 +14,7 @@ export async function inserirProduto(produto) {
                         ])
                         
     produto.id = resp.insertId;
-    return produto.id;
+    return produto;
 }
 
 
@@ -71,7 +71,23 @@ export async function salvarImagem(id, imagem) {
     return resposta;
 }  
 
-// buscar
+export async function salvarDestaque(id, imagem) {
+    const comando = `
+        insert into tb_imagem (id_produto, img_produto, img_destaque)
+        values (?, ?, true)
+        `;
+        
+    if (isNaN(id)) {
+        throw new Error("id tem o valor =" + "'" + id + "'" + " e imagem tem o valor=" + imagem) // vai retornar o que estamos enviando na rota em :id
+    }
+    
+    const [resposta] = await con.query(comando, [id, imagem]);
+
+    return resposta;
+}  
+
+
+// buscar e listar
 
 export async function listarProduto () {
     const comando = `SELECT ID_PRODUTO   id,
@@ -92,15 +108,16 @@ export async function alterarProduto (id, produto) {
 	const comando = 
             `UPDATE TB_PRODUTO
 			SET NM_PRODUTO = ?,
-			ID_TEMA        = ?,
-			ID_CATEGORIA   = ?,
-			VL_PRECO       = ?,
-			DS_DESCRICAO   = ?,
-			DS_DISPONIVEL  = ?
+			    ID_TEMA        = ?,
+			    ID_CATEGORIA   = ?,
+			    VL_PRECO       = ?,
+			    DS_DESCRICAO   = ?,
+			    DS_DISPONIVEL  = ?
 			WHERE ID_PRODUTO = ?`
 
 const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-return resposta.affectedRows;
+produto.id = id;
+return produto;
 }
 
 export async function removerProduto (id) {
@@ -114,16 +131,14 @@ export async function removerProduto (id) {
 export async function buscarPorNome(nome) {
     const comando =
     `SELECT ID_PRODUTO   id,
-    ID_TEMA    tema,
-ID_CATEGORIA categoria,
-NM_PRODUTO   nome,
-VL_PRECO     preco,
-DS_DESCRICAO descricao,
-DS_DISPONIVEL disponivel
-FROM TB_PRODUTO
-          WHERE NM_PRODUTO like ? `;
-    
-
+        ID_TEMA    tema,
+        ID_CATEGORIA categoria,
+        NM_PRODUTO   nome,
+        VL_PRECO     preco,
+        DS_DESCRICAO descricao,
+        DS_DISPONIVEL disponivel
+        FROM TB_PRODUTO
+    WHERE NM_PRODUTO like ? `;
         
     const [linhas] = await con.query(comando, [ `%${nome}%` ]);
     return linhas;
@@ -131,10 +146,10 @@ FROM TB_PRODUTO
 
 export async function buscarPorCategoria(nome) {
     const comando =
-    `SELECT ID_CATEGORIA   ID,
-    NM_CATEGORIA  NOME
-FROM TB_CATEGORIA
-WHERE NM_CATEGORIA like ? `;
+       `SELECT ID_CATEGORIA   ID,
+            NM_CATEGORIA  NOME
+        FROM TB_CATEGORIA
+        WHERE NM_CATEGORIA like ? `;
     
     const [linhas] = await con.query(comando, [ `%${nome}%` ]);
     return linhas;
@@ -172,6 +187,20 @@ export async function filtrarPorTema(nome){
             const [linhas] = await con.query(comando, [ `%${nome}%` ]);
             return linhas;
         }
+
+    export async function buscarDestaque(id) {
+        const comando= `
+        select img_produto as destaque 
+        from tb_imagem 
+        where 
+            img_destaque = true 
+        and 
+            id_produto = ?;
+        `;
+
+        const [linhas] = await con.query(comando, [id]);
+        return linhas[0];
+    }
         
 // deletar
 

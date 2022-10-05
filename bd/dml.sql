@@ -13,8 +13,8 @@ select ID_ADM_LOGIN id,
 
 
  -- TEMA
-    INSERT INTO TB_TEMA (ID_TEMA, NM_TEMA, DS_COR) 
-        VALUES (1,'NARUTO', '#FFF30');
+    INSERT INTO TB_TEMA ( NM_TEMA, DS_COR) 
+        VALUES ('NARUTO', '#FFF30');
 
     select ID_TEMA  id,
            NM_TEMA  nome,
