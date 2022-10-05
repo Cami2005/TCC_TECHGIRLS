@@ -4,10 +4,12 @@ import { con } from './connection.js'
 
 export async function inserirProduto(produto) {
     const comando = `
-    INSERT INTO TB_PRODUTO (NM_PRODUTO, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
-    VALUES ( ?, ?, ?, ?) `;
+    INSERT INTO TB_PRODUTO (NM_PRODUTO, ID_TEMA, ID_CATEGORIA, VL_PRECO, DS_DESCRICAO, DS_DISPONIVEL)
+    VALUES ( ?, ?, ?, ?, ?, ?) `;
     const [resp] = await con.query(comando, [
                             produto.nome,
+                            produto.tema,
+                            produto.categoria,
                             produto.preco,
                             produto.descricao,
                             produto.disponivel
@@ -90,14 +92,25 @@ export async function salvarDestaque(id, imagem) {
 // buscar e listar
 
 export async function listarProduto () {
-    const comando = `SELECT ID_PRODUTO   id,
-                   ID_TEMA    tema,
-               ID_CATEGORIA categoria,
-               NM_PRODUTO   nome,
-               VL_PRECO     preco,
-               DS_DESCRICAO descricao,
-               DS_DISPONIVEL disponivel
-               FROM TB_PRODUTO`;
+    const comando = 
+    `select 
+	tb_produto.id_produto 	    as id,
+	nm_produto 				    as nome, 
+	ds_descricao 			    as descricao, 
+	vl_preco 				    as preco, 
+	ds_disponivel 			    as disponivel, 
+	nm_categoria		 	    as categoria, 
+	nm_tema 				    as tema, 
+	nm_cor 					    as cores,
+	img_produto 			    as destaque
+from tb_produto
+	inner join tb_categoria     on tb_produto.id_categoria = tb_categoria.id_categoria
+	inner join tb_tema          on tb_produto.id_tema = tb_tema.id_tema
+	inner join tb_cor           on tb_cor.id_produto = tb_produto.id_produto
+	inner join tb_tamanho       on tb_tamanho.id_produto = tb_produto.id_produto
+	inner join tb_imagem        on tb_imagem.id_produto = tb_produto.id_produto
+where img_destaque = true
+    `;
 
 const [linhas] = await con.query (comando);
 return linhas;
