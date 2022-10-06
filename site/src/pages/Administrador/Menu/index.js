@@ -4,7 +4,7 @@ import "./index.scss"
 
 export default function Index(){
     return(
-        <main>
+        <main className="main">
             <div className="cabeçalho">
                 <img className="logo" src='../../../images/logoAdmin.png'></img>
                 <img className='icons' src='../../../images/menu.png'></img>

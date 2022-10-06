@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { buscarProdutosPorNome, ProdutosListados } from '../API/CadProduto.js';
-import './cabecalho.scss';
+import './cabecalhoBanner.scss';
 
 export default function Cabecalho(props){
 
