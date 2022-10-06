@@ -13,3 +13,99 @@ export async function inserirUsuario(usuario){
     return usuario;
 }
 
+export async function inserirEndereco(endereco) {
+    const comando = `
+    INSERT INTO TB_USUARIO_ENDERECO (ID_USUARIO, DS_CEP, NM_NOME_RESIDENCIA, DS_ENDERECO, DS_BAIRRO, DS_ESTADO, DS_UF, NR_NUMERO, DS_COMPLEMENTO_REF)
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const [resp] = await con.query(comando, [
+                                                        endereco.usuario,
+                                                        endereco.cep,
+                                                        endereco.residencia,
+                                                        endereco.endereco,
+                                                        endereco.bairro,
+                                                        endereco.estado,
+                                                        endereco.uf,
+                                                        endereco.numero,
+                                                        endereco.complemento
+            ])
+        
+    endereco.id = resp.insertId;
+    return endereco;
+}
+
+export async function listarEnderecos(){
+    const resposta = `
+    SELECT 
+    ID_USUARIO_ENDERECO         id, 
+    ID_USUARIO                  usuario,
+    DS_CEP                      cep,
+    NM_NOME_RESIDENCIA          residencia,
+    DS_ENDERECO                 endereco,
+    DS_BAIRRO                   bairro,
+    DS_ESTADO                   estado,
+    DS_UF                       uf,
+    NR_NUMERO                   numero,
+    DS_COMPLEMENTO_REF          complemento
+    FROM TB_USUARIO_ENDERECO
+    `;
+
+    const [linhas] = await con.query (resposta);
+    return linhas;
+}
+
+export async function alterarEndereco(id, endereco) {
+    const comando =
+            `UPDATE TB_USUARIO_ENDERECO
+            SET
+                ID_USUARIO           = ?,
+                DS_CEP               = ?,
+                NM_NOME_RESIDENCIA   = ?,
+                DS_ENDERECO          = ?,
+                DS_BAIRRO            = ?,
+                DS_ESTADO            = ?,
+                DS_UF                = ?,
+                NR_NUMERO            = ?,
+                DS_COMPLEMENTO_REF   = ?
+            WHERE ID_USUARIO_ENDERECO = ?`
+            
+        const [resposta] = await con.query(comando, [
+            endereco.usuario,
+            endereco.cep,
+            endereco.residencia,
+            endereco.endereco,
+            endereco.bairro,
+            endereco.estado,
+            endereco.uf,
+            endereco.numero,
+            endereco.complemento,
+            id
+])
+        endereco.id = id;
+        return endereco;
+}
+
+export async function deletarEndereco (id){
+    const comando = `
+    DELETE FROM TB_USUARIO_ENDERECO
+    WHERE ID_USUARIO_ENDERECO = ? `;
+
+    const [resposta] = await con.query(comando, [id]);
+    return resposta.affectedRows;
+}
+
+export async function inserirNovoCartao(cartao) {
+    const comando = `
+    INSERT INTO TB_CARTAO (ID_CARTAO, ID_USUARIO_LOGIN, DS_NUMERO, DT_VALIDADE, DS_CODIGO, DS_CPF)
+    VALUES ( ?, ?, ?, ?, ?, ?) ` ;
+
+    const [resposta] = await con.query(comando , [
+        cartao.usuario,
+        cartao.numero,
+        cartao.validade,
+        cartao.codigo,
+        cartao.cpf
+    ])
+
+    cartao.id = resposta.insertId;
+    return cartao;
+}
