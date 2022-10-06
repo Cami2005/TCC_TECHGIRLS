@@ -3,13 +3,19 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque, buscarProdutoPorId } from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
+import { useParams } from "react-router-dom";
+import { API_URL } from "../../../API/config.js";
 
 export default function Index() {
 
 
 //VARIÁVEIS DE ESTADO
+
+    const { id } = useParams();     
+
+    const [idProduto, setIdProduto] = useState();
 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -47,13 +53,15 @@ export default function Index() {
         if (imagem == undefined){
             return '../images/add.png'
         }
+        else if(typeof (imagem) == 'string'){
+            return `${API_URL}/${imagem}`
+        }
         else {
             return URL.createObjectURL(imagem)
         }
     }
 
     // função imagem destaque
-
     async function escolherDestaque(){
         document.getElementById('imagemDestaque').click();
     }
@@ -147,20 +155,72 @@ export default function Index() {
     async function carregarTemas() {
         const r = await listarTemas();
         setTemas(r);
-        console.log(Temas);
     }
 
 
     async function carregarCategorias() {
+
         const r = await listarCategorias();
         setCategorias(r);
-        console.log(categorias);
+    }
+
+    async function carregarProduto(){
+        console.log('hm')
+        if (!id) return;
+
+        console.log('chamada')
+
+        const r= await buscarProdutoPorId(id);
+
+        setIdProduto(id);
+        setNome(r.info.nome);
+        setDescricao(r.info.descricao);
+        setPreco(r.info.preco);
+        setDisponivel(r.info.disponivel);
+
+        const a = r.cores;
+        const b = r.tamanho;
+
+        console.log(a)
+        console.log(b)
+
+        setCor(a);
+        setTamanho(b)
+
+
+        console.log(
+            {
+                id: idProduto,
+                nome: nome,
+                descricao: descricao,
+                preco: preco,
+                disponivel: disponivel
+            }
+        )
+
+
+        if(r.imagens.length > 0){
+            setImagem1(r.imagens[0]);
+        }
+        if(r.imagens.length > 1){
+            setImagem2(r.imagens[1]);
+        }
+        if(r.imagens.length > 2){
+            setImagem3(r.imagens[3]);
+        }
+        if(r.imagens.length > 3){
+            setImagem4(r.imagens[3]);
+        }
+
+        setDestaque(r.destaque.url);
+        
     }
 
 
     useEffect(() => {
         carregarCategorias();
         carregarTemas();
+        carregarProduto();
     }, [])
 
     useEffect(() => {
@@ -192,13 +252,15 @@ export default function Index() {
             const dest = await CadastrarImgDestaque(novoProduto.id, destaque);
             console.log(dest)
             const imgs = await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
-            toast.dark('tudo ok')
+            alert('tudo ok')
         }
         catch (err) {
             alert({erro : err.message})
         }
     
-       
+
+    // ALTERAR PRODUTO
+
     }        
 
     return (

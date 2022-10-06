@@ -1,7 +1,7 @@
 import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, salvarDestaque,
         listarProduto, alterarProduto, removerProduto, 
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
-        deletarCor, deletarTamanho, deletarProduto, deletarImagem, buscarDestaque } from '../repository/produtoRepository.js';
+        deletarCor, deletarTamanho, deletarProduto, deletarImagem, buscarDestaque, buscarProduto, buscarCorProduto, buscarTamanhoProduto, buscarImagemProduto } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -38,8 +38,8 @@ server.post('/produto', async (req,resp) => {
         if(produtoInserido.disponivel == undefined) {
             throw new Error('Disponibilidade não registrada')
         }
-        
-        resp.send( produtoInserido);
+        console.log(produtoInserido)
+        resp.send(produtoInserido);
     } 
     catch (err) {
         resp.status(400).send({
@@ -141,7 +141,7 @@ server.get('/produto', async (req,resp) => {
     }
 })
 
-server.put ('/produto/:id', async (req,resp) => {
+ server.post('/produto/:id', async (req,resp) => {
 
 	try {
 		const { id } = req.params;
@@ -158,6 +158,34 @@ server.put ('/produto/:id', async (req,resp) => {
     }
 })
 
+// nova função alterar
+
+server.get('/produto/:id', async (req, resp) => {
+    try{
+        const id = req.params.id;
+        
+        const produto = await buscarProduto(id);
+        const cor = await buscarCorProduto(id);
+        const tamanho = await buscarTamanhoProduto(id);
+        const imagens = await buscarImagemProduto(id);
+        const destaque = await buscarDestaque(id);
+
+        resp.send(
+            {
+                info : produto,
+                cores : cor,
+                tamanho : tamanho,
+                imagens : imagens,
+                destaque : destaque
+            }
+        )
+    }
+    catch (err){
+        resp.status(400).send({
+            erro: err.message
+        })    
+    }
+})
 
 server.get('/produto/busca', async (req, resp) => {
         try {
@@ -234,6 +262,8 @@ server.get('/produto/categoria', async (req,resp) => {
         })
     }
 })
+
+
 
 server.get('/produto/destaque/:id', async (req, resp) => {
     try {

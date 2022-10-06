@@ -106,3 +106,10 @@ export async function deletarProduto(id) {
     const resposta = await api.delete('/produto/' + id)
     return resposta.data;
 }
+
+// alterar
+
+export async function buscarProdutoPorId(id){
+    const resp = await api.get(`/produto/${id}`);
+    return resp.data;
+}

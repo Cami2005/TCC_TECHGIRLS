@@ -120,7 +120,7 @@ return linhas;
 export async function alterarProduto (id, produto) {
 	const comando = 
             `UPDATE TB_PRODUTO
-			SET NM_PRODUTO = ?,
+			SET NM_PRODUTO      = ?,
 			    ID_TEMA        = ?,
 			    ID_CATEGORIA   = ?,
 			    VL_PRECO       = ?,
@@ -199,21 +199,7 @@ export async function filtrarPorTema(nome){
     
             const [linhas] = await con.query(comando, [ `%${nome}%` ]);
             return linhas;
-        }
-
-    export async function buscarDestaque(id) {
-        const comando= `
-        select img_produto as destaque 
-        from tb_imagem 
-        where 
-            img_destaque = true 
-        and 
-            id_produto = ?;
-        `;
-
-        const [linhas] = await con.query(comando, [id]);
-        return linhas[0];
-    }
+        };
         
 // deletar
 
@@ -255,4 +241,73 @@ export async function deletarProduto(idProduto) {
     
         const [resp] = await con.query(comando, [idProduto]);
         return resp.affectedRows;
+}
+
+// ALTERAR PRODUTO
+
+export async function buscarProduto(id) {
+    const comando=`
+        select 
+        nm_produto      as nome,
+        vl_preco        as preco,
+        ds_descricao    as descricao,
+        ds_disponivel   as disponivel
+        from tb_produto
+        where id_produto = ?
+    `;
+
+    const [registros] = await con.query(comando, [id]);
+    return registros[0];
+}
+
+export async function buscarCorProduto(id) {
+    const comando = `
+    select
+    nm_cor as nome_cor
+    from tb_cor
+    where id_produto = ?
+    `;
+
+    const [registros] = await con.query(comando, [id]);
+    return registros.map(item => item.nome_cor);
+}
+
+export async function buscarTamanhoProduto(id) {
+    const comando = `
+    select 
+    ds_tamanho  as tamanho
+    from tb_tamanho
+    where id_produto = ?
+    `;
+
+    const [registros] = await con.query(comando, [id]);
+    return registros.map(item => item.tamanho);
+}
+
+
+export async function buscarImagemProduto(id){
+    const comando = `
+    select
+    img_produto as url
+    from tb_imagem
+    where id_produto = ?
+    and img_destaque = false
+    `;
+
+    const [registros] = await con.query(comando, [id]);
+    return registros.map(item => item.url);
+}
+
+export async function buscarDestaque(id) {
+    const comando= `
+    select img_produto as url
+    from tb_imagem 
+    where 
+        img_destaque = true 
+    and 
+        id_produto = ?;
+    `;
+
+    const [linhas] = await con.query(comando, [id]);
+    return linhas[0];
 }

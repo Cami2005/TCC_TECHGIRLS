@@ -19,7 +19,10 @@ server.use(produtoController);
 server.use(categoria);
 server.use(tema);
 server.use(usuarioController);
-server.use(multer)
+
+server.use('/storage/produto', express.static('storage/produto'));
+
+server.use(multer);
 
 
 const PORT= process.env.PORT;

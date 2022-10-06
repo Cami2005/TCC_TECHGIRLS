@@ -18,6 +18,7 @@ export default function Index(){
                 <Route path='/pedidosRecentes' element={<PedidosRecentes />} />
                 <Route path='/produtos' element={<Produtos />} />
                 <Route path='/addProduto' element={<AddProduto />} />
+                <Route path='/addProduto/:id' element={<AddProduto />} />
                 <Route path='/login/usuario' element={<LoginUsuario/>} />
                 <Route path='/usuario/cadastro' element={<CadastroUsuario />} />
                 <Route path='/usuario/produtos' element={<NossosProdutos/>} />
