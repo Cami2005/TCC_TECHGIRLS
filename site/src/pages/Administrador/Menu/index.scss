@@ -1,4 +1,3 @@
-.main {
 .cabeçalho{
     background-color: #521FAF;
     display: flex;
@@ -8,6 +7,10 @@
 .logo{
     height: 13vh;
     width: 14vh;
+}
+.busca{
+    width: 35em;
+    height: 2em;
 }
 .icons{
     height: 24px;
@@ -27,8 +30,16 @@
     transform: rotate(88.6deg);
 }
 .icons-1{
-    width: 92px;
-    height: 60px;
+    width: 85px;
+    height: 55px;
+}
+.icons-3{
+    height: 3em;
+}
+p{
+    width: 220px;
+    font-size: 14px;
+    text-align: center;
 }
 .degrade{
     width: 94.9em;
@@ -47,15 +58,56 @@ h1{
 .seta2{
     margin-left: 82em;
 }
+.Tema1{
+    background-color: #FF4B00;
+    color: #fff;
+}
+.Tema2{
+    background-color: #00B9AE;
+    color: #fff;
+}
+.Tema3{
+    background-color: #FF2C83;
+    color: #fff;
+}
+.Tema4{
+        background-color: #FFC501;
+        color: #fff;
+}
+.Tema5{
+    background-color: #4EB9DB;
+    color: #fff;
+}
+.Tema6{
+    background-color: #521FAF;
+    color: #fff;
+}
 h3{
+    background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     position: absolute;
     top: 135em;
+    margin-left: 40em;
 }
 .texto{
     position: absolute;
     top: 165em;
+    margin-left: 55em;
+    margin-top: 20em;
 }
 .rodapé{
+    height: 261px;
     background-color: #521FAF;
 }
+h4{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+.linha{
+    width: 823px;
+    background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
+    margin-left: 150px;
 }
