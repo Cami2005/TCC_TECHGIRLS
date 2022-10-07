@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { alterarEndereco, deletarEndereco, inserirEndereco, inserirNovoCartao, inserirUsuario, listarEnderecos } from "../repository/usuarioRepository.js";
+import { alterarDadosCartao, alterarEndereco, deletarCartao, deletarEndereco, inserirEndereco, inserirNovoCartao, inserirUsuario, listarEnderecos, listarTodosCartoes } from "../repository/usuarioRepository.js";
 
 const server = Router(); 
 
@@ -145,5 +145,48 @@ server.delete('/endereco/:id', async (req,resp) => {
                 }
     
     })
+
+server.get('/cartao', async (req, resp) => {
+    try {
+        const resposta = await listarTodosCartoes();
+        resp.send(resposta);
+
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
     
+server.put('/cartao/:id', async (req, resp) => {
+    try {
+        const {id} = req.params;
+        const cartao = req.body;
+
+        const resposta = await alterarDadosCartao(id, cartao);
+
+        resp.send(resposta);
+
+    } catch (err) {
+        resp.status(404).send({
+            err: err.message
+        })
+    }
+})
+
+server.delete('/cartao/:id', async (req, resp) => {
+    try {
+        const {id} = req.params;
+
+        const resposta = await deletarCartao(id);
+        if(resposta != 1)
+            throw new Error('Cartão não pode ser removido');
+            resp.status(204).send();
+
+    } catch (error) {
+        resp.status(400).send ({
+            erro: err.message
+        })
+    }
+})
 export default server;
