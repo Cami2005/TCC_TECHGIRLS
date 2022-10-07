@@ -2,17 +2,11 @@ import { Link } from "react-router-dom";
 import "../../../common/common.scss"
 import "./index.scss"
 
+
 export default function Index(){
     return(
         <main className="main">
-            <div className="cabeçalho">
-                <img className="logo" src='../../../images/logoAdmin.png'></img>
-                <img className='icons' src='../../../images/menu.png'></img>
-                <input className='busca' placeholder='O que deseja?' type='text'/>
-                <img className='icons' src='../../../images/favoritos.png'></img>
-                <img className='icons' src='../../../images/user.png'></img>
-                <img className='icons' src='../../../images/sacola.png'></img>
-            </div>
+            
             <div className="banner">
                 <img src='../../../images/Stranger things 1.png'></img>
             </div>

@@ -1,6 +1,6 @@
 import './index.scss'
 
-import Cabecalho from "../../../components/cabecalhoBanner.js";
+import Cabecalho from "../../../components/cabecalho.js";
 
 
 export default function Index(){
