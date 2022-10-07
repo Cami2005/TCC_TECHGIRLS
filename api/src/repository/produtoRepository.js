@@ -110,27 +110,11 @@ from tb_produto
 	inner join tb_tamanho       on tb_tamanho.id_produto = tb_produto.id_produto
 	inner join tb_imagem        on tb_imagem.id_produto = tb_produto.id_produto
 where img_destaque = true
-    `;
+`;
 
 const [linhas] = await con.query (comando);
 return linhas;
 
-}
-
-export async function alterarProduto (id, produto) {
-	const comando = 
-            `UPDATE TB_PRODUTO
-			SET NM_PRODUTO      = ?,
-			    ID_TEMA        = ?,
-			    ID_CATEGORIA   = ?,
-			    VL_PRECO       = ?,
-			    DS_DESCRICAO   = ?,
-			    DS_DISPONIVEL  = ?
-			WHERE ID_PRODUTO = ?`
-
-const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-produto.id = id;
-return produto;
 }
 
 export async function removerProduto (id) {
@@ -243,7 +227,7 @@ export async function deletarProduto(idProduto) {
         return resp.affectedRows;
 }
 
-// ALTERAR PRODUTO
+// BUSCAR PRODUTO - ALTERAR
 
 export async function buscarProduto(id) {
     const comando=`
@@ -311,3 +295,46 @@ export async function buscarDestaque(id) {
     const [linhas] = await con.query(comando, [id]);
     return linhas[0];
 }
+
+// ALTERAR PRODUTO
+
+export async function alterarProduto(id, produto){
+    const comando = `
+        UPDATE TB_PRODUTO
+    SET 
+        NM_PRODUTO      = ?, 
+        ID_TEMA         = ?, 
+        ID_CATEGORIA    = ?, 
+        VL_PRECO        = ?, 
+        DS_DESCRICAO    = ?, 
+        DS_DISPONIVEL   = ?
+    WHERE ID_PRODUTO = ?
+    `;
+
+    const [registros] = await con.query(comando, [
+        produto.nome,
+        produto.tema,
+        produto.categoria,
+        produto.preco,
+        produto.descricao,
+        produto.disponivel,
+        id
+    ])
+    produto.id = id;
+    return produto;
+}
+
+
+export async function deletarImagemProduto(id, imagens){
+    const comando = `
+    delete from tb_imagem
+    where img_produto NOT IN (?)
+    and id_produto = ?
+    `;
+
+    const resp = await con.query(comando,[id, imagens]);
+    return resp.status
+}
+
+
+

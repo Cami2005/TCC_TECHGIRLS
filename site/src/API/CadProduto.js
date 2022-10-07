@@ -40,7 +40,7 @@ export async function CadastrarCor(produto, nome) {
 
 
 export async function CadastrarTamanho(produto, tamanho) {
-    const resposta= await api.post ('/produto/tamanho', {
+    const resposta= await api.post('/produto/tamanho', {
         produto: produto,
         descricao: tamanho
     })
@@ -107,9 +107,24 @@ export async function deletarProduto(id) {
     return resposta.data;
 }
 
-// alterar
+// buscar (alterar)
 
 export async function buscarProdutoPorId(id){
     const resp = await api.get(`/produto/${id}`);
     return resp.data;
 }
+
+// alterar
+
+export async function alterarProduto(id, nome, tema,categoria, preco, descricao, disponivel){
+    const r = await api.put(`/produto/${id}`, {
+        nome: nome,
+        tema: tema,
+        categoria: categoria,
+        preco: preco,
+        descricao: descricao,
+        disponivel: disponivel
+    });
+    return r.data;
+}
+        

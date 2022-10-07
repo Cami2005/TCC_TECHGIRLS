@@ -1,7 +1,10 @@
-import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, salvarDestaque,
-        listarProduto, alterarProduto, removerProduto, 
+import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
+        salvarDestaque, listarProduto, alterarProduto, removerProduto, 
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
-        deletarCor, deletarTamanho, deletarProduto, deletarImagem, buscarDestaque, buscarProduto, buscarCorProduto, buscarTamanhoProduto, buscarImagemProduto } from '../repository/produtoRepository.js';
+        deletarCor, deletarTamanho, deletarProduto, deletarImagem,
+         buscarDestaque, buscarProduto, buscarCorProduto, 
+         buscarTamanhoProduto, buscarImagemProduto, 
+         deletarImagemProduto } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -141,15 +144,31 @@ server.get('/produto', async (req,resp) => {
     }
 })
 
- server.post('/produto/:id', async (req,resp) => {
+ server.put('/produto/:id', async (req,resp) => {
 
 	try {
 		const { id } = req.params;
 		const produto = req.body;
 
+        // remover das tabelas antigas informações
+        await deletarCorProduto(id);
+        await deletarTamanhoProduto(id),
+        await deletarImagemProduto(id, imagens);
+
+        // alterando tabela principal
         const resposta = await alterarProduto(id, produto);
+
+        // inserindo novas cores
+        // for(let item in produto.cores){
+        //await inserirCor(id, item)
+        //}
+
+        // inserindo novos produtos
+        //for(let item in produto.tamanho){
+        //    await  inserirTamanho(id, tamanho)
+        //}
         
-            resp.send(resposta);
+        resp.send(resposta);
 
     } catch (err) { 
         resp.status(400).send({
@@ -158,12 +177,12 @@ server.get('/produto', async (req,resp) => {
     }
 })
 
-// nova função alterar
+// buscar produto (função alterar)
 
 server.get('/produto/:id', async (req, resp) => {
     try{
         const id = req.params.id;
-        
+
         const produto = await buscarProduto(id);
         const cor = await buscarCorProduto(id);
         const tamanho = await buscarTamanhoProduto(id);

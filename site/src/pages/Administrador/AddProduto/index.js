@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque, buscarProdutoPorId } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque, buscarProdutoPorId, alterarProduto } from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../../API/config.js";
@@ -12,6 +12,8 @@ export default function Index() {
 
 
 //VARIÁVEIS DE ESTADO
+
+
 
     const { id } = useParams();     
 
@@ -185,19 +187,7 @@ export default function Index() {
         console.log(b)
 
         setCor(a);
-        setTamanho(b)
-
-
-        console.log(
-            {
-                id: idProduto,
-                nome: nome,
-                descricao: descricao,
-                preco: preco,
-                disponivel: disponivel
-            }
-        )
-
+        setTamanho(b);
 
         if(r.imagens.length > 0){
             setImagem1(r.imagens[0]);
@@ -243,19 +233,70 @@ export default function Index() {
     }
 
     // inserindo produto + cores + tamanho + imagens
-    async function inserirProduto(){ 
+    async function salvar(){ 
         try {
-            // const precoProduto = Number(preco.replace(',', '.'));
-            const novoProduto = await CadastrarPoduto(nome, idTemas, idCategoria, descricao, preco, disponivel);
-            inserirCor(novoProduto.id);
-            inserirTamanho(novoProduto.id);
-            const dest = await CadastrarImgDestaque(novoProduto.id, destaque);
-            console.log(dest)
-            const imgs = await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
-            alert('tudo ok')
+                // const precoProduto = Number(preco.replace(',', '.'));
+                if(!destaque){
+                    throw new Error('Imagem destaque obrigatória!');
+                }
+                if(!nome){
+                    throw new Error('Nome não inserido!')
+                }
+                
+                if(!descricao){
+                    throw new Error('Descrição não inserida')
+                }
+                if(!idCategoria){
+                    throw new Error('Categoria não inserido!')
+                }
+                
+                if(!idTemas){
+                    throw new Error('Tema não inserido!')
+                }
+                if(!cor){
+                    throw new Error('Cor não inserida!')
+                }
+                if(!tamanho){
+                    throw new Error('Tamanho não inserido!')
+                }
+                if(!preco){
+                    throw new Error('Preço não inserido!')
+                }
+                
+                if(!disponivel
+                    ){
+                    throw new Error('Disponibilidade não inserida!')
+                }
+                
+                const novoProduto = await CadastrarPoduto(nome, idTemas, idCategoria, descricao, preco, disponivel);
+                console.log(novoProduto)
+                
+                const dest = await CadastrarImgDestaque(novoProduto.id, destaque);
+        
+                console.log(dest);
+
+                const imgs = await salvarImagens(novoProduto.id, imagem1, imagem2, imagem3, imagem4);
+                
+                console.log(imgs);
+                
+                await inserirTamanho(novoProduto.id);
+                await inserirCor(novoProduto.id);
+                alert('Produto inserido')
+
+
+            //else {
+              //  await alterarProduto(nome, idTemas, idCategoria, preco, descricao, disponivel);
+                //await inserirCor(id);
+               // await inserirTamanho(id);
+               // alert('Produto alterado')
+            // }
+
+            
+          
+
         }
         catch (err) {
-            alert({erro : err.message})
+            alert('erro: ' + err.message)
         }
     
 
@@ -423,7 +464,7 @@ export default function Index() {
 
                     </div>
 
-                    <button onClick={inserirProduto} className="button centralizar"> Adicionar </button>
+                    <button onClick={salvar} className="button centralizar"> Adicionar </button>
 
                 </div>
 
