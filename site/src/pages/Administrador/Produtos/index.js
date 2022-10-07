@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import  MenuAdmin from "../../../components/pagAdm";
 import BoxProduto from "../../../components/boxProduto";
 import "./index.scss"
@@ -8,6 +8,9 @@ import { buscarCategoria, buscarPorTema, deletarProduto, ProdutosListados } from
 import { toast } from "react-toastify";
 
 export default function Index(){
+
+    const navigate = useNavigate();
+
     const[produto, setProduto] = useState([]);
 
     const[filtroTema, setFiltroTema]= useState('');
@@ -27,6 +30,10 @@ export default function Index(){
     async function ListarProdutos(){
         const resposta= await ProdutosListados();
         setProduto(resposta)
+    }
+
+    async function editar(id){
+        navigate(`/addProduto/${id}`);
     }
 
     async function DeletarProdutos(id) {
@@ -77,7 +84,7 @@ export default function Index(){
                             preco={item.preco}
                             nome={item.nome}
                             clickdelete={() => DeletarProdutos(item.id)}
-                            clickedit=""
+                            clickedit={() => editar(item.id)}
                         />
                    
                      )}
