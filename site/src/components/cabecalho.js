@@ -12,7 +12,7 @@ export default function Cabecalho(props){
     async function buscarNomeClick() {
         const resp = await buscarProdutosPorNome(busca);
         console.log(resp)
-        setProdutos([]);
+        setProdutos([resp]);
      }
 
      async function ListaProdutos(){
