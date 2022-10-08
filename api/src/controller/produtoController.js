@@ -4,7 +4,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
          buscarTamanhoProduto, buscarImagemProduto, 
-         deletarImagemProduto } from '../repository/produtoRepository.js';
+         } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
 import { Router } from 'express';
@@ -206,7 +206,7 @@ server.get('/produto/:id', async (req, resp) => {
     }
 })
 
-server.get('/produto/busca', async (req, resp) => {
+server.get('/produto', async (req, resp) => {
         try {
             const { nome } = req.query;
                 

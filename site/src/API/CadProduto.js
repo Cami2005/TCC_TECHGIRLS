@@ -63,7 +63,7 @@ export async function listarTemas() {
     return resp.data;
 }
 export async function buscarProdutosPorNome(nome) {
-    const resp = await api.get(`/produto/busca?nome=${nome}`)
+    const resp = await api.get(`/produto?nome=${nome}`)
     return resp.data;
 }
 
