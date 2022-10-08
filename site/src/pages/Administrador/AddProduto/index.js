@@ -220,14 +220,14 @@ export default function Index() {
 
         // inserindo tamanho
         async function inserirTamanho(id) {
-            for(let i=0; i<=tamanho.length; i++) {
+            for(let i=0; i<tamanho.length; i++) {
             let x = await CadastrarTamanho(id, tamanho[i])
             }
         }
 
     // inserindo cores
     async function inserirCor(id) {
-        for(let i=0; i<=cor.length; i++) {
+        for(let i=0; i<cor.length; i++) {
         let x = await CadastrarCor(id, cor[i])
         }
     }
@@ -280,6 +280,7 @@ export default function Index() {
                 console.log(imgs);
                 
                 await inserirTamanho(novoProduto.id);
+                delay(100);
                 await inserirCor(novoProduto.id);
                 alert('Produto inserido')
 

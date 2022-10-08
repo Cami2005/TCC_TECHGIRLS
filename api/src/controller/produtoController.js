@@ -206,7 +206,7 @@ server.get('/produto/:id', async (req, resp) => {
     }
 })
 
-server.get('/produto', async (req, resp) => {
+server.get('/produto/nome', async (req, resp) => {
         try {
             const { nome } = req.query;
                 
