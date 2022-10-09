@@ -13,12 +13,6 @@ export default function Index() {
 
 //VARIÁVEIS DE ESTADO
 
-
-
-    const { id } = useParams();     
-
-    const [idProduto, setIdProduto] = useState();
-
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState(0.0);
@@ -67,16 +61,6 @@ export default function Index() {
     async function escolherDestaque(){
         document.getElementById('imagemDestaque').click();
     }
-
-
-    // função adicionar novo produto completa
-    // async function inserir(){
-    //    Adicionar();
-    //    adicionarCategoria()
-    //    adicionarCategoria()
-    //    adicionarImagem()
-    //    alterarDestaque()
-    // }
 
     //cor
     const [cor, setCor] = useState([]);
@@ -135,11 +119,6 @@ export default function Index() {
         Limpar();
     }, [])
 
-
-
-  
-
-    // função adicinar cores
  
     function buscarNomeCategoria(id) {
         const cat = categorias.find(item => item.id == id);
@@ -166,51 +145,9 @@ export default function Index() {
         setCategorias(r);
     }
 
-    async function carregarProduto(){
-        console.log('hm')
-        if (!id) return;
-
-        console.log('chamada')
-
-        const r= await buscarProdutoPorId(id);
-
-        setIdProduto(id);
-        setNome(r.info.nome);
-        setDescricao(r.info.descricao);
-        setPreco(r.info.preco);
-        setDisponivel(r.info.disponivel);
-
-        const a = r.cores;
-        const b = r.tamanho;
-
-        console.log(a)
-        console.log(b)
-
-        setCor(a);
-        setTamanho(b);
-
-        if(r.imagens.length > 0){
-            setImagem1(r.imagens[0]);
-        }
-        if(r.imagens.length > 1){
-            setImagem2(r.imagens[1]);
-        }
-        if(r.imagens.length > 2){
-            setImagem3(r.imagens[3]);
-        }
-        if(r.imagens.length > 3){
-            setImagem4(r.imagens[3]);
-        }
-
-        setDestaque(r.destaque.url);
-        
-    }
-
-
     useEffect(() => {
         carregarCategorias();
         carregarTemas();
-        carregarProduto();
     }, [])
 
     useEffect(() => {
@@ -283,17 +220,6 @@ export default function Index() {
                 delay(100);
                 await inserirCor(novoProduto.id);
                 alert('Produto inserido')
-
-
-            //else {
-              //  await alterarProduto(nome, idTemas, idCategoria, preco, descricao, disponivel);
-                //await inserirCor(id);
-               // await inserirTamanho(id);
-               // alert('Produto alterado')
-            // }
-
-            
-          
 
         }
         catch (err) {
