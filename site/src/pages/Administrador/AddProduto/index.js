@@ -3,21 +3,14 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque, buscarProdutoPorId, alterarProduto } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque} from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
-import { useParams } from "react-router-dom";
 import { API_URL } from "../../../API/config.js";
 
 export default function Index() {
 
 
 //VARIÁVEIS DE ESTADO
-
-
-
-    const { id } = useParams();     
-
-    const [idProduto, setIdProduto] = useState();
 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -68,16 +61,6 @@ export default function Index() {
         document.getElementById('imagemDestaque').click();
     }
 
-
-    // função adicionar novo produto completa
-    // async function inserir(){
-    //    Adicionar();
-    //    adicionarCategoria()
-    //    adicionarCategoria()
-    //    adicionarImagem()
-    //    alterarDestaque()
-    // }
-
     //cor
     const [cor, setCor] = useState([]);
     const [novaCor, setNovaCor] = useState('');
@@ -85,6 +68,7 @@ export default function Index() {
     //tamanho
     const [tamanho, setTamanho] = useState([]);
     const [novoTamanho, setNovoTamanho] = useState('');
+
 
     //funções cor e tamanho (renderização)
 
@@ -135,11 +119,6 @@ export default function Index() {
         Limpar();
     }, [])
 
-
-
-  
-
-    // função adicinar cores
  
     function buscarNomeCategoria(id) {
         const cat = categorias.find(item => item.id == id);
@@ -166,64 +145,13 @@ export default function Index() {
         setCategorias(r);
     }
 
-    async function carregarProduto(){
-        console.log('hm')
-        if (!id) return;
-
-        console.log('chamada')
-
-        const r= await buscarProdutoPorId(id);
-
-        setIdProduto(id);
-        setNome(r.info.nome);
-        setDescricao(r.info.descricao);
-        setPreco(r.info.preco);
-        setDisponivel(r.info.disponivel);
-
-        const a = r.cores;
-        const b = r.tamanho;
-
-        console.log(a)
-        console.log(b)
-
-        setCor(a);
-        setTamanho(b);
-
-        if(r.imagens.length > 0){
-            setImagem1(r.imagens[0]);
+    // inserindo tamanho
+    async function inserirTamanho(id) {
+        for(let i=0; i<tamanho.length; i++) {
+        let x = await CadastrarTamanho(id, tamanho[i])
         }
-        if(r.imagens.length > 1){
-            setImagem2(r.imagens[1]);
-        }
-        if(r.imagens.length > 2){
-            setImagem3(r.imagens[3]);
-        }
-        if(r.imagens.length > 3){
-            setImagem4(r.imagens[3]);
-        }
-
-        setDestaque(r.destaque.url);
-        
     }
 
-
-    useEffect(() => {
-        carregarCategorias();
-        carregarTemas();
-        carregarProduto();
-    }, [])
-
-    useEffect(() => {
-        console.log('tema: ' + idTemas);
-        console.log('categoria: ' + idCategoria)
-    }, [idCategoria, idTemas])
-
-        // inserindo tamanho
-        async function inserirTamanho(id) {
-            for(let i=0; i<tamanho.length; i++) {
-            let x = await CadastrarTamanho(id, tamanho[i])
-            }
-        }
 
     // inserindo cores
     async function inserirCor(id) {
@@ -284,26 +212,17 @@ export default function Index() {
                 await inserirCor(novoProduto.id);
                 alert('Produto inserido')
 
-
-            //else {
-              //  await alterarProduto(nome, idTemas, idCategoria, preco, descricao, disponivel);
-                //await inserirCor(id);
-               // await inserirTamanho(id);
-               // alert('Produto alterado')
-            // }
-
-            
-          
-
         }
         catch (err) {
             alert('erro: ' + err.message)
         }
     
-
-    // ALTERAR PRODUTO
-
-    }        
+    }      
+    
+    useEffect(() => {
+        carregarCategorias();
+        carregarTemas();
+    }, [])
 
     return (
         <main className="inserirProduto">
