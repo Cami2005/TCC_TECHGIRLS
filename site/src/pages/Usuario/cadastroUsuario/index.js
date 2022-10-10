@@ -19,10 +19,9 @@ export default function Index() {
     async function cadastrarUsuario() {
         const a = await UsuarioCadastro(nome, telefone, cpf, rg, datadenasc);
         console.log(a);
-        alert('User cadastrado' + ' ' + a.id);
+        alert('User cadastrado');
         if (senha == confSenha) {
         const b = await InserirUsuarioLogin(a.id, email, senha);
-        alert('login ok');
         toast.dark('up')
         }
     }

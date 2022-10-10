@@ -144,38 +144,38 @@ server.get('/produto', async (req,resp) => {
     }
 })
 
- //server.put('/produto/:id', async (req,resp) => {
+ server.put('/admin/produto/:id', async (req,resp) => {
 
-	//try {
-	//	const { id } = req.params;
-	//	const produto = req.body;
+	try {
+		const { id } = req.params;
+		const produto = req.body;
 
         // remover das tabelas antigas informações
-      //  await deletarCorProduto(id);
-        //await deletarTamanhoProduto(id),
-        //await deletarImagemProduto(id, imagens);
+        await deletarCor(id);
+        await deletarTamanho(id),
+        await deletarImagem(id, imagens);
 
         // alterando tabela principal
-        //const resposta = await alterarProduto(id, produto);
+        const resposta = await alterarProduto(id, produto);
 
         // inserindo novas cores
-        // for(let item in produto.cores){
-        //await inserirCor(id, item)
-        //}
+         for(let item in produto.cores){
+        await inserirCor(id, item)
+        }
 
         // inserindo novos produtos
-        //for(let item in produto.tamanho){
-        //    await  inserirTamanho(id, tamanho)
-        //}
+        for(let item in produto.tamanho){
+            await  inserirTamanho(id, item)
+        }
         
-  //      resp.send(resposta);
+        resp.send(resposta);
 
-    //} catch (err) { 
-      //  resp.status(400).send({
-	    //    erro: err.message 
-        //})
-    //}
-//})
+    } catch (err) { 
+        resp.status(400).send({
+	        erro: err.message 
+        })
+    }
+})
 
 // buscar produto (função alterar)
 
@@ -188,6 +188,8 @@ server.get('/produto/:id', async (req, resp) => {
         const tamanho = await buscarTamanhoProduto(id);
         const imagens = await buscarImagemProduto(id);
         const destaque = await buscarDestaque(id);
+
+        console.log(produto)
 
         resp.send(
             {

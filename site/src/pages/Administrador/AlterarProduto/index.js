@@ -1,14 +1,20 @@
-import { listarCategorias, listarTemas } from "../../../API/CadProduto";
+import { listarCategorias, listarTemas, buscarProdutoPorId } from "../../../API/CadProduto";
 import MenuAdmin from "../../../components/pagAdm";
 import DeletarItem from "../../../components/delete";
 import { API_URL } from "../../../API/config.js";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 
 export default function Index() {
 
     // VARIÁVEIS DE ESTADO
+
+    const { id } = useParams();
+
+    const [produto, setProduto] = useState([]);
+    const [idProduto, setIdProduto] = useState(id);
 
     
     const [nome, setNome] = useState('');
@@ -121,14 +127,50 @@ export default function Index() {
 
 
     async function carregarCategorias() {
-
         const r = await listarCategorias();
         setCategorias(r);
     }
 
+    async function carregarProduto(){
+        console.log('hm')
+        if (!id) return;
+        console.log('chamada')
+        const r= await buscarProdutoPorId(id);
+        setIdProduto(id);
+        setNome(r.info.nome);
+        setDescricao(r.info.descricao);
+        setPreco(r.info.preco);
+        setDisponivel(r.info.disponivel);
+        const a = r.cores;
+        const b = r.tamanho;
+        console.log(a)
+        console.log(b)
+
+        setCor(a);
+        setTamanho(b);
+
+        if(r.imagens.length > 0){
+            setImagem1(r.imagens[0]);
+        }
+        if(r.imagens.length > 1){
+            setImagem2(r.imagens[1]);
+        }
+        if(r.imagens.length > 2){
+            setImagem3(r.imagens[3]);
+        }
+        if(r.imagens.length > 3){
+            setImagem4(r.imagens[3]);
+        }
+        setDestaque(r.destaque.url);
+        
+    }
+
+
     useEffect(() => {
         carregarCategorias();
         carregarTemas();
+        carregarProduto();
+        console.log(id);
     }, [])
 
 
