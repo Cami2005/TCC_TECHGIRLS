@@ -3,7 +3,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-         buscarTamanhoProduto, buscarImagemProduto, 
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -144,19 +144,19 @@ server.get('/produto', async (req,resp) => {
     }
 })
 
- server.put('/produto/:id', async (req,resp) => {
+ //server.put('/produto/:id', async (req,resp) => {
 
-	try {
-		const { id } = req.params;
-		const produto = req.body;
+	//try {
+	//	const { id } = req.params;
+	//	const produto = req.body;
 
         // remover das tabelas antigas informações
-        await deletarCorProduto(id);
-        await deletarTamanhoProduto(id),
-        await deletarImagemProduto(id, imagens);
+      //  await deletarCorProduto(id);
+        //await deletarTamanhoProduto(id),
+        //await deletarImagemProduto(id, imagens);
 
         // alterando tabela principal
-        const resposta = await alterarProduto(id, produto);
+        //const resposta = await alterarProduto(id, produto);
 
         // inserindo novas cores
         // for(let item in produto.cores){
@@ -168,14 +168,14 @@ server.get('/produto', async (req,resp) => {
         //    await  inserirTamanho(id, tamanho)
         //}
         
-        resp.send(resposta);
+  //      resp.send(resposta);
 
-    } catch (err) { 
-        resp.status(400).send({
-	        erro: err.message 
-        })
-    }
-})
+    //} catch (err) { 
+      //  resp.status(400).send({
+	    //    erro: err.message 
+        //})
+    //}
+//})
 
 // buscar produto (função alterar)
 
@@ -337,5 +337,21 @@ server.delete('/produto/:id', async (req, resp) => {
         })
     }
 })
-        
+
+server.post('/resposta', async (req, resp) => {
+    try {
+        const novaResposta = req.body;
+        const resposta = await Resposta(novaResposta);
+
+        if(!resposta.resposta){
+            throw new Error('Resposta não registrada')
+        }
+        resp.send(resposta);
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
 export default server;

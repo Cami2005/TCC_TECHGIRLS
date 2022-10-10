@@ -114,21 +114,21 @@ from tb_produto
 
 }
 
-export async function alterarProduto (id, produto) {
-	const comando = 
-            `UPDATE TB_PRODUTO
-			SET NM_PRODUTO      = ?,
-			    ID_TEMA        = ?,
-			    ID_CATEGORIA   = ?,
-			    VL_PRECO       = ?,
-			    DS_DESCRICAO   = ?,
-			    DS_DISPONIVEL  = ?
-			WHERE ID_PRODUTO = ?`
+//export async function alterarProduto (id, produto) {
+//	const comando = 
+  //          `UPDATE TB_PRODUTO
+	//		SET NM_PRODUTO      = ?,
+	//		    ID_TEMA        = ?,
+	//		    ID_CATEGORIA   = ?,
+	//		    VL_PRECO       = ?,
+	//		    DS_DESCRICAO   = ?,
+	//		    DS_DISPONIVEL  = ?
+	//		WHERE ID_PRODUTO = ?`
 
-const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-produto.id = id;
-return produto;
-}
+//const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
+//produto.id = id;
+//return produto;
+//}
 
 export async function removerProduto (id) {
 	const comando = `DELETE FROM TB_PRODUTO 
@@ -308,3 +308,17 @@ export async function buscarDestaque(id) {
     const [linhas] = await con.query(comando, [id]);
     return linhas[0];
 }
+
+export async function Resposta(resposta){
+    const comando = `
+    INSERT INTO TB_RESPOSTA(ID_PRODUTO_AVALIACAO, DS_RESPOSTA)
+VALUES(?, ?);
+`;
+    const[resp] = await con.query(comando, [
+        resposta.avaliacao,
+        resposta.resposta
+    ])   
+    resposta.id = resp.insertId;
+    return resposta;
+}
+

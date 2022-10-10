@@ -36,6 +36,9 @@ export default function Cabecalho(props){
                     <input className='busca' placeholder='encontre seu produto aqui' type='text' value={busca} onChange={e=> setBusca(e.target.value)} />
                     <button onClick={buscarNomeClick}>pesquisar</button>
 
+                        
+
+
                     </div>
                     
                     <img className='icons' src={props.fav}></img>
