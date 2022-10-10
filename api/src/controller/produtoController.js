@@ -3,7 +3,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, alterarProduto, removerProduto,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-         buscarTamanhoProduto, buscarImagemProduto, Resposta, 
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, alterarCor, alterarTamanho, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -148,32 +148,38 @@ server.get('/produto', async (req,resp) => {
  server.put('/admin/produto/:id', async (req,resp) => {
 
 	try {
-		const id = req.params.id;
+		const { id } = req.params;
 		const produto = req.body;
 
         // alterando tabela principal tb_produto
-        const resposta = await alterarProduto(id, produto);
+        const resposta = await alterarProduto(id, produto.info);
 
+        console.log('ok')
 
-        /* 
+        
          // remover antigas informações  das tabelas
-         await deletarCor(id);
-         await deletarTamanho(id);
+         const a = await deletarCor(id);
+         console.log(a)
+         const b = await deletarTamanho(id);
+         console.log(b);
+         console.log('delete ok')
 
+
+         console.log(produto.cores)
 
         // inserindo novas cores
-         for(let item of produto.cores){
-        await inserirCor(id, item)
+         for(let i=0; i<produto.cores.length; i++){
+        console.log('inserindo')
+        const c = await alterarCor(id, produto.cores[i]);
+        console.log('inserido ' + produto.cores[i])
         }
 
         // inserindo novos tamanhos
-        for(let item of produto.tamanho){
-            await  inserirTamanho(id, item)
+        for(let i=0; i<produto.tamanho.length; i++){
+            await  alterarTamanho(id, produto.tamanho[i])
         }
         
-        */
-
-        resp.send(produto);
+        resp.send(resposta);
 
 
     } catch (err) { 

@@ -159,7 +159,7 @@ export default function Index() {
         try{
             console.log('chamada')
             console.log(idTemas)
-            const r = await alterarProduto(id, nome, idTemas, idCategoria, preco, descricao, disponivel);
+            const r = await alterarProduto(id, nome, preco, idTemas, idCategoria, descricao, disponivel, cor, tamanho);
             console.log(r);
             console.log('ok')
             // await salvarImagens(idProduto, imagem1, imagem2, imagem3, imagem4)

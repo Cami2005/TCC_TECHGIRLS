@@ -116,16 +116,24 @@ export async function buscarProdutoPorId(id){
 
 // alterar
 
-export async function alterarProduto(id, nome, tema, categoria, preco, descricao, disponivel){
+export async function alterarProduto(id, nome, preco, tema, categoria,  descricao, disponivel, cores, tamanho){
     
     const r = await api.put(`/admin/produto/${id}`, {
-        nome: nome,
-        tema: Number(tema),
-        categoria: categoria,
-        preco: preco,
-        descricao: descricao,
-        disponivel: disponivel
-    });
+            info : {
+            nome: nome,
+            preco: preco,
+            categoria: categoria,
+            tema: tema,
+            descricao: descricao,
+            disponivel: disponivel
+            },
+            
+            cores: cores,
+        
+            tamanho: tamanho
+
+          }
+    );
     return r.data;
 }
         

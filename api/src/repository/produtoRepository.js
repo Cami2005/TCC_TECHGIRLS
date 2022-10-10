@@ -325,6 +325,24 @@ export async function buscarDestaque(id) {
     return linhas[0];
 }
 
+
+export async function alterarCor(id, cor) {
+    const comando = `
+    INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
+    VALUES(?, ?) `;
+    const resp = await con.query(comando, [id, cor])
+    return resp.affectedRows;
+}
+
+export async function alterarTamanho(id, tamanho) {
+    const comando = `
+    INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?) `;
+    const [resp] = await con.query(comando, [id, tamanho]);
+    return resp.affectedRows;
+}
+
+
 //
 
 export async function Resposta(resposta){
