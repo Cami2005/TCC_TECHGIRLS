@@ -126,8 +126,8 @@ export async function alterarProduto (id, produto) {
 			WHERE ID_PRODUTO = ?`
 
 const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-produto.id = id;
-return produto;
+resposta.id = id;
+return resposta;
 }
 
 export async function removerProduto (id) {
@@ -240,6 +240,18 @@ export async function deletarProduto(idProduto) {
         return resp.affectedRows;
 }
 
+export async function deletarImagensDiferentes(idProduto, imagens) {
+    const comando =`
+        delete from tb_imagem 
+        where id_produto = ?
+        and img_destaque = false
+        and img_produto NOT IN (?)
+    `;
+
+    const [resp] = await con.query(comando, [idProduto]);
+    return resp.affectedRows;
+}
+
 // ALTERAR PRODUTO
 
 export async function buscarProduto(id) {
@@ -310,6 +322,8 @@ export async function buscarDestaque(id) {
     const [linhas] = await con.query(comando, [id]);
     return linhas[0];
 }
+
+//
 
 export async function Resposta(resposta){
     const comando = `

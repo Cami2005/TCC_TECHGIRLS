@@ -1,9 +1,8 @@
-import { listarCategorias, listarTemas, buscarProdutoPorId } from "../../../API/CadProduto";
+import { listarCategorias, listarTemas, buscarProdutoPorId, alterarProduto } from "../../../API/CadProduto";
 import MenuAdmin from "../../../components/pagAdm";
 import DeletarItem from "../../../components/delete";
 import { API_URL } from "../../../API/config.js";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 
@@ -12,11 +11,7 @@ export default function Index() {
     // VARIÁVEIS DE ESTADO
 
     const { id } = useParams();
-
-    const [produto, setProduto] = useState([]);
-    const [idProduto, setIdProduto] = useState(id);
-
-    
+ 
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState(0.0);
@@ -100,12 +95,6 @@ export default function Index() {
             return URL.createObjectURL(imagem)
         }
     }
-
-
-    useEffect(() => {
-        Limpar();
-    }, [])
-
  
     function buscarNomeCategoria(id) {
         const cat = categorias.find(item => item.id == id);
@@ -132,11 +121,10 @@ export default function Index() {
     }
 
     async function carregarProduto(){
-        console.log('hm')
-        if (!id) return;
-        console.log('chamada')
+        if (!id) {
+            throw new Error('Produto não encontrado')
+        }
         const r= await buscarProdutoPorId(id);
-        setIdProduto(id);
         setIdCategoria(r.info.categoria);
         setIdTemas(r.info.tema);
         setNome(r.info.nome);
@@ -165,14 +153,36 @@ export default function Index() {
         }
         setDestaque(r.destaque.url);
         
+    } 
+
+    async function Alterar(){
+        try{
+            console.log('chamada')
+            console.log(idTemas)
+            const r = await alterarProduto(id, nome, idTemas, idCategoria, preco, descricao, disponivel);
+            console.log(r);
+            console.log('ok')
+            // await salvarImagens(idProduto, imagem1, imagem2, imagem3, imagem4)
+            alert('ok');
+        }
+        catch(err) {
+
+        }
     }
+
+
+// USEEFFECTS
+    
+
+    useEffect(() => {
+        Limpar();
+    }, [])
 
 
     useEffect(() => {
         carregarCategorias();
         carregarTemas();
         carregarProduto();
-        console.log(id);
     }, [])
 
 
@@ -336,7 +346,7 @@ export default function Index() {
 
             </div>
 
-            <button className="button centralizar"> Adicionar </button>
+            <button onClick={Alterar} className="button centralizar"> Salvar </button>
 
         </div>
         

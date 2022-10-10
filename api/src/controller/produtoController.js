@@ -143,32 +143,36 @@ server.get('/produto', async (req,resp) => {
         })
     }
 })
+// ALTERAR (SEM IMAGENS)
 
  server.put('/admin/produto/:id', async (req,resp) => {
 
 	try {
-		const { id } = req.params;
+		const id = req.params.id;
 		const produto = req.body;
 
-        // remover das tabelas antigas informações
-        await deletarCor(id);
-        await deletarTamanho(id),
-        await deletarImagem(id, imagens);
-
-        // alterando tabela principal
+        // alterando tabela principal tb_produto
         const resposta = await alterarProduto(id, produto);
 
+        console.log(ok)
+
+         // remover antigas informações  das tabelas
+         await deletarCor(id);
+         await deletarTamanho(id);
+
+
         // inserindo novas cores
-         for(let item in produto.cores){
+         for(let item of produto.cores){
         await inserirCor(id, item)
         }
 
-        // inserindo novos produtos
-        for(let item in produto.tamanho){
+        // inserindo novos tamanhos
+        for(let item of produto.tamanho){
             await  inserirTamanho(id, item)
         }
         
         resp.send(resposta);
+
 
     } catch (err) { 
         resp.status(400).send({
@@ -188,8 +192,6 @@ server.get('/produto/:id', async (req, resp) => {
         const tamanho = await buscarTamanhoProduto(id);
         const imagens = await buscarImagemProduto(id);
         const destaque = await buscarDestaque(id);
-
-        console.log(produto)
 
         resp.send(
             {
