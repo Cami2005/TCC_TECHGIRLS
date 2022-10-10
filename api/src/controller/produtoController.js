@@ -1,5 +1,5 @@
 import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
-        salvarDestaque, listarProduto, alterarProduto, removerProduto, 
+        salvarDestaque, listarProduto,  
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
