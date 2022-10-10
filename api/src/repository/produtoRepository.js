@@ -247,6 +247,8 @@ export async function buscarProduto(id) {
         select 
         nm_produto      as nome,
         vl_preco        as preco,
+        id_categoria    as categoria,
+        id_tema         as tema,
         ds_descricao    as descricao,
         ds_disponivel   as disponivel
         from tb_produto
