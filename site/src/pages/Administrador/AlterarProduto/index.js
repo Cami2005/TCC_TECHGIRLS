@@ -137,6 +137,8 @@ export default function Index() {
         console.log('chamada')
         const r= await buscarProdutoPorId(id);
         setIdProduto(id);
+        setIdCategoria(r.info.categoria);
+        setIdTemas(r.info.tema);
         setNome(r.info.nome);
         setDescricao(r.info.descricao);
         setPreco(r.info.preco);
