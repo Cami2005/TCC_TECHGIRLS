@@ -3,9 +3,8 @@ import { toast } from 'react-toastify';
 import "./index.scss";
 import "../../../common/common.scss"
 import {  useEffect, useState } from "react";
-import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque, buscarProdutoPorId, alterarProduto } from '../../../API/CadProduto.js';
+import {  CadastrarCor, CadastrarPoduto, CadastrarTamanho, listarCategorias, listarTemas, salvarImagens, CadastrarImgDestaque} from '../../../API/CadProduto.js';
 import DeletarItem from "../../../components/delete.js";
-import { useParams } from "react-router-dom";
 import { API_URL } from "../../../API/config.js";
 
 export default function Index() {
@@ -69,6 +68,7 @@ export default function Index() {
     //tamanho
     const [tamanho, setTamanho] = useState([]);
     const [novoTamanho, setNovoTamanho] = useState('');
+
 
     //funções cor e tamanho (renderização)
 
@@ -145,22 +145,13 @@ export default function Index() {
         setCategorias(r);
     }
 
-    useEffect(() => {
-        carregarCategorias();
-        carregarTemas();
-    }, [])
-
-    useEffect(() => {
-        console.log('tema: ' + idTemas);
-        console.log('categoria: ' + idCategoria)
-    }, [idCategoria, idTemas])
-
-        // inserindo tamanho
-        async function inserirTamanho(id) {
-            for(let i=0; i<tamanho.length; i++) {
-            let x = await CadastrarTamanho(id, tamanho[i])
-            }
+    // inserindo tamanho
+    async function inserirTamanho(id) {
+        for(let i=0; i<tamanho.length; i++) {
+        let x = await CadastrarTamanho(id, tamanho[i])
         }
+    }
+
 
     // inserindo cores
     async function inserirCor(id) {
@@ -226,10 +217,12 @@ export default function Index() {
             alert('erro: ' + err.message)
         }
     
-
-    // ALTERAR PRODUTO
-
-    }        
+    }      
+    
+    useEffect(() => {
+        carregarCategorias();
+        carregarTemas();
+    }, [])
 
     return (
         <main className="inserirProduto">

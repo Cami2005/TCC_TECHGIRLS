@@ -59,7 +59,7 @@ export default function Index(){
             <div className="fundo">
 
                 <div className="espacamento">
-                    <Link className="edit" to='/AddProduto'>Novo Produto</Link>
+                    <Link className="edit" to='/admin/produto'>Novo Produto</Link>
                 </div>
                 <div>
                     <input type='text' placeholder="digite o tema" value={filtroTema} onChange={e=> setFiltroTema(e.target.value)}></input>
