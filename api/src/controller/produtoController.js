@@ -154,8 +154,8 @@ server.get('/produto', async (req,resp) => {
         // alterando tabela principal tb_produto
         const resposta = await alterarProduto(id, produto);
 
-        console.log(ok)
 
+        /* 
          // remover antigas informações  das tabelas
          await deletarCor(id);
          await deletarTamanho(id);
@@ -171,7 +171,9 @@ server.get('/produto', async (req,resp) => {
             await  inserirTamanho(id, item)
         }
         
-        resp.send(resposta);
+        */
+
+        resp.send(produto);
 
 
     } catch (err) { 

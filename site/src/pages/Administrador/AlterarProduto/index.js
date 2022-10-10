@@ -216,7 +216,7 @@ export default function Index() {
 
                         <div className="select-tamanho">
                             <label> Categoria:</label>
-                            <select className="select" value={idCategoria} onChange={e => setIdCategoria(e.target.value)}>
+                            <select className="select" value={idCategoria} onChange={e => setIdCategoria(Number(e.target.value))}>
                                 <option> Vestimenta </option>
 
                                 {categorias.map(item =>

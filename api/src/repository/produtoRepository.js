@@ -116,14 +116,16 @@ from tb_produto
 
 export async function alterarProduto (id, produto) {
 	const comando = 
-            `UPDATE TB_PRODUTO
-			SET NM_PRODUTO      = ?,
+            `UPDATE TB_PRODUTO 
+			SET NM_PRODUTO     = ?,
 			    ID_TEMA        = ?,
 			    ID_CATEGORIA   = ?,
 			    VL_PRECO       = ?,
 			    DS_DESCRICAO   = ?,
 			    DS_DISPONIVEL  = ?
-			WHERE ID_PRODUTO = ?`
+			WHERE 
+                ID_PRODUTO     = ?
+            `;
 
 const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
 resposta.id = id;
