@@ -1,6 +1,6 @@
 import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
-        salvarDestaque, listarProduto, alterarProduto, removerProduto, 
-        buscarPorNome, buscarPorCategoria, buscarPorTema, 
+        salvarDestaque, listarProduto,  
+        buscarPorNome, buscarPorCategoria, buscarPorTema, alterarProduto, removerProduto,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
          buscarTamanhoProduto, buscarImagemProduto, Resposta, 
