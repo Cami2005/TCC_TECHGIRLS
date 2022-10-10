@@ -290,12 +290,10 @@ export default function Index() {
                                     <button onClick={arrayCor} className="button-ok"> OK </button>
                                     
                                    {cor.map( item => 
-                                        <div className="itemzinho">
                                             <DeletarItem  
                                             key={item}
                                             it={item}
                                             deletarit={Remover}  />
-                                        </div>
                                     )}
                                   
                                 </div>
@@ -311,12 +309,10 @@ export default function Index() {
                                     <button onClick={arrayTamanho} className="button-ok"> OK </button>
 
                                     {tamanho.map( item => 
-                                        <div className="itemzinho" >
                                             <DeletarItem  
                                             key={item}
                                             it={item}
                                             deletarit={Remover}  />
-                                        </div>
                                     )}
 
                                 </div>

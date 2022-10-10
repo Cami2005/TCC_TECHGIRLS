@@ -157,11 +157,8 @@ export default function Index() {
 
     async function Alterar(){
         try{
-            console.log('chamada')
             console.log(idTemas)
             const r = await alterarProduto(id, nome, preco, idTemas, idCategoria, descricao, disponivel, cor, tamanho);
-            console.log(r);
-            console.log('ok')
             // await salvarImagens(idProduto, imagem1, imagem2, imagem3, imagem4)
             alert('ok');
         }
@@ -252,12 +249,10 @@ export default function Index() {
                             <button onClick={arrayCor} className="button-ok"> OK </button>
                             
                            {cor.map( item => 
-                                <div className="itemzinho">
                                     <DeletarItem  
                                     key={item}
                                     it={item}
                                     deletarit={Remover}  />
-                                </div>
                             )}
                           
                         </div>
@@ -273,12 +268,10 @@ export default function Index() {
                             <button onClick={arrayTamanho} className="button-ok"> OK </button>
 
                             {tamanho.map( item => 
-                                <div className="itemzinho" >
                                     <DeletarItem  
                                     key={item}
                                     it={item}
                                     deletarit={Remover}  />
-                                </div>
                             )}
 
                         </div>

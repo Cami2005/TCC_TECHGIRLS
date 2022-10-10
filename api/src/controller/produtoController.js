@@ -41,7 +41,7 @@ server.post('/produto', async (req,resp) => {
         if(produtoInserido.disponivel == undefined) {
             throw new Error('Disponibilidade não registrada')
         }
-        console.log(produtoInserido)
+
         resp.send(produtoInserido);
     } 
     catch (err) {
@@ -59,8 +59,6 @@ server.put('/produto/destaque/:id', upload.single("img"), async (req, resp) => {
         const img = req.file.path;
 
         const resposta = await salvarDestaque(id, img);
-
-        console.log(resposta.affectedRows);
 
         resp.status(204).send();
     }
@@ -99,7 +97,6 @@ server.post('/produto/cor', async (req,resp) => {
             throw new Error('Nome da cor é obrigatório!');
 
         const corInserida = await inserirCor(novaCor);
-        console.log(novaCor);
 
         resp.send(corInserida);
     
@@ -120,7 +117,6 @@ server.post('/produto/tamanho', async (req,resp) => {
             throw new Error('Tamnaho do produto é obrigatório!');
 
         const tamanhoInserido = await inserirTamanho(novoTamanho);
-        console.log(novoTamanho);
 
         resp.send(tamanhoInserido);
     } catch (err) {
@@ -153,25 +149,14 @@ server.get('/produto', async (req,resp) => {
 
         // alterando tabela principal tb_produto
         const resposta = await alterarProduto(id, produto.info);
-
-        console.log('ok')
-
         
          // remover antigas informações  das tabelas
          const a = await deletarCor(id);
-         console.log(a)
          const b = await deletarTamanho(id);
-         console.log(b);
-         console.log('delete ok')
-
-
-         console.log(produto.cores)
 
         // inserindo novas cores
          for(let i=0; i<produto.cores.length; i++){
-        console.log('inserindo')
         const c = await alterarCor(id, produto.cores[i]);
-        console.log('inserido ' + produto.cores[i])
         }
 
         // inserindo novos tamanhos
@@ -179,6 +164,7 @@ server.get('/produto', async (req,resp) => {
             await  alterarTamanho(id, produto.tamanho[i])
         }
         
+        console.log('produto alterado')
         resp.send(resposta);
 
 
