@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { alterarDadosCartao, alterarEndereco, deletarCartao, deletarEndereco, inserirEndereco, inserirNovoCartao, inserirUsuario, listarEnderecos, listarTodosCartoes } from "../repository/usuarioRepository.js";
+import { alterarDadosCartao, alterarEndereco, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, listarTodosCartoes, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
 
 const server = Router(); 
 
@@ -189,4 +189,87 @@ server.delete('/cartao/:id', async (req, resp) => {
         })
     }
 })
+
+server.post('/usuario/avaliacao', async (req, resp) => {
+    try {
+        const novaAvaliacao = req.body;
+        const avaliacao = await Avaliacao(novaAvaliacao);
+        
+        if(!avaliacao.produto) {
+            throw new Error('produto não registrado');
+            };
+            if(!avaliacao.usuario) {
+                throw new Error('Usuario não registrado');
+            };
+            if(!avaliacao.nota) {
+                throw new Error('Nota não registrada');
+            };
+            if(!avaliacao.comentario) {
+                throw new Error('Comentario não registrado');
+            };
+            if(!avaliacao.data) {
+                throw new Error('data não registrado')
+            }
+
+        resp.send(avaliacao);
+
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+server.get('/usuario/avaliacao', async (req, resp) => {
+    try {
+        const resposta = await listarAvaliacoes();
+        resp.send(resposta)
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.menssage
+        })
+    }
+})
+
+server.post('/usuario/favorito', async (req, resp) => {
+    try {
+        const novoFavorito = req.body;
+        const favorito = await Favoritos(novoFavorito);
+        resp.send(favorito);
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+server.delete('/favorito/:id', async (req,resp) => {
+
+    try {
+        const { id } = req.params;
+        const resposta = await removerProdutoFavoritos(id);
+        
+        if (resposta !=1)
+            throw new Error('Favorito não pode ser removido');
+
+        resp.status(204).send();
+        
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
+}
+})
+
+server.get('/usuario/favorito', async (req, resp) => {
+    try {
+        const resposta= await listarFavoritos();
+        resp.send(resposta);
+    } catch (err) {
+        resp.status(404).send ({
+            erro: err.message
+        })
+    }
+})
+
 export default server;

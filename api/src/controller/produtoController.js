@@ -3,7 +3,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-         buscarTamanhoProduto, buscarImagemProduto, 
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -337,5 +337,21 @@ server.delete('/produto/:id', async (req, resp) => {
         })
     }
 })
-        
+
+server.post('/resposta', async (req, resp) => {
+    try {
+        const novaResposta = req.body;
+        const resposta = await Resposta(novaResposta);
+
+        if(!resposta.resposta){
+            throw new Error('Resposta não registrada')
+        }
+        resp.send(resposta);
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
 export default server;

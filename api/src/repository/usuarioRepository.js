@@ -155,3 +155,67 @@ export async function deletarCartao (id){
     const [resposta] = await con.query(comando, [id]);
     return resposta.affectedRows;
 }
+
+export async function Avaliacao(avaliacao){
+    const comando= `
+    insert into TB_PRODUTO_AVALIACAO(ID_PRODUTO, ID_USUARIO, VL_NOTA, DS_COMENTARIO, DT_AVALIACAO)
+VALUES (?, ?, ?, ?, ?);
+`;
+    const [resp] = await con.query(comando, [
+                avaliacao.produto,
+                avaliacao.usuario,
+                avaliacao.nota,
+                avaliacao.comentario,
+                avaliacao.data
+    ])
+    avaliacao.id = resp.insertId;
+    return avaliacao;
+}
+
+export async function listarAvaliacoes(){
+        const resposta = `
+        SELECT 
+	ID_PRODUTO_AVALIACAO		ID, 
+    ID_PRODUTO					PRODUTO, 
+    ID_USUARIO					USUARIO, 
+    VL_NOTA						NOTA,
+    DS_COMENTARIO				COMENTARIO,
+    DT_AVALIACAO				AVALIACAO
+FROM TB_PRODUTO_AVALIACAO`;
+        const [linhas] = await con.query(resposta);
+        return linhas;
+        
+}
+
+export async function Favoritos(favorito){
+    const comando= `
+    INSERT INTO TB_USUARIO_FAVORITO(ID_USUARIO, ID_PRODUTO)
+    VALUES(?, ?)`;
+    const [resp] = await con.query(comando, [
+        favorito.usuario,
+        favorito.produto
+    ])
+    favorito.id = resp.insertId;
+    return favorito;
+}
+
+
+export async function removerProdutoFavoritos (id) {
+	const comando = `DELETE FROM TB_USUARIO_FAVORITO 
+			 WHERE ID_USUARIO_FAVORITO = ?`;
+
+const [resp] = await con.query(comando, [id]);
+return resp.affectedRows;
+}
+
+export async function listarFavoritos(){
+    const comando= `
+    select 
+	ID_USUARIO_FAVORITO		ID, 
+    ID_USUARIO				USUARIO, 
+    ID_PRODUTO				PRODUTO
+from TB_USUARIO_FAVORITO;
+`
+    const [linhas] = await con.query(comando);
+    return linhas
+}

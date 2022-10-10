@@ -308,3 +308,17 @@ export async function buscarDestaque(id) {
     const [linhas] = await con.query(comando, [id]);
     return linhas[0];
 }
+
+export async function Resposta(resposta){
+    const comando = `
+    INSERT INTO TB_RESPOSTA(ID_PRODUTO_AVALIACAO, DS_RESPOSTA)
+VALUES(?, ?);
+`;
+    const[resp] = await con.query(comando, [
+        resposta.avaliacao,
+        resposta.resposta
+    ])   
+    resposta.id = resp.insertId;
+    return resposta;
+}
+
