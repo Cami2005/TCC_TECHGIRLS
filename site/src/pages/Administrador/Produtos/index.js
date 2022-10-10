@@ -33,7 +33,7 @@ export default function Index(){
     }
 
     async function editar(id){
-        navigate(`/addProduto/${id}`);
+        navigate(`/admin/produto/${id}`);
     }
 
     async function DeletarProdutos(id) {

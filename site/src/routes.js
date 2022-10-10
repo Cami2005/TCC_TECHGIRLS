@@ -23,7 +23,7 @@ export default function Index(){
                 <Route path='/usuario/cadastro' element={<CadastroUsuario />} />
                 <Route path='/usuario/produtos' element={<NossosProdutos/>} />
                 <Route path='/dadosPessoais' element={<DadosPessoais/>} />
-                <Route path='/admin/produto/alterar' element={<AlterarProduto/>}/>
+                <Route path='/admin/produto/:id' element={<AlterarProduto/>}/>
             </Routes>
         </BrowserRouter>
     )

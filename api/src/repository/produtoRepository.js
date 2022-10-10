@@ -114,21 +114,21 @@ from tb_produto
 
 }
 
-//export async function alterarProduto (id, produto) {
-//	const comando = 
-  //          `UPDATE TB_PRODUTO
-	//		SET NM_PRODUTO      = ?,
-	//		    ID_TEMA        = ?,
-	//		    ID_CATEGORIA   = ?,
-	//		    VL_PRECO       = ?,
-	//		    DS_DESCRICAO   = ?,
-	//		    DS_DISPONIVEL  = ?
-	//		WHERE ID_PRODUTO = ?`
+export async function alterarProduto (id, produto) {
+	const comando = 
+            `UPDATE TB_PRODUTO
+			SET NM_PRODUTO      = ?,
+			    ID_TEMA        = ?,
+			    ID_CATEGORIA   = ?,
+			    VL_PRECO       = ?,
+			    DS_DESCRICAO   = ?,
+			    DS_DISPONIVEL  = ?
+			WHERE ID_PRODUTO = ?`
 
-//const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-//produto.id = id;
-//return produto;
-//}
+const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
+produto.id = id;
+return produto;
+}
 
 export async function removerProduto (id) {
 	const comando = `DELETE FROM TB_PRODUTO 
