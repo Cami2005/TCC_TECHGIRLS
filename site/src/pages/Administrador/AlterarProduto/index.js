@@ -146,7 +146,7 @@ export default function Index() {
             setImagem2(r.imagens[1]);
         }
         if(r.imagens.length > 2){
-            setImagem3(r.imagens[3]);
+            setImagem3(r.imagens[2]);
         }
         if(r.imagens.length > 3){
             setImagem4(r.imagens[3]);
