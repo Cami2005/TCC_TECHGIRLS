@@ -219,3 +219,39 @@ from TB_USUARIO_FAVORITO;
     const [linhas] = await con.query(comando);
     return linhas
 }
+
+
+export async function Pedidos(pedido){
+    const comando = `
+    INSERT INTO TB_PEDIDO(ID_USUARIO, ID_USUARIO_ENDERECO, ID_CARTAO, VL_SUBTOTAL, DS_SITUACAO, DT_PEDIDO, VL_FRETE)
+    VALUES(?, ?, ?, ?, ?, ?, ?);
+    `
+    const [resp] = await con.query(comando, [
+                                pedido.usuario,
+                                pedido.endereco,
+                                pedido.cartao,
+                                pedido.subtotal,
+                                pedido.situacao,
+                                pedido.data,
+                                pedido.frete
+    ])
+    pedido.id = resp.insertId;
+    return pedido;
+}
+
+export async function ListarPedidos(){
+    const resposta =`
+    select
+	ID_PEDIDO				id,
+    ID_USUARIO				usuario,
+    ID_USUARIO_ENDERECO		endereco,
+    ID_CARTAO				cartao,
+    VL_SUBTOTAL				subtotal,
+    DS_SITUACAO				situacao,
+    DT_PEDIDO				pedido,
+    VL_FRETE				frete
+    FROM TB_PEDIDO`;
+
+    const [linhas] = await con.query(resposta);
+    return linhas
+}

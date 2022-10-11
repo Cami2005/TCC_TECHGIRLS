@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { alterarDadosCartao, alterarEndereco, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, listarTodosCartoes, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
+import { alterarDadosCartao, alterarEndereco, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, ListarPedidos, listarTodosCartoes, Pedidos, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
 
 const server = Router(); 
 
@@ -271,5 +271,40 @@ server.get('/usuario/favorito', async (req, resp) => {
         })
     }
 })
+
+server.post('/pedido' , async (req , resp) =>{
+    try {
+        const novoPedido= req.body;
+        
+        const pedido = await Pedidos(novoPedido);
+       
+        if(!pedido.usuario){
+            throw new Error('Usuário não registrado');
+        }
+        if(!pedido.endereco){
+            throw new Error('Endereço não registrado');
+        }
+        if(!pedido.cartao){
+            throw new Error('Cartão não registrado');
+        }
+        if(!pedido.subtotal){
+            throw new Error('SubTotal não registrado');
+        }
+        if(!pedido.situacao){
+            throw new Error('Situação não registrado');
+        }
+        if(!pedido.data){
+            throw new Error('Pedido não registrado');
+        }
+
+        resp.send(pedido);
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.menssage
+        })
+    }
+})
+
+
 
 export default server;

@@ -324,3 +324,30 @@ VALUES(?, ?);
     return resposta;
 }
 
+export async function ListarPedidos(){
+    const resposta =`
+    select
+	ID_PEDIDO				id,
+    ID_USUARIO				usuario,
+    ID_USUARIO_ENDERECO		endereco,
+    ID_CARTAO				cartao,
+    VL_SUBTOTAL				subtotal,
+    DS_SITUACAO				situacao,
+    DT_PEDIDO				pedido,
+    VL_FRETE				frete
+    FROM TB_PEDIDO`;
+
+    const [linhas] = await con.query(resposta);
+    return linhas
+}
+
+export async function AlterarSituacãoPedido(id, pedido){
+        const comando = `
+        UPDATE TB_PEDIDO
+        SET DS_SITUACAO     = ?
+        WHERE ID_PEDIDO`;
+        const [resp] = await con.query(comando, [pedido.situacao, id
+        ])
+        pedido.id = id;
+        return pedido;
+}

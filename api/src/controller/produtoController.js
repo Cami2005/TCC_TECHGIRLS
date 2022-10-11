@@ -3,7 +3,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, 
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-         buscarTamanhoProduto, buscarImagemProduto, Resposta, 
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, ListarPedidos, AlterarSituacãoPedido, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -355,5 +355,35 @@ server.post('/resposta', async (req, resp) => {
         })
     }
 })
+
+server.get('/pedido', async (req, resp) => {
+    try {
+        const pedido= await ListarPedidos();
+        resp.send(pedido);
+
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+        }
+})
+
+server.put('/pedido/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const pedido = req.body;
+
+        const resposta= await AlterarSituacãoPedido(id, pedido);
+
+        resp.send(resposta);
+
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+
 
 export default server;
