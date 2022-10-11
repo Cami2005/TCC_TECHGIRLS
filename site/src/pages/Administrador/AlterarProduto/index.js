@@ -1,4 +1,4 @@
-import { listarCategorias, listarTemas, buscarProdutoPorId, alterarProduto } from "../../../API/CadProduto";
+import { listarCategorias, listarTemas, buscarProdutoPorId, alterarProduto, salvarImagens, alterarImagens } from "../../../API/CadProduto";
 import MenuAdmin from "../../../components/pagAdm";
 import DeletarItem from "../../../components/delete";
 import { API_URL } from "../../../API/config.js";
@@ -159,7 +159,9 @@ export default function Index() {
         try{
             console.log(idTemas)
             const r = await alterarProduto(id, nome, preco, idTemas, idCategoria, descricao, disponivel, cor, tamanho);
-            // await salvarImagens(idProduto, imagem1, imagem2, imagem3, imagem4)
+            console.log(r);
+            const b = await alterarImagens(id, imagem1, imagem2, imagem3, imagem4);
+            console.log(b)
             alert('ok');
         }
         catch(err) {

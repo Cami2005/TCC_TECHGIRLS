@@ -250,7 +250,7 @@ export async function deletarImagensDiferentes(idProduto, imagens) {
         and img_produto NOT IN (?)
     `;
 
-    const [resp] = await con.query(comando, [idProduto]);
+    const resp = await con.query(comando, [idProduto, imagens]);
     return resp.affectedRows;
 }
 

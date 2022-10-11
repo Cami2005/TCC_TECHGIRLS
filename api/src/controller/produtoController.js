@@ -3,7 +3,7 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, alterarProduto, removerProduto,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-         buscarTamanhoProduto, buscarImagemProduto, Resposta, alterarCor, alterarTamanho, 
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, alterarCor, alterarTamanho, deletarImagensDiferentes, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -171,6 +171,39 @@ server.get('/produto', async (req,resp) => {
     } catch (err) { 
         resp.status(400).send({
 	        erro: err.message 
+        })
+    }
+})
+
+
+server.put('/produto/alterar/imagem/:id', upload.array('imagens'), async (req, resp) => {
+    try{
+
+        const id = req.params.id;
+        const imagens = req.files;
+
+        console.log('nova chamada')
+
+        const imagensPermanecem = req.body.imagens.filter(item => item != 'undefined');
+
+        console.log(imagensPermanecem);
+
+        console.log(imagens)
+
+        const b = await deletarImagensDiferentes(id, imagensPermanecem);
+
+        console.log(b)
+        console.log('ok')
+
+        for(const imagem of imagens) {
+          await salvarImagem(id, imagem.path);
+         }
+
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
         })
     }
 })
