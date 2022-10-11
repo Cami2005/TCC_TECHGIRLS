@@ -88,6 +88,23 @@ export async function salvarImagens(id, imagem1, imagem2, imagem3, imagem4){
             'Content-Type' : 'multipart/form-data'
         }
     })
+
+}
+
+
+export async function alterarImagens(id, imagem1, imagem2, imagem3, imagem4){
+    let form = new FormData();
+    form.append('imagens', imagem1);
+    form.append('imagens', imagem2);
+    form.append('imagens', imagem3);
+    form.append('imagens', imagem4);
+
+    const r= await api.put(`/produto/alterar/imagem/${id}`, form, {
+        headers : {
+            'Content-Type' : 'multipart/form-data'
+        }
+    })
+
 }
 
 export async function buscarDestaque(id){
@@ -116,15 +133,24 @@ export async function buscarProdutoPorId(id){
 
 // alterar
 
-export async function alterarProduto(id, nome, tema,categoria, preco, descricao, disponivel){
-    const r = await api.put(`/produto/${id}`, {
-        nome: nome,
-        tema: tema,
-        categoria: categoria,
-        preco: preco,
-        descricao: descricao,
-        disponivel: disponivel
-    });
+export async function alterarProduto(id, nome, preco, tema, categoria,  descricao, disponivel, cores, tamanho){
+    
+    const r = await api.put(`/admin/produto/${id}`, {
+            info : {
+            nome: nome,
+            preco: preco,
+            categoria: categoria,
+            tema: tema,
+            descricao: descricao,
+            disponivel: disponivel
+            },
+            
+            cores: cores,
+        
+            tamanho: tamanho
+
+          }
+    );
     return r.data;
 }
         

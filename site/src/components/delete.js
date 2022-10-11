@@ -2,12 +2,9 @@ import "./delete.scss";
 
 export default function DeletarItem(props){
     return(
-        <main>
-                    <div>
+        <div className="itemfundo">
             <span>{props.it}</span>
-            <button className="deletebutton" onClick={e=> props.deletarit(props.it)}>(X)</button>
+            <button className="deletebutton" onClick={e=> props.deletarit(props.it)}> X</button>
         </div>
-
-        </main>
-            )
+    )
 }

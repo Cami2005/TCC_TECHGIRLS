@@ -1,9 +1,13 @@
 import { inserirCor, inserirProduto, inserirTamanho, salvarImagem, 
         salvarDestaque, listarProduto,  
-        buscarPorNome, buscarPorCategoria, buscarPorTema, 
+        buscarPorNome, buscarPorCategoria, buscarPorTema, alterarProduto, removerProduto,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
+<<<<<<< HEAD
          buscarTamanhoProduto, buscarImagemProduto, Resposta, ListarPedidos, AlterarSituacãoPedido, 
+=======
+         buscarTamanhoProduto, buscarImagemProduto, Resposta, alterarCor, alterarTamanho, deletarImagensDiferentes, 
+>>>>>>> 596c8021af6ead617d52f0de841a47c647db0259
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
@@ -41,7 +45,7 @@ server.post('/produto', async (req,resp) => {
         if(produtoInserido.disponivel == undefined) {
             throw new Error('Disponibilidade não registrada')
         }
-        console.log(produtoInserido)
+
         resp.send(produtoInserido);
     } 
     catch (err) {
@@ -59,8 +63,6 @@ server.put('/produto/destaque/:id', upload.single("img"), async (req, resp) => {
         const img = req.file.path;
 
         const resposta = await salvarDestaque(id, img);
-
-        console.log(resposta.affectedRows);
 
         resp.status(204).send();
     }
@@ -99,7 +101,6 @@ server.post('/produto/cor', async (req,resp) => {
             throw new Error('Nome da cor é obrigatório!');
 
         const corInserida = await inserirCor(novaCor);
-        console.log(novaCor);
 
         resp.send(corInserida);
     
@@ -120,7 +121,6 @@ server.post('/produto/tamanho', async (req,resp) => {
             throw new Error('Tamnaho do produto é obrigatório!');
 
         const tamanhoInserido = await inserirTamanho(novoTamanho);
-        console.log(novoTamanho);
 
         resp.send(tamanhoInserido);
     } catch (err) {
@@ -143,6 +143,7 @@ server.get('/produto', async (req,resp) => {
         })
     }
 })
+// ALTERAR (SEM IMAGENS)
 
  server.put('/admin/produto/:id', async (req,resp) => {
 
@@ -150,29 +151,55 @@ server.get('/produto', async (req,resp) => {
 		const { id } = req.params;
 		const produto = req.body;
 
-        // remover das tabelas antigas informações
-        await deletarCor(id);
-        await deletarTamanho(id),
-        await deletarImagem(id, imagens);
-
-        // alterando tabela principal
-        const resposta = await alterarProduto(id, produto);
+        // alterando tabela principal tb_produto
+        const resposta = await alterarProduto(id, produto.info);
+        
+         // remover antigas informações  das tabelas
+         const a = await deletarCor(id);
+         const b = await deletarTamanho(id);
 
         // inserindo novas cores
-         for(let item in produto.cores){
-        await inserirCor(id, item)
+         for(let i=0; i<produto.cores.length; i++){
+        const c = await alterarCor(id, produto.cores[i]);
         }
 
-        // inserindo novos produtos
-        for(let item in produto.tamanho){
-            await  inserirTamanho(id, item)
+        // inserindo novos tamanhos
+        for(let i=0; i<produto.tamanho.length; i++){
+            await  alterarTamanho(id, produto.tamanho[i])
         }
         
+        console.log('produto alterado')
         resp.send(resposta);
+
 
     } catch (err) { 
         resp.status(400).send({
 	        erro: err.message 
+        })
+    }
+})
+
+
+server.put('/produto/alterar/imagem/:id', upload.array('imagens'), async (req, resp) => {
+    try{
+
+        const id = req.params.id;
+        const imagens = req.files;
+
+
+        const imagensPermanecem = req.body.imagens.filter(item => item != 'undefined');
+
+        await deletarImagensDiferentes(id, imagensPermanecem);
+
+        for(const imagem of imagens) {
+          await salvarImagem(id, imagem.path);
+         }
+
+        resp.status(204).send();
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: err.message
         })
     }
 })
@@ -188,8 +215,6 @@ server.get('/produto/:id', async (req, resp) => {
         const tamanho = await buscarTamanhoProduto(id);
         const imagens = await buscarImagemProduto(id);
         const destaque = await buscarDestaque(id);
-
-        console.log(produto)
 
         resp.send(
             {

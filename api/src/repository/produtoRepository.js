@@ -116,18 +116,20 @@ from tb_produto
 
 export async function alterarProduto (id, produto) {
 	const comando = 
-            `UPDATE TB_PRODUTO
-			SET NM_PRODUTO      = ?,
+            `UPDATE TB_PRODUTO 
+			SET NM_PRODUTO     = ?,
 			    ID_TEMA        = ?,
 			    ID_CATEGORIA   = ?,
 			    VL_PRECO       = ?,
 			    DS_DESCRICAO   = ?,
 			    DS_DISPONIVEL  = ?
-			WHERE ID_PRODUTO = ?`
+			WHERE 
+                ID_PRODUTO     = ?
+            `;
 
 const [resposta] = await con.query(comando, [produto.nome, produto.tema, produto.categoria, produto.preco, produto.descricao, produto.disponivel, id])
-produto.id = id;
-return produto;
+resposta.id = id;
+return resposta;
 }
 
 export async function removerProduto (id) {
@@ -240,6 +242,18 @@ export async function deletarProduto(idProduto) {
         return resp.affectedRows;
 }
 
+export async function deletarImagensDiferentes(idProduto, imagens) {
+    const comando =`
+        delete from tb_imagem 
+        where id_produto = ?
+        and img_destaque = false
+        and img_produto NOT IN (?)
+    `;
+
+    const resp = await con.query(comando, [idProduto, imagens]);
+    return resp.affectedRows;
+}
+
 // ALTERAR PRODUTO
 
 export async function buscarProduto(id) {
@@ -310,6 +324,26 @@ export async function buscarDestaque(id) {
     const [linhas] = await con.query(comando, [id]);
     return linhas[0];
 }
+
+
+export async function alterarCor(id, cor) {
+    const comando = `
+    INSERT INTO TB_COR (ID_PRODUTO, NM_COR)
+    VALUES(?, ?) `;
+    const resp = await con.query(comando, [id, cor])
+    return resp.affectedRows;
+}
+
+export async function alterarTamanho(id, tamanho) {
+    const comando = `
+    INSERT INTO TB_TAMANHO (ID_PRODUTO, DS_TAMANHO)
+    VALUES(?, ?) `;
+    const [resp] = await con.query(comando, [id, tamanho]);
+    return resp.affectedRows;
+}
+
+
+//
 
 export async function Resposta(resposta){
     const comando = `
