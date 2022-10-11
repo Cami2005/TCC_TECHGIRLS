@@ -3,11 +3,8 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
         buscarPorNome, buscarPorCategoria, buscarPorTema, alterarProduto, removerProduto,
         deletarCor, deletarTamanho, deletarProduto, deletarImagem,
          buscarDestaque, buscarProduto, buscarCorProduto, 
-<<<<<<< HEAD
          buscarTamanhoProduto, buscarImagemProduto, Resposta, ListarPedidos, AlterarSituacãoPedido, 
-=======
-         buscarTamanhoProduto, buscarImagemProduto, Resposta, alterarCor, alterarTamanho, deletarImagensDiferentes, 
->>>>>>> 596c8021af6ead617d52f0de841a47c647db0259
+           alterarCor, alterarTamanho, deletarImagensDiferentes, 
          } from '../repository/produtoRepository.js';
 
 import multer from 'multer';
