@@ -183,7 +183,6 @@ server.put('/produto/alterar/imagem/:id', upload.array('imagens'), async (req, r
         const id = req.params.id;
         const imagens = req.files;
 
-
         const imagensPermanecem = req.body.imagens.filter(item => item != 'undefined');
 
         await deletarImagensDiferentes(id, imagensPermanecem);
