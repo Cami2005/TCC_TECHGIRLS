@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { alterarDadosCartao, alterarEndereco, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, ListarPedidos, listarTodosCartoes, Pedidos, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
+import { alterarDadosCartao, alterarEndereco, AlterarInfosUsuarios, AlterarSenha, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, ListarPedidos, listarTodosCartoes, Pedidos, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
 
 const server = Router(); 
 
@@ -305,6 +305,34 @@ server.post('/pedido' , async (req , resp) =>{
     }
 })
 
+server.put('/usuario/senha/:id', async (req, resp) => {
+    try {
+        const {id} = req.params;
+        const senha= req.body;
+        const resposta = await AlterarSenha(id, senha);
 
+        resp.send(resposta);
+    } catch (err) {
+        resp.status(404).send({
+            erro: err.message
+        })
+    }
+})
+
+server.put('/usuario/:id', async (req, resp) => {
+    try {
+        const {id} = req.params;
+        const usuario = req.body;
+
+        const resposta = await AlterarInfosUsuarios(id, usuario);
+
+        resp.send(resposta);
+
+    } catch (err) {
+        resp.status(404).send({
+            err: err.message
+        })
+    }
+})
 
 export default server;

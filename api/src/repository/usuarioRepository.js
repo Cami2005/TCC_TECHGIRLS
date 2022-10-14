@@ -13,6 +13,31 @@ export async function inserirUsuario(usuario){
     return usuario;
 }
 
+
+export async function AlterarInfosUsuarios(id, usuario){
+    const resposta = `
+    UPDATE TB_USUARIO
+        SET
+            NM_USUARIO        = ?, 
+            DS_TELEFONE       =  ?,
+            DS_CPF            =  ?, 
+            DS_RG             =  ?, 
+            DT_NASCIMENTO     =  ?
+            WHERE ID_USUARIO    = ?`
+
+    const [comando] = await con.query (resposta, [
+                usuario.nome,
+                usuario.telefone,
+                usuario.cpf,
+                usuario.rg,
+                usuario.nascimento,
+                id]);
+    usuario.id = id;
+    return usuario;
+}
+
+
+
 export async function inserirEndereco(endereco) {
     const comando = `
     INSERT INTO TB_USUARIO_ENDERECO (ID_USUARIO, DS_CEP, NM_NOME_RESIDENCIA, DS_ENDERECO, DS_BAIRRO, DS_ESTADO, DS_UF, NR_NUMERO, DS_COMPLEMENTO_REF)
@@ -144,7 +169,7 @@ export async function alterarDadosCartao(id, cartao){
         id
     ])
     cartao.id = id;
-    return cartao
+    return cartao;
 }
 
 export async function deletarCartao (id){
@@ -254,4 +279,17 @@ export async function ListarPedidos(){
 
     const [linhas] = await con.query(resposta);
     return linhas
+}
+
+export async function AlterarSenha(id, senha){
+    const resposta= `
+    UPDATE TB_USUARIO_LOGIN
+    SET
+        DS_SENHA = ?
+        WHERE ID_USUARIO_LOGIN =?`;
+        
+        const [resp] = await con.query(resposta, [senha.senha, id])
+        
+        senha.id = id;
+        return senha;
 }

@@ -1,4 +1,4 @@
-import {EditarTema, inserirTema, listarTemas} from '../repository/tema.js' 
+import {DeletarTema, EditarTema, inserirTema, listarTemas} from '../repository/tema.js' 
 import { Router } from "express";
 const server = Router();
 
@@ -42,6 +42,20 @@ server.post('/api/tema', async (req, resp) => {
             erro: err.menssage
         })
         
+    }
+})
+
+server.delete('/api/tema/:id', async (req, resp) => {
+    try {
+        const {id} = req.params;
+
+        const resposta= await DeletarTema(id);
+        
+            resp.status(204).send();
+    } catch (err) {
+        resp.status(400).send({
+            erro: err.message
+        })
     }
 })
 export default server;

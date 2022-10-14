@@ -36,6 +36,7 @@ export async function login (email, senha) {
     insert into tb_usuario_login(id_usuario, ds_email, ds_senha)
     values( ?, ?, ?)
     `;
+    
   
     const [r] = await con.query(comando, [ usuariologin.id_usuario, usuariologin.email, usuariologin.senha]);
     usuariologin.id= r.insertId;

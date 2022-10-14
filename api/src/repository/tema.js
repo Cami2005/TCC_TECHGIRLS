@@ -40,10 +40,9 @@ export async function inserirTema(tema){
 }
 
 export async function DeletarTema(id){
-    const comando = `
-    DELETE 
-        FROM TB_TEMA
-        WHERE ID_TEMA =?`;
+    const comando = `DELETE FROM TB_TEMA
+        WHERE ID_TEMA = ?`;
     
-        const [resposta] = await con.query
+        const [resposta] = await con.query(comando, [id]);
+        return resposta.affectedRows;
     }
