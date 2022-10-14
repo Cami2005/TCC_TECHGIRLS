@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import "../../../common/common.scss"
+import CabecalhoPrincipal from "../../../components/cabecalhoPrinc";
 import "./index.scss"
 
 
 export default function Index(){
     return(
         <main className="main">
+                        <CabecalhoPrincipal logo='../../../images/logoAdmin.png' menu='../../../images/menu.png'  fav='../../../images/favoritos.png' 
+            user='../../../images/user.png' sacola='../../../images/sacola.png'/>
+
             
             <div className="banner">
                 <img src='../../../images/Stranger things 1.png'></img>
