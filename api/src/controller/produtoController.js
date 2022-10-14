@@ -10,8 +10,9 @@ import { inserirCor, inserirProduto, inserirTamanho, salvarImagem,
 import multer from 'multer';
 import { Router } from 'express';
 
-//const server = Router();
-//const upload = multer({dest:'./storage/produto'}); //bia adiciona o storage/banner aqui please
+const server = Router();
+const upload = multer({dest:'./storage/produto'}); //bia adiciona o storage/banner aqui please
+const up = multer({dest:'./storage/banner'});
 
 //inserir Produto
 
@@ -405,12 +406,12 @@ server.put('/pedido/:id', async (req, resp) => {
     }
 })
 
-server.post('/banner', async (req, resp) => {
+server.post('/banner', up.single('banner'), async (req, resp) => {
     try {
-        const novoBanner= req.body;
+        const novoBanner= req.file.path;
         const banner= await InserirBanner(novoBanner);
 
-        resp.send(banner);
+        resp.status(204).send(banner);
     } catch (err) {
         resp.status(404).send({
             erro: err.message
@@ -418,7 +419,7 @@ server.post('/banner', async (req, resp) => {
     }
 })
 
-server.put('/banner/:id/capa', upload.single('banner'), async (req, resp) => {
+server.put('/banner/:id/capa', up.single('banner'), async (req, resp) => {
     try {
         if (!req.file)
             throw new Error('Escolha o banner.');

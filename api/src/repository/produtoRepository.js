@@ -388,14 +388,11 @@ export async function AlterarSituacãoPedido(id, pedido){
 
 export async function InserirBanner(banner){
     const comando = `
-    INSERT INTO TB_BANNER(DS_LINK)
+    INSERT INTO TB_BANNER(IMG_BANNER)
     VALUES(?)`;
 
-    const [resposta] = await con.query(comando, [
-        banner.link
-    ])
-    banner.id = resposta.insertId;
-    return banner;
+    const resposta = await con.query(comando, [banner]);
+    return resposta.status;
 }
 
 export async function AlterarBanner(id, banner){
