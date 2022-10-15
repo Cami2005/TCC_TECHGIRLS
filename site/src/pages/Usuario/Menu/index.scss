@@ -1,32 +1,20 @@
 .main {
+    width: auto;
+.banner{
+    width: 84.3em;
+    height: 80vh;
+}
 
-.cabeçalho{
-    background-color: #521FAF;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-.logo{
-    height: 13vh;
-    width: 14vh;
-}
-.busca{
-    width: 35em;
-    height: 2em;
-}
-.icons{
-    height: 24px;
-    width: 28px;
-}
 .faixa{
-    margin-top: 15em;
+    padding: 1.5em;
     display: flex;
     justify-content: space-around;
+    background-color: #FBF8F8;
+    align-items: center;
 }
 .linha-vertical{
     width: 40px;
     height: 0px;
-    margin-top: 30px;
     background-color: #000;
 
     transform: rotate(88.6deg);
@@ -43,75 +31,165 @@ p{
     font-size: 14px;
     text-align: center;
 }
-.degrade{
-    width: 94.9em;
-    padding: 2em;
+.buscados{
+    display: flex;
+    height: 99vh;
+    width: 205.7vh;
+    background-image: url("../../../../public/images/nuvemdegrade.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
 }
 h1{
     position: absolute;
-    top: 29em;
-    margin-left: 17em;
+    top: 27em;
 }
 .setas{
     position: absolute;
-    top: 78em;
-    margin: 2em;
+    top: 70em;
+}
+.seta1{
+    margin-left: 2em;
 }
 .seta2{
-    margin-left: 82em;
+    margin-left: 75em;
+}
+.sessaoTemas{
+    display: flex;
+    flex-direction: column;
+    height: 200vh;
+    background-color: #420555;
+
+}
+h2{
+    padding-top: 5em;
+    text-align: center;
+    color: #fff;
+}
+.sessao{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    margin-top: 5em;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    
 }
 .Tema1{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+    font-size: 20px;
+    border-radius: 0px 0px 20px 20px;
     background-color: #FF4B00;
     color: #fff;
+
+    position: relative;
+    bottom: 1px;
+    text-decoration: none;
+
 }
 .Tema2{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+    font-size: 20px;
+
+    border-radius: 0px 0px 20px 20px;
     background-color: #00B9AE;
     color: #fff;
+    text-decoration: none;
+
 }
 .Tema3{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+    font-size: 20px;
+
+    border-radius: 0px 0px 20px 20px;
     background-color: #FF2C83;
     color: #fff;
+    text-decoration: none;
+
 }
 .Tema4{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1.5em;
+        padding-top: 1em;
+        font-size: 20px;
+
+        border-radius: 0px 0px 20px 20px;
         background-color: #FFC501;
         color: #fff;
+        text-decoration: none;
+
 }
 .Tema5{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+    font-size: 20px;
+
+    border-radius: 0px 0px 20px 20px;
     background-color: #4EB9DB;
     color: #fff;
+    text-decoration: none;
+
+
 }
 .Tema6{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1.5em;
+    padding-top: 1em;
+    font-size: 20px;
+
+    border-radius: 0px 0px 20px 20px;
     background-color: #521FAF;
     color: #fff;
+    text-decoration: none;
+
+}
+
+.Bem-vindo{
+    height: 48vh;
 }
 h3{
     background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    position: absolute;
-    top: 135em;
-    margin-left: 40em;
+    font-size: 30px;
+    width: 12.5em;
+    margin-left: 28em;
+    line-height: 43px;
+    text-align: center;
+
+
+    position: relative;
+    top: -20em;
+    
 }
 .texto{
-    position: absolute;
-    top: 165em;
-    margin-left: 55em;
-    margin-top: 20em;
-}
-.rodapé{
-    height: 261px;
-    background-color: #521FAF;
-}
-h4{
-    color: #fff;
-    display: flex;
-    justify-content: center;
-}
-.linha{
-    width: 823px;
-    background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
-    margin-left: 150px;
+    font-size: 23px;
+    margin-left: 35em;
+    width: 20em;
+    line-height: 45px;
+    text-align: center;
+
+
+    position: relative;
+    top: -25em;
 }
 
 }

@@ -1,0 +1,43 @@
+
+.ondulacao{
+    position: relative;
+top: 0.7em;
+}
+.cor{
+    color: #FF2B5E;
+}
+
+.rodapé{
+    height: 260px;
+    background-color: #521FAF;
+
+    position: relative;
+    bottom: 0.1em;
+    
+
+}
+h4{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    font-size: 35px;
+    
+    position: relative;
+    bottom: -2em;
+}
+.linha{
+    width: 823px;
+    background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
+    margin-left: 17em;
+    margin-top: 6em;
+    border: none;
+}
+.icons-rodape{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+.icon-rodape{
+    margin: 1em;
+}

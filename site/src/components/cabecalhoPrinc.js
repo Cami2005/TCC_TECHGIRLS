@@ -15,15 +15,7 @@ export default function CabecalhoPrincipal(props){
         setProdutos([resp]);
      }
 
-     async function ListaProdutos(){
-        const resposta = await ProdutosListados();
-        setProdutos(resposta)
-    }
 
-    
-        useEffect(() => {
-            ListaProdutos();
-        } , [])
 
 
     return(
