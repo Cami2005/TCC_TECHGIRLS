@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { buscarProdutosPorNome, ProdutosListados } from '../API/CadProduto.js';
 import BoxProduto from './boxProduto.js';
-import './cabecalho.scss';
+import './cabecalhoPrinc.scss';
 
-export default function Cabecalho(props){
+export default function CabecalhoPrincipal(props){
     const [produtos, setProdutos] = useState([]);
    
     const [busca, setBusca] = useState('');
@@ -15,21 +16,14 @@ export default function Cabecalho(props){
         setProdutos([resp]);
      }
 
-     async function ListaProdutos(){
-        const resposta = await ProdutosListados();
-        setProdutos(resposta)
-    }
 
-    
-        useEffect(() => {
-            ListaProdutos();
-        } , [])
 
 
     return(
             <main>
                 <header className="cab">
-                    <img className="logo" alt="" src={props.logo}/>
+                <Link to='/Menu'> <img className="logo1" alt="" src={props.logo}/></Link>    
+
                     <img  className='menuCab' alt="" src={props.menu}/>
 
                     <div>
@@ -51,17 +45,17 @@ export default function Cabecalho(props){
 
                 <img className='banner' src={props.banner}></img>
 
-                <div className='menuzinho'>
-                    <p>Vestimenta</p>
-                    <p>Acessório</p>
-                    <p>Colecionável</p>
-                    <p>Funko</p>
-                    <p>Caneca</p>
-                    <p>Pelúcia</p>
-                    <p>Moda e Casa</p>
-                </div>
-                <hr className='linha-menuzinho'></hr>
+            <div className='links-menu'>
+            <Link className='Link'>Vestimenta</Link>
+            <Link className='Link' >Acessório</Link>
+            <Link className='Link'>Colecionável</Link>
+            <Link className='Link'>Funko</Link>
+            <Link className='Link'>Caneca</Link>
+            <Link className='Link'>Pelúcia</Link>
+            <Link className='Link'>Moda Casa</Link>
 
+            </div>
+            <hr className='linha-menu'></hr>
                <div>
                    {produtos.map(item =>
                         <BoxProduto

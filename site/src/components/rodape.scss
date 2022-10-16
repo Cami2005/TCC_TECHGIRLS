@@ -1,5 +1,6 @@
 
 .ondulacao{
+    width: 83.3em;
     position: relative;
 top: 0.7em;
 }
@@ -25,8 +26,9 @@ h4{
     position: relative;
     bottom: -2em;
 }
-.linha{
+.line{
     width: 823px;
+    height: 6px;
     background: linear-gradient(90deg, #ff2c83 0%, #521faf 44.16%, #00b8ae 85.63%);
     margin-left: 17em;
     margin-top: 6em;
