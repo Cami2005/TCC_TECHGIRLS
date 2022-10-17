@@ -4,6 +4,7 @@ import CabecalhoPrincipal from "../../../components/cabecalhoPrinc";
 import Rodape from "../../../components/rodape";
 import CardProduto from "../../../components/cardProduto/cardProduto";
 import "./index.scss"
+import Caixa from "../../../components/boxInfos";
 
 
 export default function Index(){
@@ -99,6 +100,8 @@ export default function Index(){
                 <p className="texto">A ideia de criar uma loja virtual voltada para a cultura pop veio de um grupo de amigas nerds. Nosso objetivo é trazer produtos com qualidade, buscando valorizar as obras que os estampam.</p>
             </div>
             <Rodape/>
+
+            <Caixa className='caixa'></Caixa>
         </main>
     )
 }
