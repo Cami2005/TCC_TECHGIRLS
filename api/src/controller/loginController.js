@@ -25,7 +25,14 @@ server.post('/login/usuario', async (req, resp) => {
      try{
           const {email, senha} = req.body;
           const realizarLogin = await loginUsuario(email, senha);
-          resp.status(200).send();
+
+          if (!realizarLogin) {
+               throw new Error('Credenciais inválidas')
+          }
+          resp.send({
+               id: realizarLogin.id,
+               nome: realizarLogin.nome
+          });
           }
      catch (err) {
           resp.status(401).send({         

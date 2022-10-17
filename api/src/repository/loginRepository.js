@@ -17,16 +17,16 @@ export async function login (email, senha) {
 
     export async function loginUsuario(email, senha) {
       const comando = `
-        select id_usuario_login as id,
-        ds_email as email,
-        ds_senha as senha
-        from tb_usuario_login
-        where ds_email = ?
-        and ds_senha = ?
-      `;
+      select 
+            tb_usuario.id_usuario     as id,
+            nm_usuario                as nome
+      from tb_usuario_login
+            inner join tb_usuario   
+            on tb_usuario_login.id_usuario = tb_usuario.id_usuario
+      where ds_email    = ?
+      and ds_senha      = md5(?)`;
 
       const [resposta] = await con.query(comando, [email, senha]);
-
       return resposta[0];
     }
 

@@ -15,7 +15,8 @@ export async function loginUsuario(email, senha) {
         email: email,
         senha: senha
     });
-    return r.status;
+    console.log(r);
+    return r;
 }
 
 export async function InserirUsuarioLogin(id_usuario, email, senha){
