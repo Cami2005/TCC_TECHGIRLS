@@ -34,7 +34,7 @@ p{
 .buscados{
     display: flex;
     height: 99vh;
-    width: 205.7vh;
+    width: 100%;
     background-image: url("../../../../public/images/nuvemdegrade.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -47,15 +47,18 @@ h1{
     top: 27em;
 }
 .setas{
-    position: absolute;
-    top: 70em;
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 1em 4em;
+    justify-content: space-between;
 }
-.seta1{
-    margin-left: 2em;
+.seta{
+    height: 3em;
+    width: 3em;
 }
-.seta2{
-    margin-left: 75em;
-}
+
 .sessaoTemas{
     display: flex;
     flex-direction: column;

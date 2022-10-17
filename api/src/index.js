@@ -5,6 +5,7 @@ import produtoController from './controller/produtoController.js';
 import categoria from './controller/categoriasController.js';
 import tema from './controller/temaController.js'
 import usuarioController from './controller/usuarioController.js'
+import bannerController from './controller/bannerController.js'
 
 import multer from "multer";
 import cors from "cors"
@@ -18,6 +19,7 @@ server.use(loginController);
 server.use(produtoController);
 server.use(categoria);
 server.use(tema);
+server.use(bannerController);
 server.use(usuarioController);
 
 server.use('/storage/produto', express.static('storage/produto'));
