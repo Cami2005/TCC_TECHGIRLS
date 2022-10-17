@@ -1,18 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { loginUsuario } from "../../../API/logAdm";
 import './index.scss';
+
+import Storage from 'local-storage'
 
 export default function Index() {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const navigate = useNavigate();
+
     async function login(){
+        try{
         console.log(email)
         console.log(senha)
         const a = await loginUsuario(email, senha);
-        alert('logado')
+        Storage('cliente-logado', a)
+        toast('Usuário logado!', { autoClose: 1200 /* , hideProgressBar: true */ })
+
+        setTimeout(() => {
+            navigate('/');
+        }, 1000);
+
+        }
+        catch(err){
+            toast.error(err.response.data.erro)
+        }
     }
 
     return(

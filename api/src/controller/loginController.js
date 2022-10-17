@@ -1,4 +1,4 @@
-import { login, loginUsuario } from '../repository/loginRepository.js';  
+import { CriptografarSenha, login, loginUsuario } from '../repository/loginRepository.js';  
 import { inserirUsuarioLogin } from '../repository/loginRepository.js';
 import { Router } from "express"; 
 
@@ -25,7 +25,14 @@ server.post('/login/usuario', async (req, resp) => {
      try{
           const {email, senha} = req.body;
           const realizarLogin = await loginUsuario(email, senha);
-          resp.status(200).send();
+
+          if (!realizarLogin) {
+               throw new Error('Credenciais inválidas')
+          }
+          resp.send({
+               id: realizarLogin.id,
+               nome: realizarLogin.nome
+          });
           }
      catch (err) {
           resp.status(401).send({         
@@ -43,6 +50,8 @@ server.post('/usuario/login', async (req, resp) => {
           if( !novoUsuarioLogin.id )
           throw new Error('Não foi possível inserir as informações de login do usuário')
            
+          const senhaCriptografada = await CriptografarSenha(novoUsuarioLogin);
+          console.log(senhaCriptografada);
           resp.send(novoUsuarioLogin);
         }
      catch (err) {

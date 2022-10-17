@@ -114,6 +114,24 @@ from tb_produto
 
 }
 
+export async function exibirProduto(){
+    const comando= `
+    select 	
+        tb_produto.id_produto	as id,
+		nm_produto 				as nome,
+		vl_preco				as preco,
+		img_produto				as imagem
+    from tb_produto
+    inner join tb_imagem on tb_imagem.id_produto = tb_produto.id_produto
+    where img_destaque = true
+    `;
+
+    // caso tenhamos que criar um novo campo para mostrar os produtos em destaque
+
+    const [linhas] = await con.query(comando);
+    return linhas;
+}
+
 export async function alterarProduto (id, produto) {
 	const comando = 
             `UPDATE TB_PRODUTO 
@@ -385,56 +403,3 @@ export async function AlterarSituacãoPedido(id, pedido){
         pedido.id = id;
         return pedido;
 }
-
-export async function InserirBanner(banner){
-    const comando = `
-    INSERT INTO TB_BANNER(IMG_BANNER)
-    VALUES(?)`;
-
-    const resposta = await con.query(comando, [banner]);
-    return resposta.status;
-}
-
-export async function AlterarBanner(id, banner){
-    const comando = `
-    UPDATE TB_BANNER
-    SET DS_LINK     = ?
-    WHERE ID_BANNER =?`;
-    const [resp] = await con.query(comando, [banner.link, id
-])
-    banner.id = id;
-    return banner;
-}
-
-
-export async function listarTodosBanner() {
-    const comando =
-        `SELECT ID_BANNER		id,
-                DS_LINK		link
-           FROM TB_BANNER`;
-    
-    const [linhas] = await con.query(comando);
-    return linhas;
-}
-
-
-
-export async function alterarImagemBanner(banner, id) {
-    const comando =
-        `UPDATE TB_BANNER 
-            SET IMG_BANNER     = ?
-        WHERE ID_BANNER        = ? `;
-    
-    const [resposta] = await con.query(comando, [banner, id]);
-    return resposta.affectedRows;
-}
-
-export async function deletarBanner (id){
-    const comando = `
-    DELETE FROM TB_BANNER
-    WHERE ID_BANNER = ? `;
-
-    const [resposta] = await con.query(comando, [id]);
-    return resposta.affectedRows;
-}
-

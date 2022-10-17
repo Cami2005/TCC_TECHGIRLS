@@ -175,7 +175,7 @@ export default function Index() {
                     throw new Error('Descrição não inserida')
                 }
                 if(!idCategoria){
-                    throw new Error('Categoria não inserido!')
+                    throw new Error('Categoria não inserida!')
                 }
                 
                 if(!idTemas){
@@ -210,11 +210,11 @@ export default function Index() {
                 await inserirTamanho(novoProduto.id);
                 delay(100);
                 await inserirCor(novoProduto.id);
-                alert('Produto inserido')
+                toast('Produto inserido')
 
         }
         catch (err) {
-            alert('erro: ' + err.message)
+            toast.error('Erro: ' + err.message)
         }
     
     }      
