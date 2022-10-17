@@ -43,3 +43,15 @@ export async function login (email, senha) {
 
     return usuariologin;
   }
+
+  export async function CriptografarSenha(usuarioLogin){
+    const comando = `
+    update tb_usuario_login
+    set ds_senha = md5(?)
+    where id_usuario = ?
+    `;
+
+    const [r] = await con.query(comando, [usuarioLogin.senha, usuarioLogin.id_usuario]);
+    return r[0];
+
+  }

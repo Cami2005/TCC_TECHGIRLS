@@ -17,18 +17,19 @@ export default function Index() {
     const [confSenha, setConfSenha] = useState('');
 
     async function cadastrarUsuario() {
-        const a = await UsuarioCadastro(nome, telefone, cpf, rg, datadenasc);
-        console.log(a);
-        alert('User cadastrado');
-        if (senha == confSenha) {
-        const b = await InserirUsuarioLogin(a.id, email, senha);
-        toast.dark('up')
+        try{
+            const a = await UsuarioCadastro(nome, telefone, cpf, rg, datadenasc);
+            console.log(a);
+            if (senha == confSenha) {
+            const b = await InserirUsuarioLogin(a.id, email, senha);
+            toast('Usuário cadastrado')
+            }
         }
+        catch(err){
+            toast.error({ Erro: err.message})
+        }
+       
     }
-
-    useEffect(() => {
-        console.log(datadenasc)
-    }, [datadenasc])
 
     return(
         <main className='cadastro'>

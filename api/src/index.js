@@ -1,11 +1,11 @@
 import 'dotenv/config'
 
 import loginController from './controller/loginController.js';
-import produtoController from './controller/produtoController.js';
-import categoria from './controller/categoriasController.js';
-import tema from './controller/temaController.js'
-import usuarioController from './controller/usuarioController.js'
-import bannerController from './controller/bannerController.js'
+import produtoAdminController from './controller/admin/produtoController.js';
+import categoria from './controller/admin/categoriasController.js';
+import tema from './controller/admin/temaController.js'
+import usuarioController from './controller/usuario/usuarioController.js'
+import bannerController from './controller/admin/bannerController.js'
 
 import multer from "multer";
 import cors from "cors"
@@ -16,7 +16,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use(loginController);
-server.use(produtoController);
+server.use(produtoAdminController);
 server.use(categoria);
 server.use(tema);
 server.use(bannerController);

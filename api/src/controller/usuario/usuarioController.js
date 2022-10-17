@@ -1,5 +1,5 @@
 import { Router } from "express"; 
-import { alterarDadosCartao, alterarEndereco, AlterarInfosUsuarios, AlterarSenha, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, ListarPedidos, listarTodosCartoes, Pedidos, removerProdutoFavoritos } from "../repository/usuarioRepository.js";
+import { alterarDadosCartao, alterarEndereco, AlterarInfosUsuarios, AlterarSenha, Avaliacao, deletarCartao, deletarEndereco, Favoritos, inserirEndereco, inserirNovoCartao, inserirUsuario, listarAvaliacoes, listarEnderecos, listarFavoritos, ListarPedidos, listarTodosCartoes, Pedidos, removerProdutoFavoritos } from "../../repository/usuarioRepository.js";
 
 const server = Router(); 
 
