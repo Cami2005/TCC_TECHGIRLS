@@ -1,4 +1,4 @@
-import {DeletarTema, EditarTema, inserirTema, listarTemas} from '../repository/tema.js' 
+import {DeletarTema, EditarTema, inserirTema, listarTemas} from '../../repository/tema.js' 
 import { Router } from "express";
 const server = Router();
 
