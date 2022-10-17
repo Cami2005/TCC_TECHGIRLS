@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "../../../common/common.scss"
-import CabecalhoPrincipal from "../../../components/cabecalhoPrinc";
-import Rodape from "../../../components/rodape";
-import CardProduto from "../../../components/cardProduto/cardProduto";
+import CabecalhoPrincipal from "../../../components/cabecalhoPrinc.js";
+import Rodape from "../../../components/rodape.js";
+import CardProduto from "../../../components/cardProduto/cardProduto.js";
 import "./index.scss"
-import Caixa from "../../../components/boxInfos";
+import Caixa from "../../../components/boxInfos.js";
 
 
 export default function Index(){
@@ -51,22 +51,22 @@ export default function Index(){
 
                 <div className="card">
                     <img src="../../../images/card narutooo.png"></img>
-                    <Link to='/Menu' className="Tema1" >Naruto</Link>
+                    <Link to='/Naruto' className="Tema1" >Naruto</Link>
                 </div>
 
                 <div className="card">
                     <img src="../../../images/card marvel.png"></img>
-                    <Link to='/Menu' className="Tema2" >Marvel</Link>
+                    <Link to='/Marvel' className="Tema2" >Marvel</Link>
                 </div>
 
                 <div className="card">
                     <img src="../../../images/card harry potter.png"></img>
-                    <Link to='/Menu' className="Tema3" >Harry Potter</Link>
+                    <Link to='/HarryPotter' className="Tema3" >Harry Potter</Link>
                 </div>
 
                 <div className="card">
                     <img src="../../../images/card queen.png"></img>
-                    <Link to='/Menu' className="Tema4" >Queen</Link>
+                    <Link to='/Queen' className="Tema4" >Queen</Link>
                 </div>
 
             </div>
@@ -74,22 +74,22 @@ export default function Index(){
             <div className="sessao">
                 <div className="card">
                     <img src="../../../images/cardBts.png"></img>
-                    <Link to='/Menu' className="Tema3" >BTS</Link>
+                    <Link to='/BTS' className="Tema3" >BTS</Link>
                 </div>
                 
                 <div className="card">
                     <img src="../../../images/card rick e morty.png"></img>
-                    <Link to='/Menu' className="Tema5" >Rick e Morty</Link>
+                    <Link to='/RickMorty' className="Tema5" >Rick e Morty</Link>
                 </div>
                 
                 <div className="card">
                     <img src="../../../images/card dragon ball.png"></img>
-                    <Link to='/Menu' className="Tema1" >Dragon Ball</Link>
+                    <Link to='/DragonBall' className="Tema1" >Dragon Ball</Link>
                 </div>
                 
                 <div className="card">
                     <img src="../../../images/card dc.png"></img>
-                    <Link to='/Menu' className="Tema6" >DC</Link>
+                    <Link to='/DC' className="Tema6" >DC</Link>
                 </div>
             </div>
             </div>
