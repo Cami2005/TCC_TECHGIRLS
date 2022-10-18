@@ -5,9 +5,23 @@ import Rodape from "../../../components/rodape";
 import CardProduto from "../../../components/cardProduto/cardProduto";
 import "./index.scss"
 import Caixa from "../../../components/boxInfos";
+import { ListarProdutosInicio } from "../../../API/Usuario";
+import { useEffect, useState } from "react";
 
 
 export default function Index(){
+
+    const [produtos, setProdutos] = useState([]);
+
+    async function listar(){
+        const r = await ListarProdutosInicio();
+        setProdutos(r);
+    }
+
+    useEffect(() => {
+        listar();
+    }, [])
+
     return(
         <main className="main">
                         <CabecalhoPrincipal logo='../../../images/logoAdmin.png' menu='../../../images/menu.png'  fav='../../../images/favoritos.png' 
@@ -35,7 +49,10 @@ export default function Index(){
                 <div className="setas">
                     <img className="seta" src="../../../images/Vector.png"></img>
 
-                    <CardProduto />
+                    {produtos.map(item =>
+                
+                    <CardProduto  nome={item.nome} preco={item.preco} imagem={item.imagem}/>
+                        )}
 
                     <img className="seta" src="../../../images/Vector2.png"></img>
                 </div>

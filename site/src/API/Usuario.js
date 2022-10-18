@@ -15,3 +15,9 @@ export async function UsuarioCadastro(nome, telefone, cpf, rg, nascimento) {
     })
     return r.data;
 }
+
+
+export async function ListarProdutosInicio() {
+    const r = await api.get('/usuario/produto');
+    return r.data;
+}
