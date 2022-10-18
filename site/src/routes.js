@@ -26,7 +26,11 @@ export default function Index(){
     return(
         <BrowserRouter>
             <Routes>
+<<<<<<< HEAD
                 <Route path='/ladingPage' element={<LadingPage/>}/>
+=======
+                <Route path='/' element={<Menu/>}/>
+>>>>>>> 376843d319b528d157993e75fe08822bc0b61789
                 <Route path='/login/admin' element={<LoginAdmin />} />
                 <Route path='/pedidosRecentes' element={<PedidosRecentes />} />
                 <Route path='/produtos' element={<Produtos />} />
