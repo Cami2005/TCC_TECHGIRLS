@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { buscarDestaque, buscarProdutoPorId, buscarProdutosPorNome } from "../../../../site/src/API/CadProduto.js";
+import { buscarCorProduto, buscarImagemProduto, buscarProduto, buscarTamanhoProduto } from "../../repository/produtoRepository.js";
 import { ListarProdutosInicio } from "../../repository/usuario/produtoRepository.js";
 
 const server = Router();
@@ -14,5 +16,31 @@ server.get('/usuario/produto', async (req,resp) => {
     }
 })
 
+server.get('/api/produto/:id', async (req, resp) => {
+    try{
+        const id = req.params.id;
+
+        const produto = await buscarProduto(id);
+        const cor = await buscarCorProduto(id);
+        const tamanho = await buscarTamanhoProduto(id);
+        const imagens = await buscarImagemProduto(id);
+        const destaque = await buscarDestaque(id);
+
+        resp.send(
+            {
+                info : produto,
+                cores : cor,
+                tamanho : tamanho,
+                imagens : imagens,
+                destaque : destaque
+            }
+        )
+    }
+    catch (err){
+        resp.status(400).send({
+            erro: err.message
+        })    
+    }
+})
 
 export default server;

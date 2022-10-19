@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../API/config';
 import './cardProduto.scss'
 
 export default function CardProduto(props){
-
+    const navigate = useNavigate();
+    
     function exibir(imagem){
         if(!imagem){
             return '';
@@ -16,8 +18,12 @@ export default function CardProduto(props){
         return preco.replace('.', ',');
     }
 
+    function abrirDetalhes(id){
+        navigate('/produto/' + id + '/detalhe')
+    }
+
     return(
-        <div className="cardprd">
+        <div className="cardprd" onClick={() => abrirDetalhes(props.id)}>
 
             <button className='favoritar'> <img src="" alt="" /> </button> 
             <img src={exibir(props.imagem)} className="imagemcardzinho" alt=""/>
@@ -26,4 +32,4 @@ export default function CardProduto(props){
         
         </div>
     )
-}
+} 

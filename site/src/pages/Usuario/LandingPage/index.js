@@ -4,13 +4,8 @@ import CabecalhoPrincipal from "../../../components/cabecalhoPrinc.js";
 import Rodape from "../../../components/rodape.js";
 import CardProduto from "../../../components/cardProduto/cardProduto.js";
 import "./index.scss"
-<<<<<<< HEAD
-import Caixa from "../../../components/boxInfos.js";
-=======
-import Caixa from "../../../components/boxInfos";
 import { ListarProdutosInicio } from "../../../API/Usuario";
 import { useEffect, useState } from "react";
->>>>>>> 376843d319b528d157993e75fe08822bc0b61789
 
 
 export default function Index(){
@@ -33,7 +28,7 @@ export default function Index(){
 
             
             <div>
-                <img className="banner" src='../../../images/Stranger things 1.png'></img>
+             <Link to='/strangerThings'><img className="banner" src='../../../images/Stranger things 1.png'></img></Link>  
             </div>
 
             <div className="faixa">
@@ -122,7 +117,6 @@ export default function Index(){
             </div>
             <Rodape/>
 
-            <Caixa className='caixa'></Caixa>
         </main>
     )
 }

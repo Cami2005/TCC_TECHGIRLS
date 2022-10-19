@@ -1,8 +1,8 @@
 import './rodape.scss';
 
-export default function Rodape(){
+export default function Rodape(props){
     return(
-        <main>
+        <main className={props.edit}>
             <img className="ondulacao" src="../../../images/ondulação.png"></img>
             <div className="rodapé">
                 <h4>Nos siga nas <span className='cor'>redes sociais</span></h4>

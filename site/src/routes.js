@@ -18,6 +18,14 @@ import DragonBall from './pages/Usuario/nossosProdutos/DragonBall/index.js'
 import DC from './pages/Usuario/nossosProdutos/DC/index.js'
 import Favoritos from './pages/Usuario/Favoritos/index.js'
 import LadingPage from './pages/Usuario/LandingPage/index.js'
+import ProdutoDetalhe from './pages/Usuario/produtoDetalhe'
+import Endereco from './pages/Usuario/endereco/index.js'
+import NovoEndereco from './pages/Usuario/novoEndereco/index.js'
+import Cartao from './pages/Usuario/cartao/index.js'
+import NovoCartao from './pages/Usuario/novoCartao/index.js'
+import SeusPedidos from './pages/Usuario/SeusPedidos/index.js'
+import DetalhePedidos from './pages/Usuario/detalhePedidos/index.js'
+
 
 
 
@@ -26,11 +34,7 @@ export default function Index(){
     return(
         <BrowserRouter>
             <Routes>
-<<<<<<< HEAD
                 <Route path='/ladingPage' element={<LadingPage/>}/>
-=======
-                <Route path='/' element={<Menu/>}/>
->>>>>>> 376843d319b528d157993e75fe08822bc0b61789
                 <Route path='/login/admin' element={<LoginAdmin />} />
                 <Route path='/pedidosRecentes' element={<PedidosRecentes />} />
                 <Route path='/produtos' element={<Produtos />} />
@@ -49,6 +53,16 @@ export default function Index(){
                 <Route path='/dc' element={<DC/>} />
                 <Route path='/StrangerThings' element={<StrangerThings/>} />
                 <Route path='/favoritos' element={<Favoritos/>} />
+                <Route path='/produto/:id/detalhe' element={<ProdutoDetalhe/>} />
+                <Route path='/endereco' element={<Endereco/>} />
+                <Route path='/novo/endereco' element={<NovoEndereco/>} />
+                <Route path='/cartao' element={<Cartao/>} />
+                <Route path='/novo/cartao' element={<NovoCartao/>} />
+                <Route path='/seusPedidos' element={<SeusPedidos/>} />
+                <Route path='/detalhePedidos' element={<DetalhePedidos/>} />
+
+
+
                 
             </Routes>
         </BrowserRouter>

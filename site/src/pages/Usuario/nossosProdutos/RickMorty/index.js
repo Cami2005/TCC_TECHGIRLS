@@ -8,7 +8,8 @@ export default function Index(){
         <main>
             <Cabecalho logo='../../../images/logoAdmin.png' menu='../../../images/menu.png'  fav='../../../images/favoritos.png' 
             user='../../../images/user.png' sacola='../../../images/sacola.png' banner='../../../images/rickmorty.jpg'/>
-                <Rodape></Rodape>
+                            <Rodape edit="edit-rodape8"></Rodape>
+
 
         </main>
 

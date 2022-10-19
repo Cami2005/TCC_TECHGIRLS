@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buscarProdutosPorNome } from '../API/CadProduto.js';
-import BoxProduto from './boxProduto.js';
+import BoxProdutos from './boxProdutos2.js';
 import './cabecalhoPrinc.scss';
 
 export default function CabecalhoPrincipal(props){
@@ -43,7 +43,7 @@ export default function CabecalhoPrincipal(props){
             </header>
                 <hr className='linha'></hr>
 
-                <img className='banner' src={props.banner}></img>
+                <img className='banner1' src={props.banner}></img>
 
             <div className='links-menu'>
             <Link className='Link'>Vestimenta</Link>
@@ -58,7 +58,7 @@ export default function CabecalhoPrincipal(props){
             <hr className='linha-menu'></hr>
                <div>
                    {produtos.map(item =>
-                        <BoxProduto
+                        <BoxProdutos
                         img=""
                         preco={item.preco}
                         nome={item.nome}
