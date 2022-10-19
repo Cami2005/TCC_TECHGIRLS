@@ -58,6 +58,7 @@ export default function Index(){
                     
                     <div className='preco-label'> PREÇO </div>
                     <div className='preco'> R$ {produto.info.preco} </div>
+                    <div className='descricao'> Descrição: {produto.info.descricao} </div>
 
 
                     
