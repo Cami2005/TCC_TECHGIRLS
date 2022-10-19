@@ -16,12 +16,13 @@ export async function UsuarioCadastro(nome, telefone, cpf, rg, nascimento) {
     return r.data;
 }
 
-export async function buscarPorId(id){
-    const resp = await api.get(`/api/produto/${id}`);
-    return resp.data;
-}
+
 
 export async function ListarProdutosInicio() {
     const r = await api.get('/usuario/produto');
     return r.data;
+}
+export async function buscarPorId(id){
+    const resp = await api.get('/api/produto/'+ id);
+    return resp.data;
 }

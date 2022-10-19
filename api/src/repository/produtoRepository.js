@@ -279,13 +279,18 @@ export async function buscarProduto(id) {
         select 
         nm_produto      as nome,
         vl_preco        as preco,
-        id_categoria    as categoria,
-        id_tema         as tema,
+        tb_produto.id_categoria    as categoria,
+        tb_produto.id_tema         as tema,
         ds_descricao    as descricao,
-        ds_disponivel   as disponivel
+        ds_disponivel   as disponivel,
+        nm_categoria     as NomeCategoria,
+        nm_tema             as NomeTema
         from tb_produto
+        inner join tb_categoria on tb_categoria.id_categoria = tb_produto.id_categoria
+        inner join tb_tema on tb_tema.id_tema = tb_produto.id_tema
         where id_produto = ?
     `;
+    //talvez precise arrumar
 
     const [registros] = await con.query(comando, [id]);
     return registros[0];

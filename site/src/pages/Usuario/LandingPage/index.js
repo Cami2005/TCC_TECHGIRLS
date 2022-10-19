@@ -50,8 +50,8 @@ export default function Index(){
 
                     {produtos.map(item =>
                 
-                    <CardProduto  nome={item.nome} preco={item.preco} imagem={item.imagem}/>
-                        )}
+                <CardProduto item={item}/>
+                    )}
 
                     <img className="seta" src="../../../images/Vector2.png"></img>
                 </div>

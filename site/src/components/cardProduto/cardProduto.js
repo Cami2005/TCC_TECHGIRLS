@@ -23,12 +23,12 @@ export default function CardProduto(props){
     }
 
     return(
-        <div className="cardprd" onClick={() => abrirDetalhes(props.id)}>
+        <div className="cardprd" onClick={() => abrirDetalhes(props.item.id)}>
 
             <button className='favoritar'> <img src="" alt="" /> </button> 
-            <img src={exibir(props.imagem)} className="imagemcardzinho" alt=""/>
-            <h6> {props.nome} </h6>
-            <h6> {formatarPreco(props.preco)} </h6>
+            <img src={exibir(props.item.imagem)} className="imagemcardzinho" alt=""/>
+            <h6> {props.item.nome} </h6>
+            <h6> {formatarPreco(props.item.preco)} </h6>
         
         </div>
     )
