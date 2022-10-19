@@ -9,7 +9,7 @@ import { buscarPorId } from '../../../API/Usuario';
 import { API_URL } from '../../../API/config';
 
 export default function Index(){
-    const[produto, setProduto]= useState({cor:[], tamanho:[], imagens:[] , destaque:[], info:{} });
+    const[produto, setProduto]= useState({cor:[], tamanho:[], imagens:[] , destaque:{}, info:{} });
     const[imagemPrincipal, setImagemPrincipal] = useState(0);
     
 
@@ -18,16 +18,22 @@ export default function Index(){
     
     async function carregarPagina(){
         const resposta= await buscarPorId(id);
+        console.log(resposta);
         setProduto(resposta);
+        console.log(produto)
     }
 
     function ExibirImagemPrincipal(){
         if(produto.imagens.length > 0){
-            return API_URL + '/' + produto.imagens[imagemPrincipal];
+            return API_URL + '/' + produto.destaque.url[imagemPrincipal];
         }
         else{
             return '/produto-padrao.png';
         }
+    }
+
+    function exibirDestaque() {
+        return API_URL + '/' + produto.destaque.url;
     }
 
     function exibirImagensProduto(imagem){
@@ -41,18 +47,22 @@ export default function Index(){
 
 
     return(
-        <main>
+        <main className="main">
             <CabecalhoPrincipal logo='../../../images/logoAdmin.png' menu='../../../images/menu.png'  fav='../../../images/favoritos.png' 
             user='../../../images/user.png' sacola='../../../images/sacola.png'/>
             <Tema cor='cor-pedido' nome={produto.info.NomeTema}></Tema>     
 
             <div className='detalhes'>
+                
                 <div>
+                    <img className="img" src={exibirDestaque()}/>
+                </div>
+                <div>
+
                     {produto.imagens.map((item, pos) =>
-                        <img src={exibirImagensProduto(item)} onClick={() => setImagemPrincipal(pos)}/>
+                        <img className="img" src={exibirImagensProduto(item)} onClick={() => setImagemPrincipal(pos)}/>
                         )}
                 </div>
-                    <div><img src={ExibirImagemPrincipal()}/></div>
                     <div className='nome'> Nome  {produto.info.nome} </div>
                     <div className='categoria'> Categoria {produto.info.NomeCategoria} </div>
                     
