@@ -6,7 +6,9 @@ import CabecalhoPrincipal from '../../../components/cabecalhoPrinc.js';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { buscarPorId } from '../../../API/Usuario';
+import Storage from 'local-storage';
 import { API_URL } from '../../../API/config';
+import { toast } from 'react-toastify';
 
 export default function Index(){
     const[produto, setProduto]= useState({cor:[], tamanho:[], imagens:[] , destaque:{}, info:{} });
@@ -40,6 +42,21 @@ export default function Index(){
         return API_URL + '/' + imagem;
 
     }
+
+    function adicionarAoCarrinho(){
+        let carrinho = [];
+        if(Storage('carrinho')){
+            carrinho = Storage('carrinho');
+        }
+        if(!carrinho.find(item => item.id === id )){
+            carrinho.push({
+                id: id, 
+                qtd: 1
+            })
+            Storage('carrinho', carrinho)
+        }
+        toast.dark('Produto adicionado ao carrinho')
+    }
     
     useEffect(() => {
         carregarPagina();
@@ -70,7 +87,7 @@ export default function Index(){
                     <div className='preco'> R$ {produto.info.preco} </div>
                     <div className='descricao'> Descrição: {produto.info.descricao} </div>
 
-
+                    <button onClick={adicionarAoCarrinho}> Adicionar ao carrinho </button> 
                     
                 </div>
                 <Rodape></Rodape>
