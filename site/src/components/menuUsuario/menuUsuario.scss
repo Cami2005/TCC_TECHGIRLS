@@ -1,0 +1,23 @@
+.menu-user{
+    display: flex;
+    flex-direction: row;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    margin-right: 1em;
+}
+
+.Link{
+    margin: 1em;
+}
+
+.hr{
+    height: 20em;
+    width: 4px;
+    background-image: linear-gradient(to bottom, #4EB9DB, #521FAF, #FF2C83);
+    border: none;
+
+}

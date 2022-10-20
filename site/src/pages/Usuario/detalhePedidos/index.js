@@ -4,6 +4,7 @@ import Rodape from '../../../components/rodape.js';
 import Tema from '../../../components/tema.js';
 import CabecalhoPrincipal from '../../../components/cabecalhoPrinc.js';
 import Caixa from '../../../components/boxInfos';
+import MenuUsuario from '../../../components/menuUsuario/menuUsuario';
 
 export default function Index(){
     return(
@@ -12,6 +13,7 @@ export default function Index(){
             user='../../../images/user.png' sacola='../../../images/sacola.png'/>
             <Tema cor='cor-detalhe-ped' nome='Detalhe do Pedido'></Tema>     
             <Caixa ajuste='ajuste-caixa'></Caixa>
+            <MenuUsuario></MenuUsuario>
                 <Rodape></Rodape>
 
         </main>
