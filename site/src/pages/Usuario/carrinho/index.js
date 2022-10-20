@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react"
 import Storage from 'local-storage'
 import { buscarPorId } from "../../../API/Usuario";
-import CarrinhoItem from "../../../components/carrinhoItem/carrinhoItem";
+import CarrinhoItem from "../../../components/carrinhoItem/carrinhoItem.js";
 
 export default function Index(){
     const[itens, setItens] = useState([]);
+
+    function removerItem(id) {
+        let carrinho = Storage('carrinho');
+        carrinho = carrinho.filter(item => item.id != id);
+
+        Storage('carrinho', carrinho);
+        CarregarCarrinho();
+    }
     
     async function CarregarCarrinho(){
         let carrinho= Storage('carrinho')
@@ -34,7 +42,7 @@ export default function Index(){
 
                 <div className="itens">
                     {itens.map(item =>
-                        <CarrinhoItem item={item}/>
+                        <CarrinhoItem item={item} removerItem={removerItem}/>
                         )}
                 </div>
 
