@@ -26,8 +26,8 @@ import NovoCartao from './pages/Usuario/novoCartao/index.js'
 import SeusPedidos from './pages/Usuario/SeusPedidos/index.js'
 import DetalhePedidos from './pages/Usuario/detalhePedidos/index.js'
 import Carrinho from './pages/Usuario/carrinho/index.js'
-
-
+import Catalogo from './pages/Administrador/Catalogo/index.js'
+import Temas from './pages/Administrador/Temas/index.js'
 
 
 export default function Index(){
@@ -61,9 +61,9 @@ export default function Index(){
                 <Route path='/seusPedidos' element={<SeusPedidos/>} />
                 <Route path='/detalhePedidos' element={<DetalhePedidos/>} />
                 <Route path='/carrinho' element={<Carrinho/>} />
-
-
-
+                <Route path='/catalogo' element={<Catalogo/>} />
+                <Route path='/temas' element={<Temas/>} />
+                <Route path='/novoTema' element={<NovoTema/>} />
                 
             </Routes>
         </BrowserRouter>

@@ -20,7 +20,9 @@ export default function MenuAdmin(props){
                 <div>
                 <Link className="opcao">Avaliações</Link>
                 </div>
-
+                <div>
+                <Link className="opcao">Temas</Link>
+                </div>
             </div>
     )
 }
