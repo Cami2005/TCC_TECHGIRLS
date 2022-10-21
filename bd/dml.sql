@@ -74,12 +74,12 @@ insert into TB_USUARIO(ID_USUARIO, NM_USUARIO, DS_TELEFONE, DS_CPF, DS_RG)
 values(1, 'Giovana', '5522-5522', '678.765,876-12', '123.456.34'); 
 
 -- inserir login usuario
-  insert into tb_usuario_login(id_usuario_login, id_usuario, ds_email, ds_senha)
-    values(1, 1, 'ffffff', '4321' );
+  insert into tb_usuario_login( id_usuario, ds_email, ds_senha)
+    values(1, 'user@user.com', '1234' );
     
 -- inserir endereço
-    INSERT INTO TB_USUARIO_ENDERECO(ID_USUARIO_ENDERECO, ID_USUARIO, DS_CEP, NM_NOME_RESIDENCIA, DS_ENDERECO, DS_BAIRRO, DS_ESTADO, DS_UF, NR_NUMERO, DS_COMPLEMENTO_REF)
-    VALUES(1, 1, '04852-401', 'CASA', 'RUA JJJJJ', 'JD. NNNN', 'SAO-PAULO','PP', 5, 'PERTO DO MERCAADINHO');
+    INSERT INTO TB_USUARIO_ENDERECO(ID_USUARIO_ENDERECO, ID_USUARIO, DS_CEP, NM_REFERENCIA, DS_ENDERECO, DS_BAIRRO, DS_CIDADE, DS_ESTADO, NR_NUMERO, DS_COMPLEMENTO_REF)
+    VALUES(1, 1, '04852-401', 'CASA', 'RUA JJJJJ', 'JD. NNNN', 'Embu-Guaçu', 'São Paulo - SP', 5, 'PERTO DO MERCAADINHO');
 
         insert into TB_CARTAO (ID_CARTAO, ID_USUARIO_LOGIN, DS_NUMERO, DT_VALIDADE, DS_CODIGO, DS_CPF)
     VALUES(1, 1, '000 000 000 000', '2023-09-12', '401', '000.000.000-00');
@@ -102,16 +102,16 @@ inner join tb_cor on tb_cor.id_produto = tb_produto.id_produto
 inner join tb_tamanho on tb_tamanho.id_produto = tb_produto.id_produto
 inner join tb_imagem on tb_imagem.id_produto = tb_produto.id_produto
 where img_destaque = true
-and tb_produto.id_produto = 5
+and tb_produto.id_produto = 5;
 
 -- endereco
     select id_usuario 			as id,
 			ds_cep	  			as cep,
-			nm_nome_residencia 	as nome,
+			nm_referencia	    as referencia,
             ds_endereco			as endereco,
 			ds_bairro			as bairro,
+            ds_cidade			as cidade,
             ds_estado			as estado,
-            ds_uf				as uf,
             nr_numero			as numero
 from tb_usuario_endereco
-where id_usuario = ?
+where id_usuario = ?;

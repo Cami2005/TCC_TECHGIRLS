@@ -6,7 +6,7 @@ const server = Router();
 server.get('/api/usuario/endereco/:id', async (req, resp) => {
     try{
     const id = req.params.id;
-    const r = await PlistarEndereco(id);
+    const r = await listarEndereco(id);
     
     resp.send(r)
         

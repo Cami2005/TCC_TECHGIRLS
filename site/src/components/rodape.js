@@ -2,8 +2,9 @@ import './rodape.scss';
 
 export default function Rodape(props){
     return(
-        <main className={props.edit}>
-            <img className="ondulacao" src="../../../images/ondulação.png"></img>
+        <footer className={props.edit}>
+            <div className='ondulacao'></div>
+            <img className="ondimg" src="../../../images/ondulação.png"></img>
             <div className="rodapé">
                 <h4>Nos siga nas <span className='cor'>redes sociais</span></h4>
                 <hr className="line"></hr>
@@ -13,6 +14,6 @@ export default function Rodape(props){
                     <img  className='icon-rodape' src="../../../images/whats.png"></img>
                 </div>
             </div>
-        </main>
+        </footer>
     )
 }

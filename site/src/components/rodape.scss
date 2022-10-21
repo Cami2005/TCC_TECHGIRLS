@@ -1,9 +1,15 @@
 
 .ondulacao{
-    width: 83.3em;
-    position: relative;
-top: 0.7em;
+    margin: 0px;
+    height: 10em;
+    width: 100%;
 }
+
+.ondimg {
+    width: 100%;
+    height: 100%;
+}
+
 .cor{
     color: #FF2B5E;
 }
@@ -11,11 +17,6 @@ top: 0.7em;
 .rodapé{
     height: 260px;
     background-color: #521FAF;
-
-    position: relative;
-    bottom: 0.1em;
-    
-
 }
 h4{
     color: #fff;
