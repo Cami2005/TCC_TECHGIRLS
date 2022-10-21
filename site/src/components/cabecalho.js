@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { buscarProdutosPorNome } from '../API/CadProduto.js';
 import BoxProdutos from './boxProdutos2.js';
-import './cabecalhoPrinc.scss';
+import './cabecalho.scss';
 
 export default function CabecalhoPrincipal(props){
     const [produtos, setProdutos] = useState([]);
@@ -22,7 +22,7 @@ export default function CabecalhoPrincipal(props){
     return(
             <main>
                 <header className="cab">
-                <Link to='/LadingPage'> <img className="logo1" alt="" src={props.logo}/></Link>    
+                <Link to='/'> <img className="logo1" alt="" src={props.logo}/></Link>    
 
                     <img  className='menuCab' alt="" src={props.menu}/>
 
