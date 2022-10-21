@@ -103,3 +103,15 @@ inner join tb_tamanho on tb_tamanho.id_produto = tb_produto.id_produto
 inner join tb_imagem on tb_imagem.id_produto = tb_produto.id_produto
 where img_destaque = true
 and tb_produto.id_produto = 5
+
+-- endereco
+    select id_usuario 			as id,
+			ds_cep	  			as cep,
+			nm_nome_residencia 	as nome,
+            ds_endereco			as endereco,
+			ds_bairro			as bairro,
+            ds_estado			as estado,
+            ds_uf				as uf,
+            nr_numero			as numero
+from tb_usuario_endereco
+where id_usuario = ?
