@@ -1,10 +1,13 @@
+.espaco {
+    height: max-content;
+    margin-bottom: 1em;
+
 .cab1{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     background-color: #521FAF;
-       
 }
 
 .logo1{
@@ -30,7 +33,7 @@
 
 
 .linha1{
-    height: 6px;
+    height: 2px;
     background: linear-gradient(270deg, #FF2B5E 35.42%, #521FAF 50.83%, #2BFFBF 64.58%);
     border: none;
 }
@@ -38,4 +41,5 @@
 .banner{
     position: relative;
     bottom: 2.2em;
+}
 }

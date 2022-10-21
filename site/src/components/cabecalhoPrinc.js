@@ -20,8 +20,8 @@ export default function CabecalhoPrincipal(props){
 
 
     return(
-            <main>
-                <header className="cab1">
+            <div className="espaco">
+            <header className="cab1">
                <Link to='/LadingPage'> <img className="logo1" alt="" src={props.logo}/></Link>    
                     <img  className='menuCab1' alt="" src={props.menu}/>
 
@@ -38,12 +38,9 @@ export default function CabecalhoPrincipal(props){
                     <Link to='/login/usuario'>        <img className='icons1' src={props.user}></img></Link>
                  <img className='icons1' src={props.sacola}></img>
 
-                    
+
             </header>
                 <hr className='linha1'></hr>
-
-                
-
 
                <div>
                    {produtos.map(item =>
@@ -55,7 +52,7 @@ export default function CabecalhoPrincipal(props){
                     )}
                </div>
 
-            </main>
+            </div>
                
         )
 }
